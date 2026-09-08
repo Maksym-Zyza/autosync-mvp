@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AutoSync - Інтелект вашого авто</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons (Phosphor Icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header glass">
+            <div class="logo">
+                <i class="ph-fill ph-steering-wheel"></i>
+                <span>AutoSync</span>
+            </div>
+            <div class="user-avatar">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=AutoSync" alt="User Avatar">
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            
+            <!-- Dashboard View -->
+            <section id="dashboard-view" class="view active">
+                <div class="car-selector glass-panel">
+                    <div class="car-info">
+                        <h2>Volkswagen Golf VII</h2>
+                        <p>1.4 TSI • 145 000 км</p>
+                    </div>
+                    <button class="icon-btn"><i class="ph ph-caret-down"></i></button>
+                </div>
+
+                <!-- Health Score Widget -->
+                <div class="health-widget glass-panel">
+                    <div class="health-header">
+                        <h3>Індекс здоров'я</h3>
+                        <span class="status-badge warning">Потребує уваги</span>
+                    </div>
+                    <div class="health-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart warning">
+                            <path class="circle-bg"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <path class="circle" id="health-circle-path"
+                                stroke-dasharray="0, 100"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <text x="18" y="20.35" class="percentage">75%</text>
+                        </svg>
+                    </div>
+                    <p class="health-desc">Знос гальмівних колодок наближається до критичного рівня.</p>
+                </div>
+
+                <!-- Upcoming Reminders -->
+                <div class="section-header">
+                    <h3>Найближчі події</h3>
+                    <button class="text-btn">Всі</button>
+                </div>
+                
+                <div class="reminders-list">
+                    <div class="reminder-card glass-panel alert">
+                        <div class="icon-box red">
+                            <i class="ph ph-wrench"></i>
+                        </div>
+                        <div class="reminder-info">
+                            <h4>Гальмівні колодки</h4>
+                            <p>Заміна через 500 км</p>
+                        </div>
+                        <button class="action-btn">Записатись</button>
+                    </div>
+                    
+                    <div class="reminder-card glass-panel warning">
+                        <div class="icon-box orange">
+                            <i class="ph ph-drop"></i>
+                        </div>
+                        <div class="reminder-info">
+                            <h4>Моторне мастило</h4>
+                            <p>Заміна через 2 300 км</p>
+                        </div>
+                    </div>
+
+                    <div class="reminder-card glass-panel normal">
+                        <div class="icon-box blue">
+                            <i class="ph ph-shield-check"></i>
+                        </div>
+                        <div class="reminder-info">
+                            <h4>ОСЦПВ (Страховка)</h4>
+                            <p>Дійсна ще 4 місяці</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History View -->
+            <section id="history-view" class="view">
+                <div class="history-header glass-panel">
+                    <h2>Історія обслуговування</h2>
+                    <p>Верифікований цифровий слід</p>
+                    <button class="share-btn"><i class="ph ph-share-network"></i> Поділитись для продажу</button>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-panel">
+                            <div class="timeline-meta">
+                                <span class="date">12 Травня 2026</span>
+                                <span class="mileage">142 500 км</span>
+                            </div>
+                            <h4 class="title">Заміна моторного мастила та фільтрів</h4>
+                            <p class="desc">СТО "АвтоДок". Мастило Motul 5W-30, фільтри Bosch.</p>
+                            <div class="price">₴ 3,200</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-panel">
+                            <div class="timeline-meta">
+                                <span class="date">05 Березня 2026</span>
+                                <span class="mileage">138 000 км</span>
+                            </div>
+                            <h4 class="title">Діагностика ходової</h4>
+                            <p class="desc">Офіційний дилер. Рекомендовано заміну стійок стабілізатора.</p>
+                            <div class="price">₴ 800</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-panel">
+                            <div class="timeline-meta">
+                                <span class="date">10 Вересня 2025</span>
+                                <span class="mileage">130 000 км</span>
+                            </div>
+                            <h4 class="title">Заміна комплекту ГРМ</h4>
+                            <p class="desc">СТО "Garage". Комплект Gates + помпа.</p>
+                            <div class="price">₴ 12,500</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Floating Add Button -->
+        <button id="add-record-btn" class="fab">
+            <i class="ph ph-plus"></i>
+        </button>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav glass">
+            <a href="#" class="nav-item active" data-target="dashboard-view">
+                <i class="ph-fill ph-squares-four"></i>
+                <span>Головна</span>
+            </a>
+            <a href="#" class="nav-item" data-target="history-view">
+                <i class="ph-fill ph-clock-counter-clockwise"></i>
+                <span>Історія</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="ph-fill ph-map-pin"></i>
+                <span>Сервіси</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="ph-fill ph-user"></i>
+                <span>Профіль</span>
+            </a>
+        </nav>
+        
+        <!-- Add Record Modal -->
+        <div id="add-modal" class="modal-overlay">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2>Новий запис</h2>
+                    <button id="close-modal-btn" class="icon-btn"><i class="ph ph-x"></i></button>
+                </div>
+                <form class="add-form">
+                    <div class="form-group">
+                        <label>Тип обслуговування</label>
+                        <select>
+                            <option>Технічне обслуговування (ТО)</option>
+                            <option>Ремонт</option>
+                            <option>Шиномонтаж</option>
+                            <option>Страхування</option>
+                            <option>Інше</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Пробіг (км)</label>
+                        <input type="number" value="145000">
+                    </div>
+                    <div class="form-group">
+                        <label>Опис робіт</label>
+                        <textarea rows="3" placeholder="Що було зроблено?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Вартість (₴)</label>
+                        <input type="number" placeholder="0">
+                    </div>
+                    <div class="form-group file-upload">
+                        <i class="ph ph-upload-simple"></i>
+                        <span>Прикріпити фото чеку або акту</span>
+                    </div>
+                    <button type="button" class="btn-primary" id="save-record-btn">Зберегти запис</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
