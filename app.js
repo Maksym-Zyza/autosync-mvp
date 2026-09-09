@@ -245,4 +245,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginDiiaBtn) loginDiiaBtn.addEventListener('click', login);
     if (loginGoogleBtn) loginGoogleBtn.addEventListener('click', login);
     if (logoutBtn) logoutBtn.addEventListener('click', logout);
+
+    const headerProfileBtn = document.getElementById('header-profile-btn');
+    if (headerProfileBtn) {
+        headerProfileBtn.addEventListener('click', () => {
+            // Act as if the Profile nav item was clicked
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            const profileNav = document.querySelector('.nav-item[data-target="profile-view"]');
+            if (profileNav) profileNav.classList.add('active');
+            
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            const profileView = document.getElementById('profile-view');
+            if (profileView) profileView.classList.add('active');
+        });
+    }
 });

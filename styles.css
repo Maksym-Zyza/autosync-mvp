@@ -214,12 +214,12 @@ h1, h2, h3, h4, h5, h6 {
 .circle-bg {
     fill: none;
     stroke: rgba(255,255,255,0.05);
-    stroke-width: 2.5;
+    stroke-width: 4;
 }
 
 .circle {
     fill: none;
-    stroke-width: 2.5;
+    stroke-width: 4;
     stroke-linecap: round;
     transition: stroke-dasharray 1.5s cubic-bezier(0.1, 0.5, 0.2, 1);
 }
@@ -949,7 +949,8 @@ h1, h2, h3, h4, h5, h6 {
 .profile-hero h2 { font-size: 1.5rem; margin-bottom: 4px; }
 
 .profile-stats { display: flex; gap: 16px; margin-bottom: 32px; }
-.stat-box { flex: 1; padding: 16px; text-align: center; border-radius: 16px; }
+.stat-box { flex: 1; padding: 16px; text-align: center; border-radius: 16px; cursor: pointer; transition: transform 0.2s, background 0.2s; }
+.stat-box:hover { transform: translateY(-2px); background: rgba(255,255,255,0.05); border: 1px solid var(--accent-primary); }
 .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); font-family: 'Play', sans-serif; }
 .stat-label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
 

@@ -13,15 +13,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container auth-mode">
+    <div class="app-container">
         <!-- Header -->
         <header class="app-header glass">
             <div class="logo">
                 <i class="ph-fill ph-steering-wheel"></i>
                 <span>AutoSync</span>
             </div>
-            <div class="user-avatar">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=AutoSync" alt="User Avatar">
+            <div class="user-avatar" id="header-profile-btn" style="cursor: pointer;">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Taras" alt="User Avatar">
             </div>
         </header>
 
@@ -29,7 +29,7 @@
         <main class="content-area">
             
             <!-- Login View -->
-            <section id="login-view" class="view active auth-screen">
+            <section id="login-view" class="view auth-screen">
                 <div class="auth-hero">
                     <div class="logo-large">
                         <i class="ph-fill ph-steering-wheel"></i>
@@ -51,7 +51,7 @@
             </section>
 
             <!-- Dashboard View -->
-            <section id="dashboard-view" class="view">
+            <section id="dashboard-view" class="view active">
                 <div class="car-selector glass-panel">
                     <div class="car-info">
                         <h2>Volkswagen Golf VII</h2>
@@ -344,11 +344,11 @@
                 </div>
 
                 <div class="profile-stats">
-                    <div class="stat-box glass-panel">
+                    <div class="stat-box glass-panel" onclick="alert('Детальна статистика Еко-Рейтингу буде доступна в наступних версіях додатку.')">
                         <div class="stat-value">98%</div>
                         <div class="stat-label">Еко-Рейтинг</div>
                     </div>
-                    <div class="stat-box glass-panel">
+                    <div class="stat-box glass-panel" onclick="alert('Детальна статистика витрат буде доступна в наступних версіях додатку.')">
                         <div class="stat-value">₴ 12.4k</div>
                         <div class="stat-label">Витрати/рік</div>
                     </div>
