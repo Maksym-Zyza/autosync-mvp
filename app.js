@@ -211,17 +211,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginGoogleBtn = document.getElementById('login-google-btn');
     const logoutBtn = document.getElementById('logout-btn');
 
-    function login() {
-        appContainer.classList.remove('auth-mode');
-        document.getElementById('login-view').classList.remove('active');
+    function login(e) {
+        if(e) e.preventDefault();
         
-        // Reset nav and view to dashboard
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        const dashboardNav = document.querySelector('.nav-item[data-target="dashboard-view"]');
-        if (dashboardNav) dashboardNav.classList.add('active');
+        const btn = e.currentTarget || loginDiiaBtn;
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Авторизація...';
+        btn.style.pointerEvents = 'none';
         
-        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        document.getElementById('dashboard-view').classList.add('active');
+        setTimeout(() => {
+            appContainer.classList.remove('auth-mode');
+            document.getElementById('login-view').classList.remove('active');
+            
+            // Reset nav and view to dashboard
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            const dashboardNav = document.querySelector('.nav-item[data-target="dashboard-view"]');
+            if (dashboardNav) dashboardNav.classList.add('active');
+            
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById('dashboard-view').classList.add('active');
+            
+            // Reset button state
+            btn.innerHTML = originalHtml;
+            btn.style.pointerEvents = 'auto';
+        }, 800);
     }
 
     function logout() {
