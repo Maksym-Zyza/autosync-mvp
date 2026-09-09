@@ -108,7 +108,7 @@
                 <div class="history-header glass-panel">
                     <h2>Історія обслуговування</h2>
                     <p>Верифікований цифровий слід</p>
-                    <button class="share-btn"><i class="ph ph-share-network"></i> Поділитись для продажу</button>
+                    <button id="share-btn-action" class="share-btn"><i class="ph ph-share-network"></i> Поділитись для продажу</button>
                 </div>
 
                 <div class="timeline">
@@ -121,7 +121,10 @@
                             </div>
                             <h4 class="title">Заміна моторного мастила та фільтрів</h4>
                             <p class="desc">СТО "АвтоДок". Мастило Motul 5W-30, фільтри Bosch.</p>
-                            <div class="price">₴ 3,200</div>
+                            <div class="price-row">
+                                <div class="price">₴ 3,200</div>
+                                <div class="doc-attachment"><i class="ph ph-file-pdf"></i> 1 акт</div>
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -133,7 +136,25 @@
                             </div>
                             <h4 class="title">Діагностика ходової</h4>
                             <p class="desc">Офіційний дилер. Рекомендовано заміну стійок стабілізатора.</p>
-                            <div class="price">₴ 800</div>
+                            <div class="price-row">
+                                <div class="price">₴ 800</div>
+                                <div class="doc-attachment"><i class="ph ph-file-text"></i> 1 висновок</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-panel">
+                            <div class="timeline-meta">
+                                <span class="date">15 Листопада 2025</span>
+                                <span class="mileage">134 200 км</span>
+                            </div>
+                            <h4 class="title">Заміна гальмівних колодок</h4>
+                            <p class="desc">СТО "Швидкість". Передні та задні колодки Brembo.</p>
+                            <div class="price-row">
+                                <div class="price">₴ 4,500</div>
+                                <div class="doc-attachment"><i class="ph ph-receipt"></i> 2 чеки</div>
+                            </div>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -145,9 +166,69 @@
                             </div>
                             <h4 class="title">Заміна комплекту ГРМ</h4>
                             <p class="desc">СТО "Garage". Комплект Gates + помпа.</p>
-                            <div class="price">₴ 12,500</div>
+                            <div class="price-row">
+                                <div class="price">₴ 12,500</div>
+                                <div class="doc-attachment"><i class="ph ph-file-pdf"></i> 2 акти</div>
+                            </div>
                         </div>
                     </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-panel">
+                            <div class="timeline-meta">
+                                <span class="date">22 Серпня 2025</span>
+                                <span class="mileage">128 500 км</span>
+                            </div>
+                            <h4 class="title">Новий акумулятор</h4>
+                            <p class="desc">Магазин "АвтоСвіт". Varta Silver Dynamic 77Ah.</p>
+                            <div class="price-row">
+                                <div class="price">₴ 4,100</div>
+                                <div class="doc-attachment"><i class="ph ph-receipt"></i> 1 чек, гарантія</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Shared View (For Buyers) -->
+            <section id="shared-view" class="view">
+                <div class="shared-nav">
+                    <button id="back-to-history-btn" class="icon-btn"><i class="ph ph-arrow-left"></i></button>
+                    <span>Опублікована історія</span>
+                    <div style="width: 36px;"></div> <!-- spacer -->
+                </div>
+
+                <div class="shared-hero glass-panel">
+                    <div class="verified-badge">
+                        <i class="ph-fill ph-seal-check"></i> Перевірено AutoSync
+                    </div>
+                    <h2 class="shared-title">Volkswagen Golf VII</h2>
+                    <p class="shared-subtitle">1.4 TSI • 2018 рік • 145 000 км</p>
+                    
+                    <div class="shared-stats">
+                        <div class="stat-box">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Власників</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Записів ТО</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">₴ 0</div>
+                            <div class="stat-label">ДТП</div>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary download-btn">
+                        <i class="ph ph-download-simple"></i> Завантажити PDF звіт
+                    </button>
+                </div>
+
+                <div class="shared-info-block">
+                    <h3>Звіт згенеровано:</h3>
+                    <p>09 Серпня 2026, 14:30</p>
+                    <p class="text-muted">Цей звіт містить повну сервісну історію автомобіля, задокументовану власником. Усі прикріплені чеки та акти виконаних робіт включені до PDF файлу.</p>
                 </div>
             </section>
 

@@ -62,4 +62,30 @@ document.addEventListener('DOMContentLoaded', () => {
             circlePath.style.strokeDasharray = '75, 100';
         }, 500);
     }
+
+    // --- Share View Logic ---
+    const shareBtnAction = document.getElementById('share-btn-action');
+    const backToHistoryBtn = document.getElementById('back-to-history-btn');
+    const appContainer = document.querySelector('.app-container');
+    const sharedView = document.getElementById('shared-view');
+
+    if (shareBtnAction && backToHistoryBtn && sharedView) {
+        shareBtnAction.addEventListener('click', () => {
+            // Hide all current views
+            views.forEach(view => view.classList.remove('active'));
+            // Show shared view
+            sharedView.classList.add('active');
+            // Hide bottom nav and FAB
+            appContainer.classList.add('hide-nav');
+        });
+
+        backToHistoryBtn.addEventListener('click', () => {
+            // Hide shared view
+            sharedView.classList.remove('active');
+            // Show history view again
+            document.getElementById('history-view').classList.add('active');
+            // Show bottom nav and FAB
+            appContainer.classList.remove('hide-nav');
+        });
+    }
 });
