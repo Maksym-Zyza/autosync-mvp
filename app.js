@@ -206,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Auth Logic ---
-    const appContainer = document.querySelector('.app-container');
     const loginDiiaBtn = document.getElementById('login-diia-btn');
     const loginGoogleBtn = document.getElementById('login-google-btn');
     const logoutBtn = document.getElementById('logout-btn');
