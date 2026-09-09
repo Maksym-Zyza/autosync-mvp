@@ -545,10 +545,16 @@ body {
 .price-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+}
+.docs-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
 }
 .doc-attachment {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 4px;
     font-size: 0.75rem;
@@ -560,6 +566,14 @@ body {
 .doc-attachment i {
     color: var(--accent-primary);
     font-size: 1rem;
+}
+.doc-attachment.warranty {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.doc-attachment.warranty i {
+    color: var(--accent-green);
 }
 
 /* Shared View Styles */
@@ -642,4 +656,95 @@ body {
 .app-container.hide-nav .bottom-nav,
 .app-container.hide-nav .fab {
     display: none;
+}
+
+/* Integration Actions */
+.integration-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.integration-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.integration-btn:hover {
+    background: rgba(255,255,255,0.08);
+}
+.integration-btn i {
+    font-size: 1.1rem;
+}
+.integration-btn.mvs i { color: var(--accent-primary); }
+.integration-btn.carvertical i { color: var(--accent-orange); }
+
+/* Trust Badges */
+.trust-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 1rem;
+}
+.trust-badge.verified { color: var(--accent-green); }
+.trust-badge.manual { color: var(--text-secondary); }
+.trust-badge.ai { color: #a855f7; } /* Purple for AI */
+.trust-badge.imported { color: var(--accent-primary); }
+
+/* AI Scan Button & Divider */
+.btn-ai-scan {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(168, 85, 247, 0.15);
+    color: #d8b4fe;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: 0.2s;
+}
+.btn-ai-scan:hover {
+    background: rgba(168, 85, 247, 0.25);
+}
+.btn-ai-scan i {
+    font-size: 1.2rem;
+}
+.divider {
+    text-align: center;
+    position: relative;
+    margin: 16px 0;
+}
+.divider::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 0; right: 0;
+    border-top: 1px solid var(--glass-border);
+    z-index: 1;
+}
+.divider span {
+    position: relative;
+    z-index: 2;
+    background: #171c28; /* approx modal background to mask line */
+    padding: 0 10px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
 }

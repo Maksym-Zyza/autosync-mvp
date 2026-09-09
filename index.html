@@ -111,13 +111,18 @@
                     <button id="share-btn-action" class="share-btn"><i class="ph ph-share-network"></i> Поділитись для продажу</button>
                 </div>
 
+                <div class="integration-actions">
+                    <button class="integration-btn mvs"><i class="ph ph-database"></i> Дані МВС</button>
+                    <button class="integration-btn carvertical"><i class="ph ph-car"></i> Звіт CarVertical</button>
+                </div>
+
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content glass-panel">
                             <div class="timeline-meta">
-                                <span class="date">12 Травня 2026</span>
-                                <span class="mileage">142 500 км</span>
+                                <div><span class="date">12 Травня 2026</span> <span class="mileage">• 142 500 км</span></div>
+                                <span class="trust-badge verified" title="Верифіковано в AutoSync"><i class="ph-fill ph-check-circle"></i></span>
                             </div>
                             <h4 class="title">Заміна моторного мастила та фільтрів</h4>
                             <p class="desc">СТО "АвтоДок". Мастило Motul 5W-30, фільтри Bosch.</p>
@@ -131,8 +136,8 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-content glass-panel">
                             <div class="timeline-meta">
-                                <span class="date">05 Березня 2026</span>
-                                <span class="mileage">138 000 км</span>
+                                <div><span class="date">05 Березня 2026</span> <span class="mileage">• 138 000 км</span></div>
+                                <span class="trust-badge verified" title="Верифіковано в AutoSync"><i class="ph-fill ph-check-circle"></i></span>
                             </div>
                             <h4 class="title">Діагностика ходової</h4>
                             <p class="desc">Офіційний дилер. Рекомендовано заміну стійок стабілізатора.</p>
@@ -146,8 +151,8 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-content glass-panel">
                             <div class="timeline-meta">
-                                <span class="date">15 Листопада 2025</span>
-                                <span class="mileage">134 200 км</span>
+                                <div><span class="date">15 Листопада 2025</span> <span class="mileage">• 134 200 км</span></div>
+                                <span class="trust-badge manual" title="Додано вручну"><i class="ph-fill ph-user"></i></span>
                             </div>
                             <h4 class="title">Заміна гальмівних колодок</h4>
                             <p class="desc">СТО "Швидкість". Передні та задні колодки Brembo.</p>
@@ -161,8 +166,8 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-content glass-panel">
                             <div class="timeline-meta">
-                                <span class="date">10 Вересня 2025</span>
-                                <span class="mileage">130 000 км</span>
+                                <div><span class="date">10 Вересня 2025</span> <span class="mileage">• 130 000 км</span></div>
+                                <span class="trust-badge ai" title="Оцифровано через ШІ"><i class="ph-fill ph-magic-wand"></i></span>
                             </div>
                             <h4 class="title">Заміна комплекту ГРМ</h4>
                             <p class="desc">СТО "Garage". Комплект Gates + помпа.</p>
@@ -176,14 +181,17 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-content glass-panel">
                             <div class="timeline-meta">
-                                <span class="date">22 Серпня 2025</span>
-                                <span class="mileage">128 500 км</span>
+                                <div><span class="date">22 Серпня 2025</span> <span class="mileage">• 128 500 км</span></div>
+                                <span class="trust-badge imported" title="Імпортовано з МВС"><i class="ph-fill ph-database"></i></span>
                             </div>
                             <h4 class="title">Новий акумулятор</h4>
                             <p class="desc">Магазин "АвтоСвіт". Varta Silver Dynamic 77Ah.</p>
                             <div class="price-row">
                                 <div class="price">₴ 4,100</div>
-                                <div class="doc-attachment"><i class="ph ph-receipt"></i> 1 чек, гарантія</div>
+                                <div class="docs-group">
+                                    <div class="doc-attachment"><i class="ph ph-receipt"></i> 1 чек</div>
+                                    <div class="doc-attachment warranty"><i class="ph-fill ph-shield-check"></i> Гарантія</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -293,6 +301,10 @@
                         <i class="ph ph-upload-simple"></i>
                         <span>Прикріпити фото чеку або акту</span>
                     </div>
+                    <button type="button" class="btn-ai-scan">
+                        <i class="ph-fill ph-magic-wand"></i> Оцифрувати документ через ШІ
+                    </button>
+                    <div class="divider"><span>або вручну</span></div>
                     <button type="button" class="btn-primary" id="save-record-btn">Зберегти запис</button>
                 </form>
             </div>
