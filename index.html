@@ -240,6 +240,65 @@
                 </div>
             </section>
 
+            <!-- Services View -->
+            <section id="services-view" class="view">
+                <div class="services-header">
+                    <div class="search-bar glass-panel">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" placeholder="Знайти СТО, мийку...">
+                        <button class="icon-btn"><i class="ph ph-faders"></i></button>
+                    </div>
+                    
+                    <div class="services-chips">
+                        <button class="chip active">Всі</button>
+                        <button class="chip">СТО</button>
+                        <button class="chip">Шиномонтаж</button>
+                        <button class="chip">Мийка</button>
+                        <button class="chip">Детейлінг</button>
+                    </div>
+                </div>
+
+                <div class="services-list">
+                    <!-- Card 1 -->
+                    <div class="service-card glass-panel" data-category="СТО">
+                        <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1625047509168-a7026f36de04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="service-rating"><i class="ph-fill ph-star"></i> 4.8 (120)</div>
+                        </div>
+                        <div class="service-info">
+                            <div class="service-meta">
+                                <h3>Bosch Service "АвтоДрайв"</h3>
+                                <span class="distance"><i class="ph-fill ph-map-pin"></i> 1.2 км</span>
+                            </div>
+                            <p class="service-type">СТО • Діагностика • Ремонт</p>
+                            <div class="service-status open"><i class="ph-fill ph-clock"></i> Відчинено до 20:00</div>
+                            <div class="service-actions">
+                                <button class="btn-outline"><i class="ph ph-phone"></i></button>
+                                <button class="btn-primary-sm"><i class="ph ph-navigation-arrow"></i> Прокласти маршрут</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="service-card glass-panel" data-category="Шиномонтаж">
+                        <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1596766465492-944a9462c151?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="service-rating"><i class="ph-fill ph-star"></i> 4.5 (85)</div>
+                        </div>
+                        <div class="service-info">
+                            <div class="service-meta">
+                                <h3>Твоя Шина</h3>
+                                <span class="distance"><i class="ph-fill ph-map-pin"></i> 2.5 км</span>
+                            </div>
+                            <p class="service-type">Шиномонтаж • Зберігання шин</p>
+                            <div class="service-status closed"><i class="ph-fill ph-clock"></i> Зачинено (до 09:00)</div>
+                            <div class="service-actions">
+                                <button class="btn-outline"><i class="ph ph-phone"></i></button>
+                                <button class="btn-primary-sm"><i class="ph ph-navigation-arrow"></i> Прокласти маршрут</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
 
         <!-- Floating Add Button -->
@@ -257,7 +316,7 @@
                 <i class="ph-fill ph-clock-counter-clockwise"></i>
                 <span>Історія</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-target="services-view">
                 <i class="ph-fill ph-map-pin"></i>
                 <span>Сервіси</span>
             </a>

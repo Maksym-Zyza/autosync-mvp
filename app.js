@@ -88,4 +88,29 @@ document.addEventListener('DOMContentLoaded', () => {
             appContainer.classList.remove('hide-nav');
         });
     }
+
+    // --- Services Filtering Logic ---
+    const serviceChips = document.querySelectorAll('.chip');
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    serviceChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            // Remove active from all chips
+            serviceChips.forEach(c => c.classList.remove('active'));
+            // Add active to clicked
+            chip.classList.add('active');
+            
+            const category = chip.textContent.trim();
+            
+            // Filter cards
+            serviceCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'Всі' || category === cardCategory) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
 });
