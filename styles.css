@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Rajdhani:wght@400;500;600;700&display=swap');
+
 /* Base Settings & CSS Variables */
 :root {
     /* Dark Vision Palette */
@@ -35,15 +37,17 @@
 }
 
 body {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
     background: var(--bg-gradient);
     background-color: var(--bg-color);
-    background-attachment: fixed;
     color: var(--text-primary);
     line-height: 1.5;
-    min-height: 100vh;
     display: flex;
-    justify-content: center; /* Center on desktop */
+    justify-content: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
 }
 
 /* Mobile App Container */
@@ -304,7 +308,7 @@ body {
 
 .action-btn {
     background: var(--accent-primary);
-    color: #fff;
+    color: #050505;
     border: none;
     padding: 8px 16px;
     border-radius: 20px;
@@ -393,7 +397,7 @@ body {
     height: 56px;
     border-radius: 50%;
     background: var(--accent-primary);
-    color: #fff;
+    color: #050505;
     border: none;
     font-size: 1.5rem;
     display: flex;
@@ -532,7 +536,7 @@ body {
     padding: 16px;
     border-radius: 14px;
     background: var(--accent-primary);
-    color: #fff;
+    color: #050505;
     border: none;
     font-size: 1rem;
     font-weight: 600;
@@ -795,7 +799,7 @@ body {
 }
 .chip.active {
     background: var(--accent-primary);
-    color: #fff;
+    color: #050505;
     border-color: var(--accent-primary);
 }
 
@@ -885,7 +889,7 @@ body {
 .btn-primary-sm {
     flex: 1;
     background: var(--accent-primary);
-    color: #fff;
+    color: #050505;
     border: none;
     border-radius: 12px;
     font-size: 0.95rem;
