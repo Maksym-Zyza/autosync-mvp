@@ -902,3 +902,70 @@ h1, h2, h3, h4, h5, h6 {
     gap: 8px;
     cursor: pointer;
 }
+
+/* --- v1.4 Auth & Profile --- */
+.app-container.auth-mode .app-header,
+.app-container.auth-mode .bottom-nav,
+.app-container.auth-mode .fab {
+    display: none !important;
+}
+
+.auth-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 24px;
+    text-align: center;
+}
+.auth-hero { margin-bottom: 60px; }
+.auth-hero .logo-large {
+    font-size: 4rem;
+    color: var(--accent-primary);
+    text-shadow: 0 0 20px var(--accent-glow);
+    margin-bottom: 16px;
+}
+.auth-hero h1 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+.auth-hero p { color: var(--text-secondary); font-size: 1.1rem; }
+.auth-actions { width: 100%; max-width: 320px; margin: 0 auto; }
+.auth-btn { width: 100%; padding: 14px; border-radius: 16px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+.auth-terms { font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; }
+
+/* Profile View */
+.profile-hero { text-align: center; margin-bottom: 24px; }
+.profile-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    margin: 0 auto 12px; border: 2px solid var(--accent-primary);
+    box-shadow: 0 0 15px var(--accent-glow); overflow: hidden;
+}
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.profile-hero h2 { font-size: 1.5rem; margin-bottom: 4px; }
+
+.profile-stats { display: flex; gap: 16px; margin-bottom: 32px; }
+.stat-box { flex: 1; padding: 16px; text-align: center; border-radius: 16px; }
+.stat-value { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); font-family: 'Play', sans-serif; }
+.stat-label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
+
+.profile-section { margin-bottom: 32px; }
+.profile-section h3 { font-size: 1.1rem; margin-bottom: 16px; color: var(--text-primary); }
+.car-card { display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: 16px; margin-bottom: 12px; }
+.car-card > i:first-child { font-size: 2rem; color: var(--text-secondary); }
+.car-card.active-car { border: 1px solid var(--accent-primary); background: rgba(0,229,255,0.05); }
+.car-card.active-car > i:first-child { color: var(--accent-primary); }
+.car-card .car-info h4 { font-size: 1rem; margin-bottom: 4px; }
+.car-card .car-info p { font-size: 0.8rem; color: var(--text-secondary); }
+.add-car-btn { width: 100%; padding: 16px; border-radius: 16px; border: 1px dashed var(--glass-border); background: transparent; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
+.add-car-btn:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+.settings-list .setting-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-radius: 16px; margin-bottom: 12px; }
+.setting-info { display: flex; align-items: center; gap: 12px; }
+.setting-info i { font-size: 1.25rem; color: var(--accent-primary); }
+.toggle { width: 44px; height: 24px; background: rgba(255,255,255,0.1); border-radius: 12px; position: relative; cursor: pointer; transition: 0.3s; }
+.toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: #fff; border-radius: 50%; transition: 0.3s; }
+.toggle.active { background: var(--accent-green); }
+.toggle.active::after { left: calc(100% - 22px); }

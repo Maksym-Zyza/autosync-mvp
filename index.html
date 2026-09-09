@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container">
+    <div class="app-container auth-mode">
         <!-- Header -->
         <header class="app-header glass">
             <div class="logo">
@@ -28,8 +28,29 @@
         <!-- Main Content Area -->
         <main class="content-area">
             
+            <!-- Login View -->
+            <section id="login-view" class="view active auth-screen">
+                <div class="auth-hero">
+                    <div class="logo-large">
+                        <i class="ph-fill ph-steering-wheel"></i>
+                        <h1>AutoSync</h1>
+                    </div>
+                    <p>Інтелект вашого авто</p>
+                </div>
+                
+                <div class="auth-actions">
+                    <button class="btn-primary auth-btn" id="login-diia-btn" style="background: #000; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <img src="https://diia.gov.ua/build/assets/images/logo_diia_v1.svg" height="24" alt="Diia"> Увійти через Дія
+                    </button>
+                    <button class="btn-outline auth-btn" id="login-google-btn" style="width: 100%; margin-top: 12px; color: var(--text-primary);">
+                        <i class="ph-fill ph-google-logo"></i> Увійти через Google
+                    </button>
+                    <p class="auth-terms">Авторизуючись, ви погоджуєтесь з політикою конфіденційності.</p>
+                </div>
+            </section>
+
             <!-- Dashboard View -->
-            <section id="dashboard-view" class="view active">
+            <section id="dashboard-view" class="view">
                 <div class="car-selector glass-panel">
                     <div class="car-info">
                         <h2>Volkswagen Golf VII</h2>
@@ -311,6 +332,68 @@
                 </div>
             </section>
 
+            <!-- Profile View -->
+            <section id="profile-view" class="view">
+                <div class="profile-hero">
+                    <div class="profile-avatar">
+                        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=AutoSync" alt="User">
+                    </div>
+                    <h2>Максим Зиза</h2>
+                    <span class="trust-badge verified"><i class="ph-fill ph-check-circle"></i> Верифіковано Дія</span>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="stat-box glass-panel">
+                        <div class="stat-value">98%</div>
+                        <div class="stat-label">Еко-Рейтинг</div>
+                    </div>
+                    <div class="stat-box glass-panel">
+                        <div class="stat-value">₴ 12.4k</div>
+                        <div class="stat-label">Витрати/рік</div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3>Мій Гараж</h3>
+                    <div class="garage-list">
+                        <div class="car-card glass-panel active-car">
+                            <i class="ph-fill ph-car"></i>
+                            <div class="car-info">
+                                <h4>Volkswagen Golf VII</h4>
+                                <p>1.4 TSI • AI2026AX</p>
+                            </div>
+                            <i class="ph-fill ph-check-circle" style="color: var(--accent-green)"></i>
+                        </div>
+                        <button class="add-car-btn glass-panel">
+                            <i class="ph ph-plus"></i> Додати авто
+                        </button>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3>Налаштування</h3>
+                    <div class="settings-list">
+                        <div class="setting-item glass-panel">
+                            <div class="setting-info">
+                                <i class="ph ph-bell"></i>
+                                <span>Push-сповіщення</span>
+                            </div>
+                            <div class="toggle active"></div>
+                        </div>
+                        <div class="setting-item glass-panel">
+                            <div class="setting-info">
+                                <i class="ph ph-shield-check"></i>
+                                <span>Синхронізація з МВС</span>
+                            </div>
+                            <div class="toggle active"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-outline logout-btn" id="logout-btn" style="margin-top: 24px; color: var(--accent-red); border-color: var(--accent-red); width: 100%;">
+                    <i class="ph ph-sign-out"></i> Вийти з акаунту
+                </button>
+            </section>
         </main>
 
         <!-- Floating Add Button -->
@@ -332,7 +415,7 @@
                 <i class="ph-fill ph-map-pin"></i>
                 <span>Сервіси</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-target="profile-view">
                 <i class="ph-fill ph-user"></i>
                 <span>Профіль</span>
             </a>

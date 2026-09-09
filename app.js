@@ -204,4 +204,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- Auth Logic ---
+    const appContainer = document.querySelector('.app-container');
+    const loginDiiaBtn = document.getElementById('login-diia-btn');
+    const loginGoogleBtn = document.getElementById('login-google-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    function login() {
+        appContainer.classList.remove('auth-mode');
+        document.getElementById('login-view').classList.remove('active');
+        
+        // Reset nav and view to dashboard
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        const dashboardNav = document.querySelector('.nav-item[data-target="dashboard-view"]');
+        if (dashboardNav) dashboardNav.classList.add('active');
+        
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById('dashboard-view').classList.add('active');
+    }
+
+    function logout() {
+        appContainer.classList.add('auth-mode');
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById('login-view').classList.add('active');
+    }
+
+    if (loginDiiaBtn) loginDiiaBtn.addEventListener('click', login);
+    if (loginGoogleBtn) loginGoogleBtn.addEventListener('click', login);
+    if (logoutBtn) logoutBtn.addEventListener('click', logout);
 });
