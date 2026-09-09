@@ -1,18 +1,18 @@
 /* Base Settings & CSS Variables */
 :root {
-    /* Sleek Dark Mode Palette */
-    --bg-color: #0b0f19;
-    --bg-gradient: linear-gradient(135deg, #0b0f19 0%, #1a1f2e 100%);
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    /* Dark Vision Palette */
+    --bg-color: #050505;
+    --bg-gradient: linear-gradient(135deg, #050505 0%, #0a0a14 100%);
+    --glass-bg: rgba(20, 20, 30, 0.6);
+    --glass-border: rgba(0, 229, 255, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 229, 255, 0.05);
     
-    /* Accents */
-    --accent-primary: #3b82f6; /* Modern Blue */
-    --accent-glow: rgba(59, 130, 246, 0.5);
-    --accent-red: #ef4444;
-    --accent-orange: #f59e0b;
-    --accent-green: #10b981;
+    /* Neon Accents */
+    --accent-primary: #00e5ff; /* Neon Cyan */
+    --accent-glow: rgba(0, 229, 255, 0.6);
+    --accent-red: #ff2a2a;
+    --accent-orange: #ffaa00;
+    --accent-green: #00ff88;
     
     /* Text */
     --text-primary: #f8fafc;

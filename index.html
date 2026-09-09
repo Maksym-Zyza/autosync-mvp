@@ -66,40 +66,14 @@
                 <!-- Upcoming Reminders -->
                 <div class="section-header">
                     <h3>Найближчі події</h3>
-                    <button class="text-btn">Всі</button>
+                    <div>
+                        <button id="enable-notifications-btn" class="icon-btn" title="Увімкнути сповіщення" style="margin-right: 8px;"><i class="ph ph-bell-ringing"></i></button>
+                        <button class="text-btn">Всі</button>
+                    </div>
                 </div>
                 
-                <div class="reminders-list">
-                    <div class="reminder-card glass-panel alert">
-                        <div class="icon-box red">
-                            <i class="ph ph-wrench"></i>
-                        </div>
-                        <div class="reminder-info">
-                            <h4>Гальмівні колодки</h4>
-                            <p>Заміна через 500 км</p>
-                        </div>
-                        <button class="action-btn">Записатись</button>
-                    </div>
-                    
-                    <div class="reminder-card glass-panel warning">
-                        <div class="icon-box orange">
-                            <i class="ph ph-drop"></i>
-                        </div>
-                        <div class="reminder-info">
-                            <h4>Моторне мастило</h4>
-                            <p>Заміна через 2 300 км</p>
-                        </div>
-                    </div>
-
-                    <div class="reminder-card glass-panel normal">
-                        <div class="icon-box blue">
-                            <i class="ph ph-shield-check"></i>
-                        </div>
-                        <div class="reminder-info">
-                            <h4>ОСЦПВ (Страховка)</h4>
-                            <p>Дійсна ще 4 місяці</p>
-                        </div>
-                    </div>
+                <div class="reminders-list" id="reminders-container">
+                    <!-- Reminders will be injected here by app.js -->
                 </div>
             </section>
 

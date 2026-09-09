@@ -113,4 +113,95 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // --- Dynamic Reminders & Sorting ---
+    const remindersData = [
+        {
+            title: "ОСЦПВ (Страховка)",
+            desc: "Дійсна ще 4 місяці",
+            icon: "ph-shield-check",
+            colorClass: "normal",
+            iconClass: "blue",
+            priority: 3, // 1 = highest, 3 = lowest
+            daysLeft: 120
+        },
+        {
+            title: "Моторне мастило",
+            desc: "Заміна через 2 300 км",
+            icon: "ph-drop",
+            colorClass: "warning",
+            iconClass: "orange",
+            priority: 2,
+            daysLeft: 45
+        },
+        {
+            title: "Гальмівні колодки",
+            desc: "Заміна через 500 км",
+            icon: "ph-wrench",
+            colorClass: "alert",
+            iconClass: "red",
+            priority: 1,
+            daysLeft: 7,
+            hasAction: true
+        }
+    ];
+
+    const remindersContainer = document.getElementById('reminders-container');
+    
+    function renderReminders() {
+        if (!remindersContainer) return;
+        
+        // Dynamic Sorting (Priority 1 first)
+        remindersData.sort((a, b) => a.priority - b.priority);
+        
+        remindersContainer.innerHTML = '';
+        
+        remindersData.forEach(reminder => {
+            const btnHtml = reminder.hasAction ? `<button class="action-btn">Записатись</button>` : '';
+            
+            const cardHtml = `
+                <div class="reminder-card glass-panel ${reminder.colorClass}">
+                    <div class="icon-box ${reminder.iconClass}">
+                        <i class="ph ${reminder.icon}"></i>
+                    </div>
+                    <div class="reminder-info">
+                        <h4>${reminder.title}</h4>
+                        <p>${reminder.desc}</p>
+                    </div>
+                    ${btnHtml}
+                </div>
+            `;
+            remindersContainer.insertAdjacentHTML('beforeend', cardHtml);
+        });
+    }
+
+    renderReminders();
+
+    // --- Web Notifications API (Proactive Push) ---
+    const notifyBtn = document.getElementById('enable-notifications-btn');
+    if (notifyBtn) {
+        notifyBtn.addEventListener('click', () => {
+            if (!("Notification" in window)) {
+                alert("Ваш браузер не підтримує системні сповіщення.");
+                return;
+            }
+
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    notifyBtn.style.color = "var(--accent-green)"; // Change icon color
+                    
+                    // Trigger a demo notification
+                    const notification = new Notification("AutoSync", {
+                        body: "Увага! Гальмівні колодки потребують заміни через 500 км.",
+                        icon: "https://cdn-icons-png.flaticon.com/512/3204/3204364.png" // Car icon
+                    });
+                    
+                    notification.onclick = function() {
+                        window.focus();
+                        this.close();
+                    };
+                }
+            });
+        });
+    }
 });
