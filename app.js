@@ -259,4 +259,36 @@ document.addEventListener('DOMContentLoaded', () => {
             if (profileView) profileView.classList.add('active');
         });
     }
+
+    // --- AI Scanner Logic ---
+    const scannerBtn = document.getElementById('scanner-btn');
+    const scannerInput = document.getElementById('scanner-input');
+    const scannerLoading = document.getElementById('scanner-loading');
+    const scannerResult = document.getElementById('scanner-result');
+
+    if (scannerBtn) {
+        scannerBtn.addEventListener('click', () => {
+            if (!scannerInput.value.trim()) {
+                alert('Будь ласка, введіть VIN-код або Держ. номер.');
+                return;
+            }
+            
+            // Show loading
+            scannerResult.style.display = 'none';
+            scannerLoading.style.display = 'block';
+            scannerBtn.style.pointerEvents = 'none';
+            scannerBtn.innerHTML = '<i class="ph ph-spinner ph-spin" style="font-size: 1.2rem;"></i>';
+
+            // Simulate API call and AI processing
+            setTimeout(() => {
+                scannerLoading.style.display = 'none';
+                scannerResult.style.display = 'block';
+                scannerBtn.style.pointerEvents = 'auto';
+                scannerBtn.innerHTML = '<i class="ph ph-magnifying-glass" style="font-size: 1.2rem;"></i>';
+                
+                // Add simple fade in animation
+                scannerResult.style.animation = 'fadeIn 0.5s ease';
+            }, 2500);
+        });
+    }
 });
