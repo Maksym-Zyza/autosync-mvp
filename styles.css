@@ -107,6 +107,44 @@ body, .glass, .glass-panel, .bottom-nav, .modal-content {
 :root[data-theme="light"] .theme-toggle .ph-sun { display: block; }
 :root[data-theme="light"] .theme-toggle .ph-moon { display: none; }
 
+/* Light theme: modal and form controls (solid surface like --surface-modal in the design system) */
+:root[data-theme="light"] .modal-content {
+    background: var(--modal-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: 0 -12px 40px rgba(15, 23, 42, 0.18);
+}
+:root[data-theme="light"] .form-group input,
+:root[data-theme="light"] .form-group select,
+:root[data-theme="light"] .form-group textarea {
+    background: #f8fafc;
+    border-color: rgba(71, 85, 105, 0.3);
+}
+:root[data-theme="light"] .form-group input:focus,
+:root[data-theme="light"] .form-group select:focus,
+:root[data-theme="light"] .form-group textarea:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.15);
+}
+:root[data-theme="light"] .file-upload {
+    background: var(--fill-05);
+    border-color: rgba(71, 85, 105, 0.35);
+}
+
+/* Profile: small link to the design system */
+.design-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.design-link:hover { color: var(--accent-primary); }
+
 * {
     margin: 0;
     padding: 0;
