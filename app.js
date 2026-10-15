@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- Navigation Logic (SPA Tab Switching) ---
-    const navItems = document.querySelectorAll('.nav-item');
+    const navItems = document.querySelectorAll('.nav-item[data-target]');
     const views = document.querySelectorAll('.view');
 
     navItems.forEach(item => {

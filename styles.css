@@ -131,19 +131,6 @@ body, .glass, .glass-panel, .bottom-nav, .modal-content {
     border-color: rgba(71, 85, 105, 0.35);
 }
 
-/* Profile: small link to the design system */
-.design-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 16px;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-.design-link:hover { color: var(--accent-primary); }
 
 * {
     margin: 0;
@@ -1180,6 +1167,8 @@ h1, h2, h3, h4, h5, h6 {
     .nav-item:hover { color: var(--text-primary); background: var(--fill-04); }
     .nav-item.active { background: rgba(0, 229, 255, 0.1); }
     .nav-item--desktop { display: flex; margin-top: auto; }
+    /* External link (design system) sits right below Profile */
+    .nav-item--link { margin-top: 0; font-size: 0.9rem; }
 
     /* Layout without nav (shared view) and without header (auth) */
     .app-container.hide-nav {
