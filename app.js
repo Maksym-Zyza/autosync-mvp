@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Theme switcher (dark / light), choice is remembered ---
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const root = document.documentElement;
+            const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            root.setAttribute('data-theme', next);
+            try { localStorage.setItem('autosync-theme', next); } catch (e) {}
+        });
+    }
+
     
     // --- Navigation Logic (SPA Tab Switching) ---
     const navItems = document.querySelectorAll('.nav-item');
