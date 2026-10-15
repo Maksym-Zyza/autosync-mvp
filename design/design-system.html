@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoSync Design System</title>
+<meta name="description" content="Кольори, шрифти, відступи та компоненти інтерфейсу AutoSync.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><path d='M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM212.72,104H173.85a48.16,48.16,0,0,0-16.14-38.93l27.53-27.54A88.08,88.08,0,0,1,212.72,104ZM128,160a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM118.41,75.76a48.06,48.06,0,0,0-36.29,0l-15.65-38.4a87.65,87.65,0,0,1,67,0ZM112,215.35V173.85a48.16,48.16,0,0,0-38.93-16.14l-27.54,27.53A88.08,88.08,0,0,1,43.28,152H82.15a48.16,48.16,0,0,0,16.14-38.93L70.76,85.53A88.08,88.08,0,0,1,104,43.28v38.87a48.16,48.16,0,0,0,38.93,16.14l27.53-27.54A88.08,88.08,0,0,1,212.72,104H173.85a48.16,48.16,0,0,0-16.14,38.93l27.54,27.53A88.08,88.08,0,0,1,152,212.72V173.85a48.16,48.16,0,0,0-38.93,16.14Z' fill='%2300e5ff'/></svg>">
+<!-- The app's own stylesheet: every component below is rendered with the real classes -->
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Layout: sticky token index on the left, specimen sheet on the right; collapses to a top tab strip on phones */
+:root {
+  --bg-color: #050505;
+  --glass-bg: rgba(20, 20, 30, 0.6);
+  --glass-border: rgba(0, 229, 255, 0.15);
+  --surface-modal: #171c28;
+  --scrim: rgba(0, 0, 0, 0.6);
+  --fill-subtle: rgba(255, 255, 255, 0.05);
+  --fill-hover: rgba(255, 255, 255, 0.1);
+  --accent-primary: #00e5ff;
+  --accent-glow: rgba(0, 229, 255, 0.6);
+  --on-accent: #050505;
+  --tint-primary: rgba(0, 229, 255, 0.1);
+  --accent-green: #00ff88;
+  --tint-good: rgba(16, 185, 129, 0.2);
+  --accent-orange: #ffaa00;
+  --tint-warning: rgba(245, 158, 11, 0.2);
+  --accent-red: #ff2a2a;
+  --tint-danger: rgba(239, 68, 68, 0.2);
+  --accent-ai: #a855f7;
+  --accent-ai-text: #d8b4fe;
+  --tint-ai: rgba(168, 85, 247, 0.15);
+  --rating-star: #f59e0b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --ds-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --ds-side: 248px;
+  --ds-line: rgba(148, 163, 184, 0.14);
+  color-scheme: dark;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { display: block; min-height: 100vh; }
+code, .ds-val, .ds-num { font-family: var(--ds-mono); font-size: 0.8rem; }
+.ds-num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
+
+.ds-shell { display: grid; grid-template-columns: var(--ds-side) minmax(0, 1fr); min-height: 100vh; }
+.ds-side {
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  padding: 28px 20px; border-right: 1px solid var(--glass-border);
+  background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  display: flex; flex-direction: column; gap: 24px;
+}
+.ds-brand { display: flex; align-items: center; gap: 10px; font-family: 'Play', sans-serif; font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+.ds-brand i { color: var(--accent-primary); font-size: 1.5rem; }
+.ds-brand small { display: block; font-family: 'Exo 2', sans-serif; font-weight: 500; font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 0.08em; text-transform: uppercase; }
+.ds-nav { display: flex; flex-direction: column; gap: 2px; }
+.ds-nav-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin: 12px 0 6px 12px; }
+.ds-nav a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; padding: 7px 12px; border-radius: 10px; transition: background .2s, color .2s; }
+.ds-nav a:hover { color: var(--text-primary); background: var(--fill-subtle); }
+.ds-nav a.is-active { color: var(--accent-primary); background: var(--tint-primary); }
+.ds-back { margin-top: auto; font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+.ds-back:hover { color: var(--accent-primary); }
+
+.ds-main { padding: 40px clamp(16px, 4vw, 56px) 96px; max-width: 1180px; width: 100%; }
+.ds-section { padding-top: 56px; display: flex; flex-direction: column; gap: 20px; }
+.ds-section > h2 { font-size: 1.6rem; text-wrap: balance; }
+.ds-eyebrow { font-family: var(--ds-mono); font-size: 0.75rem; color: var(--accent-primary); letter-spacing: 0.06em; }
+.ds-lead { color: var(--text-secondary); max-width: 68ch; }
+.ds-lead-sm { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px; }
+.ds-sub { display: flex; flex-direction: column; }
+.ds-sub h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.ds-name { color: var(--text-primary); }
+.ds-val { color: var(--text-secondary); }
+p { color: var(--text-secondary); font-size: 0.85rem; }
+
+/* Hero */
+.ds-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: 32px; align-items: center;
+  padding: 32px; border-radius: var(--radius-lg); border: 1px solid var(--glass-border); background: var(--glass-bg); box-shadow: var(--glass-shadow); overflow: hidden; }
+.ds-hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1; margin-bottom: 12px; }
+.ds-hero h1 span { display: block; color: var(--accent-primary); font-size: 0.42em; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 10px; }
+.ds-hero p { font-size: 1rem; max-width: 52ch; }
+.ds-facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.ds-facts span { font-size: 0.8rem; padding: 6px 12px; border-radius: var(--radius-pill); background: var(--fill-subtle); border: 1px solid var(--glass-border); color: var(--text-secondary); }
+.ds-facts b { color: var(--text-primary); font-family: 'Play', sans-serif; }
+.ds-hero svg { width: 100%; height: auto; display: block; }
+.ds-hero .cyan { fill: var(--accent-primary); } .ds-hero .ai { fill: var(--accent-ai); } .ds-hero .warn { fill: var(--accent-orange); } .ds-hero .good { fill: var(--accent-green); }
+.ds-hero .arc { fill: none; stroke: var(--on-accent); stroke-width: 10; stroke-linecap: round; }
+.ds-hero .track { fill: none; stroke: var(--on-accent); stroke-width: 10; opacity: .18; }
+.ds-principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.ds-principles div { padding: 20px; border-radius: var(--radius-md); background: var(--fill-subtle); border: 1px solid var(--ds-line); }
+.ds-principles h3 { font-size: 1rem; margin-bottom: 6px; display: flex; gap: 8px; align-items: center; }
+.ds-principles i { color: var(--accent-primary); font-size: 1.2rem; }
+
+/* Colors */
+.ds-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.ds-swatch { display: flex; flex-direction: column; border-radius: var(--radius-md); border: 1px solid var(--ds-line); overflow: hidden; background: var(--bg-color); }
+.ds-chip { height: 72px; border-bottom: 1px solid var(--ds-line); }
+.ds-sw-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.ds-sw-head { display: flex; justify-content: space-between; gap: 8px; align-items: center; flex-wrap: wrap; }
+.ds-sw-body p { font-size: 0.8rem; margin-top: 4px; }
+.ds-cr { font-family: var(--ds-mono); font-size: 0.7rem; padding: 2px 8px; border-radius: var(--radius-pill); }
+.ds-cr.ok { background: var(--tint-good); color: var(--accent-green); }
+.ds-cr.bad { background: var(--tint-warning); color: var(--accent-orange); }
+.ds-note { display: flex; gap: 12px; padding: 16px; border-radius: var(--radius-md); background: var(--tint-warning); border: 1px solid rgba(255, 170, 0, 0.3); }
+.ds-note i { color: var(--accent-orange); font-size: 1.3rem; flex: none; }
+.ds-note p { color: var(--text-primary); }
+
+/* Type */
+.ds-type { border-radius: var(--radius-md); border: 1px solid var(--ds-line); overflow: hidden; }
+.ds-type-group { padding: 10px 20px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-primary); background: var(--fill-subtle); border-bottom: 1px solid var(--ds-line); }
+.ds-type-row { display: grid; grid-template-columns: 170px minmax(0, 1fr) 260px; gap: 20px; align-items: baseline; padding: 16px 20px; border-bottom: 1px solid var(--ds-line); }
+.ds-type-row:last-child { border-bottom: none; }
+.ds-type-meta { display: flex; flex-direction: column; gap: 2px; }
+.ds-type-meta span { font-family: var(--ds-mono); font-size: 0.72rem; color: var(--text-secondary); }
+.ds-type-sample { color: var(--text-primary); overflow-wrap: anywhere; }
+.ds-type-usage { font-size: 0.8rem; }
+.ds-fonts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.ds-font { padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--ds-line); background: var(--bg-color); }
+.ds-font .ag { font-size: 3rem; line-height: 1.1; color: var(--text-primary); }
+.ds-font h3 { font-size: 1rem; margin-top: 8px; }
+
+/* Scales */
+.ds-scale { display: flex; flex-direction: column; border-radius: var(--radius-md); border: 1px solid var(--ds-line); overflow: hidden; }
+.ds-scale-row { display: grid; grid-template-columns: 120px 56px minmax(120px, 1fr) minmax(0, 1.3fr); gap: 16px; align-items: center; padding: 12px 20px; border-bottom: 1px solid var(--ds-line); }
+.ds-scale-row:last-child { border-bottom: none; }
+.ds-bar-wrap { height: 16px; display: flex; align-items: center; }
+.ds-bar { height: 16px; background: var(--accent-primary); border-radius: 3px; box-shadow: 0 0 12px var(--accent-glow); }
+.ds-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
+.ds-tile { padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--ds-line); display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.ds-tile .ds-val { overflow-wrap: anywhere; }
+.ds-rbox { width: 88px; height: 64px; border: 2px solid var(--accent-primary); background: var(--tint-primary); margin-bottom: 12px; }
+.ds-sbox { width: 100%; height: 72px; border-radius: var(--radius-md); background: var(--glass-bg); border: 1px solid var(--glass-border); margin-bottom: 16px; }
+.ds-blur { position: relative; height: 72px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 12px; }
+.ds-blur-dots { position: absolute; inset: 0; background-image: radial-gradient(var(--accent-primary) 6px, transparent 7px), radial-gradient(var(--accent-orange) 5px, transparent 6px); background-size: 34px 34px, 26px 26px; background-position: 0 0, 13px 13px; }
+.ds-blur-glass { position: absolute; inset: 0 0 0 40%; background: var(--glass-bg); border-left: 1px solid var(--glass-border); }
+.ds-table-wrap { overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--ds-line); }
+.ds-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.ds-table td { padding: 12px 16px; border-bottom: 1px solid var(--ds-line); color: var(--text-secondary); vertical-align: top; }
+.ds-table tr:last-child td { border-bottom: none; }
+.ds-table strong { color: var(--text-primary); font-weight: 600; }
+.ds-bp { display: flex; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--glass-border); min-width: 640px; }
+.ds-bp-seg { padding: 14px 12px; display: flex; flex-direction: column; gap: 2px; border-right: 1px solid var(--glass-border); min-width: 0; }
+.ds-bp-seg:last-child { border-right: none; }
+.ds-bp-seg strong { font-family: 'Play', sans-serif; font-size: 0.9rem; }
+.ds-bp-seg span { font-family: var(--ds-mono); font-size: 0.72rem; color: var(--text-secondary); }
+.ds-bp-seg.s0 { background: var(--tint-primary); } .ds-bp-seg.s1 { background: rgba(0, 229, 255, 0.16); } .ds-bp-seg.s2 { background: rgba(0, 229, 255, 0.22); }
+.ds-bp-seg.s3 { background: rgba(0, 229, 255, 0.28); } .ds-bp-seg.s4 { background: rgba(0, 229, 255, 0.34); }
+
+/* Icons */
+.ds-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+.ds-icon { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; border-radius: var(--radius-sm); border: 1px solid var(--ds-line); text-align: center; }
+.ds-icon i { font-size: 1.6rem; color: var(--text-primary); }
+.ds-icon code { font-size: 0.68rem; color: var(--text-secondary); overflow-wrap: anywhere; }
+
+/* Components */
+.ds-comp-index { display: flex; flex-wrap: wrap; gap: 8px; }
+.ds-comp-index a { font-size: 0.8rem; text-decoration: none; padding: 6px 12px; border-radius: var(--radius-pill); border: 1px solid var(--glass-border); color: var(--text-secondary); }
+.ds-comp-index a:hover { color: var(--accent-primary); border-color: var(--accent-primary); }
+.ds-comp { border-radius: var(--radius-lg); border: 1px solid var(--glass-border); background: var(--glass-bg); overflow: hidden; scroll-margin-top: 24px; }
+.ds-comp-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--ds-line); }
+.ds-comp-head h3 { font-size: 1.15rem; }
+.ds-tag { font-size: 0.72rem; padding: 4px 10px; border-radius: var(--radius-pill); background: var(--fill-subtle); color: var(--text-secondary); }
+.ds-comp-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+.ds-stage { padding: 28px 24px; background: var(--bg-color); background-image: radial-gradient(var(--ds-line) 1px, transparent 1px); background-size: 16px 16px; border-right: 1px solid var(--ds-line); min-width: 0; overflow-x: auto; }
+.ds-stage .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.ds-stage .col { display: flex; flex-direction: column; gap: 12px; }
+.ds-stage .w { max-width: 420px; }
+.ds-guide { padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.ds-guide p, .ds-guide li { font-size: 0.85rem; color: var(--text-secondary); }
+.ds-guide ul { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.ds-guide strong { color: var(--text-primary); }
+.ds-guide code, .ds-sw-body code, .ds-type-usage code, .ds-scale-row code, .ds-tile code, .ds-table code { font-size: 0.78em; padding: 1px 5px; border-radius: 5px; background: var(--fill-subtle); color: var(--text-primary); }
+.ds-code { border-top: 1px solid var(--ds-line); position: relative; }
+.ds-code summary { cursor: pointer; padding: 12px 24px; font-size: 0.85rem; color: var(--accent-primary); list-style: none; display: flex; align-items: center; gap: 8px; }
+.ds-code summary::before { content: '›'; transition: transform .2s; display: inline-block; }
+.ds-code[open] summary::before { transform: rotate(90deg); }
+.ds-code pre { margin: 0; padding: 16px 24px 24px; overflow-x: auto; max-height: 360px; background: rgba(0, 0, 0, 0.35); }
+.ds-code pre code { color: var(--text-secondary); font-size: 0.75rem; line-height: 1.6; white-space: pre; }
+.ds-copy { position: absolute; right: 16px; top: 8px; font: inherit; font-size: 0.75rem; padding: 5px 12px; border-radius: var(--radius-pill); border: 1px solid var(--glass-border); background: var(--fill-subtle); color: var(--text-primary); cursor: pointer; }
+.ds-copy:hover { border-color: var(--accent-primary); }
+.ds-foot { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--ds-line); font-size: 0.8rem; color: var(--text-secondary); }
+
+@media (max-width: 1100px) {
+  .ds-type-row { grid-template-columns: 150px minmax(0, 1fr); }
+  .ds-type-usage { grid-column: 2; }
+  .ds-comp-grid { grid-template-columns: minmax(0, 1fr); }
+  .ds-stage { border-right: none; border-bottom: 1px solid var(--ds-line); }
+}
+@media (max-width: 900px) {
+  .ds-shell { grid-template-columns: minmax(0, 1fr); }
+  .ds-side { position: sticky; top: 0; z-index: 50; height: auto; flex-direction: row; align-items: center; gap: 16px; padding: 12px 16px; border-right: none; border-bottom: 1px solid var(--glass-border); overflow-x: auto; }
+  .ds-brand small, .ds-nav-label, .ds-back, .ds-nav-comps { display: none; }
+  .ds-nav { flex-direction: row; gap: 4px; }
+  .ds-nav a { white-space: nowrap; }
+  html { scroll-padding-top: 76px; }
+  .ds-comp { scroll-margin-top: 76px; }
+  .ds-hero { grid-template-columns: minmax(0, 1fr); padding: 24px; }
+  .ds-scale-row { grid-template-columns: 110px 52px minmax(0, 1fr); }
+  .ds-scale-row p { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .ds-type-row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .ds-type-usage { grid-column: auto; }
+  .ds-comp-head, .ds-guide, .ds-stage { padding-left: 16px; padding-right: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+  <aside class="ds-side">
+    <a class="ds-brand" href="#overview"><i class="ph-fill ph-steering-wheel"></i><span>AutoSync<small>Design System</small></span></a>
+    <nav class="ds-nav" aria-label="Розділи">
+      <div class="ds-nav-label">Основи</div>
+      <a href="#overview">Огляд</a>
+      <a href="#colors">Кольори</a>
+      <a href="#type">Типографіка</a>
+      <a href="#spacing">Відступи</a>
+      <a href="#radius">Радіуси і тіні</a>
+      <a href="#layout">Адаптивність</a>
+      <a href="#icons">Іконки</a>
+      <a href="#components">Компоненти</a>
+      <div class="ds-nav-label ds-nav-comps">Компоненти</div>
+      <a class="ds-nav-comps" href="#c-glasspanel">GlassPanel</a><a class="ds-nav-comps" href="#c-button">Button</a><a class="ds-nav-comps" href="#c-iconbutton">IconButton</a><a class="ds-nav-comps" href="#c-fab">Fab</a><a class="ds-nav-comps" href="#c-integrationbutton">IntegrationButton</a><a class="ds-nav-comps" href="#c-badge">Badge</a><a class="ds-nav-comps" href="#c-chip">Chip</a><a class="ds-nav-comps" href="#c-searchbar">SearchBar</a><a class="ds-nav-comps" href="#c-formfield">FormField</a><a class="ds-nav-comps" href="#c-toggle">Toggle</a><a class="ds-nav-comps" href="#c-healthscore">HealthScore</a><a class="ds-nav-comps" href="#c-statbox">StatBox</a><a class="ds-nav-comps" href="#c-remindercard">ReminderCard</a><a class="ds-nav-comps" href="#c-timelineentry">TimelineEntry</a><a class="ds-nav-comps" href="#c-servicecard">ServiceCard</a><a class="ds-nav-comps" href="#c-carcard">CarCard</a><a class="ds-nav-comps" href="#c-navigation">Navigation</a><a class="ds-nav-comps" href="#c-modal">Modal</a>
+    </nav>
+    <a class="ds-back" href="index.html"><i class="ph ph-arrow-left"></i> До застосунку</a>
+  </aside>
+
+  <main class="ds-main">
+    <section class="ds-hero" id="overview">
+      <div>
+        <h1>AutoSync<span>Design System · v1.5</span></h1>
+        <p>Мова інтерфейсу цифрового сервісного паспорта авто: темне скло, неоновий блакитний акцент і кольори стану, як на панелі приладів. Усі приклади нижче намальовані справжніми класами з <code>styles.css</code>.</p>
+        <div class="ds-facts"><span><b>24</b> кольори</span><span><b>14</b> стилів тексту</span><span><b>18</b> компонентів</span><span><b>4</b> контрольні точки</span></div>
+      </div>
+      <svg viewBox="470 0 490 288" aria-hidden="true">
+        <rect class="cyan" x="600" y="-24" width="384" height="216" rx="24"/>
+        <rect class="ai" x="480" y="120" width="96" height="192" rx="24"/>
+        <rect class="warn" x="600" y="216" width="128" height="96" rx="24"/>
+        <rect class="good" x="752" y="216" width="56" height="56" rx="12"/>
+        <g transform="translate(808 84)">
+          <circle class="track" r="72"/><circle class="arc" r="72" pathLength="100" stroke-dasharray="75 100" transform="rotate(-90)"/>
+          <circle class="track" r="48"/><circle class="arc" r="48" pathLength="100" stroke-dasharray="50 100" transform="rotate(-90)"/>
+          <circle class="track" r="24"/><circle class="arc" r="24" pathLength="100" stroke-dasharray="90 100" transform="rotate(-90)"/>
+        </g>
+      </svg>
+    </section>
+
+    <section class="ds-section">
+      <div class="ds-principles">
+        <div><h3><i class="ph-fill ph-squares-four"></i>Скло, а не тіні</h3><p>Кожна картка — напівпрозора панель з розмиттям і тонкою блакитною межею. Глибину дає світіння, а не темна тінь.</p></div>
+        <div><h3><i class="ph-fill ph-check-circle"></i>Один акцент</h3><p>Блакитний <code>accent-primary</code> означає «дія» або «вибрано». Зелений, помаранчевий і червоний — лише стан.</p></div>
+        <div><h3><i class="ph-fill ph-scan"></i>Конкретні цифри</h3><p>«Заміна через 500 км», «Відчинено до 20:00». Людина одразу бачить, що робити.</p></div>
+        <div><h3><i class="ph-fill ph-magic-wand"></i>ШІ видно</h3><p>Усе, що зробив штучний інтелект, позначене фіолетовим <code>accent-ai</code>, щоб відрізняти його від перевірених даних.</p></div>
+      </div>
+    </section>
+
+    <section class="ds-section" id="colors">
+      <div class="ds-eyebrow">01 · tokens.color</div>
+      <h2>Кольори</h2>
+      <p class="ds-lead">Одна темна тема. Біля кожного кольору показано контраст з фоном <code>bg-color</code>; WCAG AA вимагає щонайменше 4.5:1 для звичайного тексту.</p>
+      <div class="ds-sub"><h3>Поверхні</h3><p class=ds-lead-sm>Скляний темний інтерфейс: фон, скло, межі, затемнення.</p><div class="ds-swatches"><div class="ds-swatch">
+  <div class="ds-chip" style="background:#050505"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--bg-color</code></div>
+    <div class="ds-val">#050505</div>
+    <p>Фон сторінки. Під ним у застосунку лежить градієнт --bg-gradient (#050505 → #0a0a14).</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(20, 20, 30, 0.6)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--glass-bg</code></div>
+    <div class="ds-val">rgba(20, 20, 30, 0.6)</div>
+    <p>Заливка скляних панелей (.glass-panel) і шапки/навігації (.glass) разом з backdrop-filter blur.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(0, 229, 255, 0.15)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--glass-border</code></div>
+    <div class="ds-val">rgba(0, 229, 255, 0.15)</div>
+    <p>Тонка межа скляних панелей, полів форм, лінія хронології, роздільники.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#171c28"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--surface-modal</code></div>
+    <div class="ds-val">#171c28</div>
+    <p>Приблизний колір фону модалки; маскує лінію в роздільнику «або вручну».</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(0, 0, 0, 0.6)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--scrim</code></div>
+    <div class="ds-val">rgba(0, 0, 0, 0.6)</div>
+    <p>Затемнення під модальним вікном (.modal-overlay).</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(255, 255, 255, 0.05)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--fill-subtle</code></div>
+    <div class="ds-val">rgba(255, 255, 255, 0.05)</div>
+    <p>Фон іконкових кнопок, чіпів, вкладень документів, плиток статистики.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(255, 255, 255, 0.1)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--fill-hover</code></div>
+    <div class="ds-val">rgba(255, 255, 255, 0.1)</div>
+    <p>Фон кнопки «Поділитись», трек вимкненого перемикача, ховер іконкових кнопок.</p>
+  </div>
+</div></div></div>
+<div class="ds-sub"><h3>Акцент</h3><p class=ds-lead-sm>Єдиний колір бренду. Головна дія, активна навігація, ціни, фокус.</p><div class="ds-swatches"><div class="ds-swatch">
+  <div class="ds-chip" style="background:#00e5ff"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-primary</code><span class="ds-cr ok" title="Контраст з bg-color">13.2:1</span></div>
+    <div class="ds-val">#00e5ff</div>
+    <p>Неоновий блакитний: головні кнопки, активна навігація, ціни, фокус полів. 13.3:1 на bg-color.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(0, 229, 255, 0.6)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-glow</code></div>
+    <div class="ds-val">rgba(0, 229, 255, 0.6)</div>
+    <p>Світіння під кнопками з заливкою accent-primary і під FAB.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#050505"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--on-accent</code></div>
+    <div class="ds-val">#050505</div>
+    <p>Текст та іконки на заливці accent-primary (13.3:1). Ніколи не білий.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(0, 229, 255, 0.1)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--tint-primary</code></div>
+    <div class="ds-val">rgba(0, 229, 255, 0.1)</div>
+    <p>Фон активного пункту бічної навігації та активного авто в гаражі (0.05).</p>
+  </div>
+</div></div></div>
+<div class="ds-sub"><h3>Стани</h3><p class=ds-lead-sm>Сталі значення як на панелі приладів. Завжди разом зі словом або іконкою.</p><div class="ds-swatches"><div class="ds-swatch">
+  <div class="ds-chip" style="background:#00ff88"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-green</code><span class="ds-cr ok" title="Контраст з bg-color">15.2:1</span></div>
+    <div class="ds-val">#00ff88</div>
+    <p>Стан «добре»: верифіковано, відчинено, гарантія, активний перемикач. 15.2:1 на bg-color.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(16, 185, 129, 0.2)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--tint-good</code></div>
+    <div class="ds-val">rgba(16, 185, 129, 0.2)</div>
+    <p>Фон бейджа «Добре», «Перевірено AutoSync» (0.15), гарантії.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#ffaa00"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-orange</code><span class="ds-cr ok" title="Контраст з bg-color">10.7:1</span></div>
+    <div class="ds-val">#ffaa00</div>
+    <p>Стан «увага»: індекс здоров'я, бейдж «Потребує уваги», смуга попередження. 10.7:1 на bg-color.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(245, 158, 11, 0.2)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--tint-warning</code></div>
+    <div class="ds-val">rgba(245, 158, 11, 0.2)</div>
+    <p>Фон бейджа «Потребує уваги» та іконки-плашки orange (0.15).</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#ff2a2a"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-red</code><span class="ds-cr ok" title="Контраст з bg-color">5.5:1</span></div>
+    <div class="ds-val">#ff2a2a</div>
+    <p>Стан «критично»: смуга нагадування, зачинено, вихід з акаунту. 5.45:1 на bg-color; на tint-danger лише 4.18:1 — не проходить AA для дрібного тексту.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(239, 68, 68, 0.2)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--tint-danger</code></div>
+    <div class="ds-val">rgba(239, 68, 68, 0.2)</div>
+    <p>Фон бейджа danger та іконки-плашки red (0.15).</p>
+  </div>
+</div></div></div>
+<div class="ds-sub"><h3>ШІ</h3><p class=ds-lead-sm>Лише для функцій штучного інтелекту.</p><div class="ds-swatches"><div class="ds-swatch">
+  <div class="ds-chip" style="background:#a855f7"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-ai</code><span class="ds-cr ok" title="Контраст з bg-color">5.2:1</span></div>
+    <div class="ds-val">#a855f7</div>
+    <p>Все, що робить ШІ: бейдж «Оцифровано через ШІ», іконка «Резюме ШІ», межа кнопки сканування.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#d8b4fe"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-ai-text</code><span class="ds-cr ok" title="Контраст з bg-color">11.5:1</span></div>
+    <div class="ds-val">#d8b4fe</div>
+    <p>Текст кнопки «Оцифрувати документ через ШІ» на tint-ai (8.1:1).</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(168, 85, 247, 0.15)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--tint-ai</code></div>
+    <div class="ds-val">rgba(168, 85, 247, 0.15)</div>
+    <p>Фон кнопки ШІ-сканування.</p>
+  </div>
+</div></div></div>
+<div class="ds-sub"><h3>Текст</h3><p class=ds-lead-sm>Три рівні важливості тексту.</p><div class="ds-swatches"><div class="ds-swatch">
+  <div class="ds-chip" style="background:#f8fafc"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--text-primary</code><span class="ds-cr ok" title="Контраст з bg-color">19.5:1</span></div>
+    <div class="ds-val">#f8fafc</div>
+    <p>Основний текст і заголовки на bg-color та glass-bg (18.4:1).</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#94a3b8"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--text-secondary</code><span class="ds-cr ok" title="Контраст з bg-color">7.9:1</span></div>
+    <div class="ds-val">#94a3b8</div>
+    <p>Описи, підписи, мета-текст на bg-color та glass-bg (7.5:1).</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#64748b"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--text-muted</code><span class="ds-cr bad" title="Контраст з bg-color">4.3:1 · нижче AA</span></div>
+    <div class="ds-val">#64748b</div>
+    <p>Дати, плейсхолдери, неактивна навігація. Лише 4.28:1 на bg-color, 4.04:1 на glass-bg і 3.58:1 у модалці — нижче AA 4.5:1 для дрібного тексту; не використовувати для важливої інформації.</p>
+  </div>
+</div></div></div>
+<div class="ds-sub"><h3>Інше</h3><div class="ds-swatches"><div class="ds-swatch">
+  <div class="ds-chip" style="background:#f59e0b"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--rating-star</code><span class="ds-cr ok" title="Контраст з bg-color">9.5:1</span></div>
+    <div class="ds-val">#f59e0b</div>
+    <p>Зірка рейтингу на фото сервісу.</p>
+  </div>
+</div></div></div>
+      <div class="ds-note"><i class="ph-fill ph-warning"></i><p><strong>Відомі проблеми контрасту.</strong> <code>text-muted</code> має 4.3:1 на фоні, 4.0:1 на склі та 3.6:1 у модалці. Червоний текст бейджа на <code>tint-danger</code> має 4.2:1. Зелений і червоний відрізняються переважно відтінком, тому стан завжди підписується словом.</p></div>
+    </section>
+
+    <section class="ds-section" id="type">
+      <div class="ds-eyebrow">02 · tokens.type</div>
+      <h2>Типографіка</h2>
+      <p class="ds-lead">Play для заголовків, Exo 2 для тексту. Обидва шрифти безкоштовні й підключаються з Google Fonts.</p>
+      <div class="ds-fonts">
+        <div class="ds-font"><div class="ag" style="font-family:'Play',sans-serif;font-weight:700">Аа 145</div><h3>Play</h3><p>Заголовки, назви авто, великі числа. 400 і 700, трекінг 0.03em.</p></div>
+        <div class="ds-font"><div class="ag" style="font-family:'Exo 2',sans-serif;font-weight:500">Аа 145</div><h3>Exo 2</h3><p>Весь інший текст, кнопки, поля. 400–700, міжрядковий 1.5.</p></div>
+        <div class="ds-font"><div class="ag" style="font-family:'Outfit',sans-serif;font-weight:700">75%</div><h3>Outfit</h3><p>Лише число в кільці здоров'я. Кандидат на заміну на Play.</p></div>
+      </div>
+      <div class="ds-type"><div class="ds-type-group">Display · Play</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">display-xl</code><span>2.5rem · 700 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Play', sans-serif;font-size:2.5rem;font-weight:700;line-height:1.5;letter-spacing:0.03em">AutoSync</div>
+  <p class="ds-type-usage">Назва на екрані входу.</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">title-lg</code><span>1.5rem · 700 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Play', sans-serif;font-size:1.5rem;font-weight:700;line-height:1.5;letter-spacing:0.03em">Тарас Шевченко</div>
+  <p class="ds-type-usage">Ім'я в профілі, назва авто у звіті, значення статистики.</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">title-md</code><span>1.25rem · 700 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Play', sans-serif;font-size:1.25rem;font-weight:700;line-height:1.5;letter-spacing:0.03em">Новий запис</div>
+  <p class="ds-type-usage">Заголовок модалки та розділу Історії (1.2rem).</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">title-sm</code><span>1.1rem · 600 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Play', sans-serif;font-size:1.1rem;font-weight:600;line-height:1.5;letter-spacing:0.03em">Найближчі події</div>
+  <p class="ds-type-usage">Заголовки секцій, назва авто, назва сервісу.</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">title-xs</code><span>0.95rem · 600 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Play', sans-serif;font-size:0.95rem;font-weight:600;line-height:1.5;letter-spacing:0.03em">Гальмівні колодки</div>
+  <p class="ds-type-usage">Назва нагадування, запису в хронології (1rem).</p>
+</div>
+<div class="ds-type-group">Text · Exo 2</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">body</code><span>1rem · 400 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Exo 2', sans-serif;font-size:1rem;font-weight:400;line-height:1.5;letter-spacing:0.01em">Знос гальмівних колодок наближається до критичного рівня.</div>
+  <p class="ds-type-usage">Основний текст, поля форм.</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">body-sm</code><span>0.9rem · 400 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Exo 2', sans-serif;font-size:0.9rem;font-weight:400;line-height:1.5;letter-spacing:0.01em">1.4 TSI • 2018 рік • 145 000 км</div>
+  <p class="ds-type-usage">Підзаголовки, текст сканера.</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">caption</code><span>0.85rem · 400 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Exo 2', sans-serif;font-size:0.85rem;font-weight:400;line-height:1.5;letter-spacing:0.01em">СТО &quot;АвтоДок&quot;. Мастило Motul 5W-30.</div>
+  <p class="ds-type-usage">Описи в картках, підписи полів.</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">meta</code><span>0.8rem · 400 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Exo 2', sans-serif;font-size:0.8rem;font-weight:400;line-height:1.5;letter-spacing:0.01em">Заміна через 500 км</div>
+  <p class="ds-type-usage">Друга лінія нагадувань, відстань, підписи статистики.</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">micro</code><span>0.75rem · 600 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Exo 2', sans-serif;font-size:0.75rem;font-weight:600;line-height:1.5;letter-spacing:0.01em">Потребує уваги</div>
+  <p class="ds-type-usage">Бейджі статусу, дата в хронології (400).</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">nav-label</code><span>0.65rem · 500 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Exo 2', sans-serif;font-size:0.65rem;font-weight:500;line-height:1.5;letter-spacing:0.01em">Головна</div>
+  <p class="ds-type-usage">Підписи нижньої навігації на телефоні (0.95rem у бічній панелі на ноутбуці).</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">button</code><span>1rem · 600 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Exo 2', sans-serif;font-size:1rem;font-weight:600;line-height:1.5;letter-spacing:0.01em">Зберегти запис</div>
+  <p class="ds-type-usage">Великі кнопки (.btn-primary, .auth-btn).</p>
+</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">button-sm</code><span>0.8rem · 600 · 1.5</span></div>
+  <div class="ds-type-sample" style="font-family:'Exo 2', sans-serif;font-size:0.8rem;font-weight:600;line-height:1.5;letter-spacing:0.01em">Записатись</div>
+  <p class="ds-type-usage">Компактна кнопка дії в картці (.action-btn).</p>
+</div>
+<div class="ds-type-group">Numeric · Outfit</div>
+<div class="ds-type-row">
+  <div class="ds-type-meta"><code class="ds-name">gauge-value</code><span>36px · 700 · 1</span></div>
+  <div class="ds-type-sample" style="font-family:'Outfit', sans-serif;font-size:36px;font-weight:700;line-height:1;letter-spacing:normal">75%</div>
+  <p class="ds-type-usage">Відсоток у кільці індексу здоров'я. У коді це 0.5rem всередині SVG viewBox 36, що дає ≈36px у колі 160px.</p>
+</div></div>
+    </section>
+
+    <section class="ds-section" id="spacing">
+      <div class="ds-eyebrow">03 · tokens.spacing</div>
+      <h2>Відступи</h2>
+      <p class="ds-lead">Крок 4px. Внутрішні відступи карток — <code>space-4</code>–<code>space-5</code>, між секціями — <code>space-6</code>.</p>
+      <div class="ds-scale"><div class="ds-scale-row"><code class="ds-name">--space-1</code><span class="ds-val">4px</span><div class="ds-bar-wrap"><div class="ds-bar" style="width:4px"></div></div><p>Відступ між заголовком і підзаголовком, гап у бейджах.</p></div>
+<div class="ds-scale-row"><code class="ds-name">--space-2</code><span class="ds-val">8px</span><div class="ds-bar-wrap"><div class="ds-bar" style="width:8px"></div></div><p>Гап між іконкою і текстом у кнопках, між чіпами.</p></div>
+<div class="ds-scale-row"><code class="ds-name">--space-3</code><span class="ds-val">12px</span><div class="ds-bar-wrap"><div class="ds-bar" style="width:12px"></div></div><p>Гап між картками нагадувань і кнопками-інтеграціями.</p></div>
+<div class="ds-scale-row"><code class="ds-name">--space-4</code><span class="ds-val">16px</span><div class="ds-bar-wrap"><div class="ds-bar" style="width:16px"></div></div><p>Внутрішній відступ карток, гап між сервісами, відступи полів форми.</p></div>
+<div class="ds-scale-row"><code class="ds-name">--space-5</code><span class="ds-val">20px</span><div class="ds-bar-wrap"><div class="ds-bar" style="width:20px"></div></div><p>Відступ панелей (.glass-panel), бічні поля контенту на телефоні.</p></div>
+<div class="ds-scale-row"><code class="ds-name">--space-6</code><span class="ds-val">24px</span><div class="ds-bar-wrap"><div class="ds-bar" style="width:24px"></div></div><p>Між секціями, нижній відступ шапок розділів, гап колонок на ноутбуці.</p></div>
+<div class="ds-scale-row"><code class="ds-name">--space-8</code><span class="ds-val">32px</span><div class="ds-bar-wrap"><div class="ds-bar" style="width:32px"></div></div><p>Між великими блоками; поля контенту з планшета.</p></div>
+<div class="ds-scale-row"><code class="ds-name">--space-10</code><span class="ds-val">40px</span><div class="ds-bar-wrap"><div class="ds-bar" style="width:40px"></div></div><p>Бічні поля контенту на ноутбуці.</p></div></div>
+    </section>
+
+    <section class="ds-section" id="radius">
+      <div class="ds-eyebrow">04 · tokens.radius · shadow · blur</div>
+      <h2>Радіуси, тіні, розмиття</h2>
+      <div class="ds-tiles"><div class="ds-tile"><div class="ds-rbox" style="border-radius:12px"></div><code class="ds-name">--radius-sm</code><span class="ds-val">12px</span><p>Поля форм, іконки-плашки, кнопки в картках.</p></div>
+<div class="ds-tile"><div class="ds-rbox" style="border-radius:16px"></div><code class="ds-name">--radius-md</code><span class="ds-val">16px</span><p>Скляні панелі та картки.</p></div>
+<div class="ds-tile"><div class="ds-rbox" style="border-radius:24px"></div><code class="ds-name">--radius-lg</code><span class="ds-val">24px</span><p>Модалка, кнопка «Поділитись», великі поверхні.</p></div>
+<div class="ds-tile"><div class="ds-rbox" style="border-radius:20px"></div><code class="ds-name">--radius-pill</code><span class="ds-val">20px</span><p>Бейджі, чіпи, компактні кнопки (.action-btn).</p></div>
+<div class="ds-tile"><div class="ds-rbox" style="border-radius:50%"></div><code class="ds-name">--radius-full</code><span class="ds-val">50%</span><p>Аватар, іконкові кнопки, FAB, крапки хронології.</p></div></div>
+      <div class="ds-tiles"><div class="ds-tile"><div class="ds-sbox" style="box-shadow:0 8px 32px 0 rgba(0, 229, 255, 0.05)"></div><code class="ds-name">--glass-shadow</code><span class="ds-val">0 8px 32px 0 rgba(0, 229, 255, 0.05)</span><p>Ледь помітне світіння скляних панелей.</p></div>
+<div class="ds-tile"><div class="ds-sbox" style="box-shadow:0 4px 12px rgba(0, 229, 255, 0.6);background:var(--accent-primary)"></div><code class="ds-name">--glow-accent</code><span class="ds-val">0 4px 12px rgba(0, 229, 255, 0.6)</span><p>Під кнопками з заливкою accent-primary.</p></div>
+<div class="ds-tile"><div class="ds-sbox" style="box-shadow:0 8px 24px rgba(0, 229, 255, 0.6);background:var(--accent-primary)"></div><code class="ds-name">--glow-fab</code><span class="ds-val">0 8px 24px rgba(0, 229, 255, 0.6)</span><p>Під плаваючою кнопкою «Новий запис».</p></div>
+<div class="ds-tile"><div class="ds-sbox" style="box-shadow:0 12px 32px rgba(0, 229, 255, 0.08)"></div><code class="ds-name">--hover-lift</code><span class="ds-val">0 12px 32px rgba(0, 229, 255, 0.08)</span><p>Картки при наведенні миші (лише пристрої з курсором).</p></div></div>
+      <div class="ds-tiles"><div class="ds-tile"><div class="ds-blur"><div class="ds-blur-dots"></div><div class="ds-blur-glass" style="backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)"></div></div><code class="ds-name">--blur-header</code><span class="ds-val">12px</span><p>backdrop-filter шапки та навігації (.glass).</p></div>
+<div class="ds-tile"><div class="ds-blur"><div class="ds-blur-dots"></div><div class="ds-blur-glass" style="backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)"></div></div><code class="ds-name">--blur-panel</code><span class="ds-val">16px</span><p>backdrop-filter скляних панелей (.glass-panel).</p></div></div>
+    </section>
+
+    <section class="ds-section" id="layout">
+      <div class="ds-eyebrow">05 · tokens.breakpoint · layout</div>
+      <h2>Адаптивність</h2>
+      <p class="ds-lead">Mobile-first: базові стилі для телефона, далі чотири контрольні точки. Навігація переїжджає вниз → вліво, а розділи розкладаються в колонки.</p>
+      <div class="ds-table-wrap"><div class="ds-bp"><div class="ds-bp-seg s0" style="flex:768"><strong>Телефон</strong><span>0–767</span></div><div class="ds-bp-seg s1" style="flex:256"><strong>Планшет</strong><span>768–1023</span></div><div class="ds-bp-seg s2" style="flex:176"><strong>Ноутбук</strong><span>1024–1199</span></div><div class="ds-bp-seg s3" style="flex:240"><strong>Широкий ноутбук</strong><span>1200–1439</span></div><div class="ds-bp-seg s4" style="flex:240"><strong>Десктоп</strong><span>1440–∞</span></div></div></div>
+      <div class="ds-table-wrap"><table class="ds-table"><tbody><tr><td><strong>Телефон</strong></td><td class="ds-num">0–767px</td><td>Нижня навігація, круглий FAB, модалка знизу</td></tr>
+<tr><td><strong>Планшет</strong></td><td class="ds-num">768–1023px</td><td>Нижня навігація стає бічною, FAB стає кнопкою з підписом, модалка по центру.</td></tr>
+<tr><td><strong>Ноутбук</strong></td><td class="ds-num">1024–1199px</td><td>Бічна панель з підписами, двоколонкові Історія, Сервіси, Профіль.</td></tr>
+<tr><td><strong>Широкий ноутбук</strong></td><td class="ds-num">1200–1439px</td><td>Головна у дві колонки.</td></tr>
+<tr><td><strong>Десктоп</strong></td><td class="ds-num">1440–∞px</td><td>Ширша бічна панель і контент.</td></tr></tbody></table></div>
+      <div class="ds-table-wrap"><table class="ds-table"><tbody><tr><td><code class="ds-name">--nav-height</code></td><td class="ds-num">70px</td><td>Висота нижньої навігації на телефоні.</td></tr>
+<tr><td><code class="ds-name">--mobile-max</code></td><td class="ds-num">480px</td><td>Максимальна ширина мобільного контейнера й модалки на телефоні.</td></tr>
+<tr><td><code class="ds-name">--header-height</code></td><td class="ds-num">80px</td><td>Висота шапки з планшета (≥768px).</td></tr>
+<tr><td><code class="ds-name">--sidebar-rail</code></td><td class="ds-num">96px</td><td>Ширина вузької бічної панелі з іконками на планшеті.</td></tr>
+<tr><td><code class="ds-name">--sidebar-full</code></td><td class="ds-num">240px</td><td>Ширина бічної панелі з підписами на ноутбуці (≥1024px).</td></tr>
+<tr><td><code class="ds-name">--sidebar-wide</code></td><td class="ds-num">260px</td><td>Ширина бічної панелі на великому екрані (≥1440px).</td></tr>
+<tr><td><code class="ds-name">--content-max</code></td><td class="ds-num">1200px</td><td>Максимальна ширина контенту на ноутбуці (1320px з 1440px).</td></tr></tbody></table></div>
+    </section>
+
+    <section class="ds-section" id="icons">
+      <div class="ds-eyebrow">06 · Phosphor Icons 2.1</div>
+      <h2>Іконки</h2>
+      <p class="ds-lead">Лінійні <code>ph</code> у кнопках і картках, заповнені <code>ph-fill</code> у навігації, бейджах і статусах. Нижче всі 36 іконок, які використовує застосунок.</p>
+      <div class="ds-icons"><div class="ds-icon"><i class="ph-fill ph-squares-four"></i><code>squares-four</code></div>
+<div class="ds-icon"><i class="ph-fill ph-clock-counter-clockwise"></i><code>clock-counter-clockwise</code></div>
+<div class="ds-icon"><i class="ph-fill ph-map-pin"></i><code>map-pin</code></div>
+<div class="ds-icon"><i class="ph-fill ph-scan"></i><code>scan</code></div>
+<div class="ds-icon"><i class="ph-fill ph-user-circle"></i><code>user-circle</code></div>
+<div class="ds-icon"><i class="ph-fill ph-steering-wheel"></i><code>steering-wheel</code></div>
+<div class="ds-icon"><i class="ph ph-plus"></i><code>plus</code></div>
+<div class="ds-icon"><i class="ph ph-x"></i><code>x</code></div>
+<div class="ds-icon"><i class="ph ph-caret-down"></i><code>caret-down</code></div>
+<div class="ds-icon"><i class="ph ph-arrow-left"></i><code>arrow-left</code></div>
+<div class="ds-icon"><i class="ph ph-bell"></i><code>bell</code></div>
+<div class="ds-icon"><i class="ph ph-bell-ringing"></i><code>bell-ringing</code></div>
+<div class="ds-icon"><i class="ph ph-faders"></i><code>faders</code></div>
+<div class="ds-icon"><i class="ph ph-magnifying-glass"></i><code>magnifying-glass</code></div>
+<div class="ds-icon"><i class="ph ph-share-network"></i><code>share-network</code></div>
+<div class="ds-icon"><i class="ph ph-download-simple"></i><code>download-simple</code></div>
+<div class="ds-icon"><i class="ph ph-upload-simple"></i><code>upload-simple</code></div>
+<div class="ds-icon"><i class="ph ph-sign-out"></i><code>sign-out</code></div>
+<div class="ds-icon"><i class="ph ph-phone"></i><code>phone</code></div>
+<div class="ds-icon"><i class="ph ph-navigation-arrow"></i><code>navigation-arrow</code></div>
+<div class="ds-icon"><i class="ph ph-car"></i><code>car</code></div>
+<div class="ds-icon"><i class="ph ph-database"></i><code>database</code></div>
+<div class="ds-icon"><i class="ph ph-drop"></i><code>drop</code></div>
+<div class="ds-icon"><i class="ph ph-wrench"></i><code>wrench</code></div>
+<div class="ds-icon"><i class="ph ph-shield-check"></i><code>shield-check</code></div>
+<div class="ds-icon"><i class="ph-fill ph-seal-check"></i><code>seal-check</code></div>
+<div class="ds-icon"><i class="ph-fill ph-check-circle"></i><code>check-circle</code></div>
+<div class="ds-icon"><i class="ph-fill ph-clock"></i><code>clock</code></div>
+<div class="ds-icon"><i class="ph-fill ph-star"></i><code>star</code></div>
+<div class="ds-icon"><i class="ph ph-file-pdf"></i><code>file-pdf</code></div>
+<div class="ds-icon"><i class="ph ph-file-text"></i><code>file-text</code></div>
+<div class="ds-icon"><i class="ph ph-receipt"></i><code>receipt</code></div>
+<div class="ds-icon"><i class="ph-fill ph-magic-wand"></i><code>magic-wand</code></div>
+<div class="ds-icon"><i class="ph-fill ph-user"></i><code>user</code></div>
+<div class="ds-icon"><i class="ph ph-google-logo"></i><code>google-logo</code></div>
+<div class="ds-icon"><i class="ph ph-spinner"></i><code>spinner</code></div></div>
+    </section>
+
+    <section class="ds-section" id="components">
+      <div class="ds-eyebrow">07 · components</div>
+      <h2>Компоненти</h2>
+      <p class="ds-lead">Кожен приклад — живий HTML зі справжніми класами застосунку. Розгорніть «HTML-розмітка», щоб скопіювати код.</p>
+      <div class="ds-comp-index"><a href="#c-glasspanel">GlassPanel</a><a href="#c-button">Button</a><a href="#c-iconbutton">IconButton</a><a href="#c-fab">Fab</a><a href="#c-integrationbutton">IntegrationButton</a><a href="#c-badge">Badge</a><a href="#c-chip">Chip</a><a href="#c-searchbar">SearchBar</a><a href="#c-formfield">FormField</a><a href="#c-toggle">Toggle</a><a href="#c-healthscore">HealthScore</a><a href="#c-statbox">StatBox</a><a href="#c-remindercard">ReminderCard</a><a href="#c-timelineentry">TimelineEntry</a><a href="#c-servicecard">ServiceCard</a><a href="#c-carcard">CarCard</a><a href="#c-navigation">Navigation</a><a href="#c-modal">Modal</a></div>
+      <article class="ds-comp" id="c-glasspanel">
+  <header class="ds-comp-head"><h3>GlassPanel</h3><span class="ds-tag">Поверхні</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="glass-panel w">
+  <div class="car-info"><h2>Volkswagen Golf VII</h2><p>1.4 TSI • 145 000 км</p></div>
+</div></div>
+    <div class="ds-guide"><p>Базова поверхня AutoSync: напівпрозоре «скло» з розмиттям, тонкою блакитною межею і ледь помітним світінням.</p>
+<p><code>.glass-panel</code>: фон <code>glass-bg</code>, <code>backdrop-filter: blur(16px)</code> (<code>blur-panel</code>), межа <code>glass-border</code>, радіус <code>radius-md</code>, тінь <code>glass-shadow</code>, відступ <code>space-5</code>. Варіант <code>.glass</code> (шапка, навігація) — розмиття <code>blur-header</code> і лише нижня межа.</p>
+<p>Майже всі картки побудовані на ній. Не вкладайте скло в скло — всередині панелі використовуйте <code>fill-subtle</code>.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;glass-panel w&quot;&gt;
+  &lt;div class=&quot;car-info&quot;&gt;&lt;h2&gt;Volkswagen Golf VII&lt;/h2&gt;&lt;p&gt;1.4 TSI • 145 000 км&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-button">
+  <header class="ds-comp-head"><h3>Button</h3><span class="ds-tag">Дії</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="col w">
+  <button class="btn-primary" style="margin-top:0">Зберегти запис</button>
+  <button class="btn-ai-scan"><i class="ph-fill ph-magic-wand"></i> Оцифрувати документ через ШІ</button>
+  <div class="row">
+    <button class="action-btn">Записатись</button>
+    <button class="share-btn"><i class="ph ph-share-network"></i> Поділитись для продажу</button>
+    <button class="text-btn">Всі</button>
+  </div>
+  <div class="service-actions">
+    <button class="btn-outline"><i class="ph ph-phone"></i></button>
+    <button class="btn-primary-sm" style="padding:12px"><i class="ph ph-navigation-arrow"></i> Прокласти маршрут</button>
+  </div>
+  <button class="btn-outline" style="color:var(--accent-red);border-color:var(--accent-red);width:100%;gap:8px"><i class="ph ph-sign-out"></i> Вийти з акаунту</button>
+</div></div>
+    <div class="ds-guide"><p>Кнопки AutoSync: одна головна дія з неоновою заливкою, решта — скляні або текстові.</p>
+<p><strong>Варіанти (класи):</strong></p>
+<ul>
+<li><code>.btn-primary</code> — головна дія екрана на всю ширину («Зберегти запис», «Завантажити PDF звіт»). Заливка <code>accent-primary</code>, текст <code>on-accent</code>, тінь <code>glow-accent</code>, радіус 14px. Одна на екран.</li>
+<li><code>.btn-primary-sm</code> — головна дія всередині картки поруч з <code>.btn-outline</code> («Прокласти маршрут»).</li>
+<li><code>.action-btn</code> — компактна кнопка-пігулка в рядку нагадування («Записатись»), стиль <code>button-sm</code>.</li>
+<li><code>.share-btn</code> — другорядна дія зі склом <code>fill-hover</code> і межею <code>glass-border</code>.</li>
+<li><code>.text-btn</code> — посилання-дія в шапці секції («Всі»), колір <code>accent-primary</code>.</li>
+<li><code>.btn-outline</code> — квадрат 44×44 для іконки (дзвінок) або, з червоним кольором і шириною 100%, «Вийти з акаунту».</li>
+<li><code>.btn-ai-scan</code> — тільки для дій ШІ: <code>tint-ai</code>, межа <code>accent-ai</code>, текст <code>accent-ai-text</code>.</li>
+</ul>
+<p><strong>Споживач передає:</strong> текст дієслова (з великої літери, без крапки) та, за потреби, іконку Phosphor перед текстом.</p>
+<p><strong>Не робити:</strong> дві <code>.btn-primary</code> поруч; білий текст на <code>accent-primary</code>; фіолетовий для дій, що не пов'язані з ШІ.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;col w&quot;&gt;
+  &lt;button class=&quot;btn-primary&quot; style=&quot;margin-top:0&quot;&gt;Зберегти запис&lt;/button&gt;
+  &lt;button class=&quot;btn-ai-scan&quot;&gt;&lt;i class=&quot;ph-fill ph-magic-wand&quot;&gt;&lt;/i&gt; Оцифрувати документ через ШІ&lt;/button&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;button class=&quot;action-btn&quot;&gt;Записатись&lt;/button&gt;
+    &lt;button class=&quot;share-btn&quot;&gt;&lt;i class=&quot;ph ph-share-network&quot;&gt;&lt;/i&gt; Поділитись для продажу&lt;/button&gt;
+    &lt;button class=&quot;text-btn&quot;&gt;Всі&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;service-actions&quot;&gt;
+    &lt;button class=&quot;btn-outline&quot;&gt;&lt;i class=&quot;ph ph-phone&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+    &lt;button class=&quot;btn-primary-sm&quot; style=&quot;padding:12px&quot;&gt;&lt;i class=&quot;ph ph-navigation-arrow&quot;&gt;&lt;/i&gt; Прокласти маршрут&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;button class=&quot;btn-outline&quot; style=&quot;color:var(--accent-red);border-color:var(--accent-red);width:100%;gap:8px&quot;&gt;&lt;i class=&quot;ph ph-sign-out&quot;&gt;&lt;/i&gt; Вийти з акаунту&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-iconbutton">
+  <header class="ds-comp-head"><h3>IconButton</h3><span class="ds-tag">Дії</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="row">
+  <button class="icon-btn"><i class="ph ph-caret-down"></i></button>
+  <button class="icon-btn"><i class="ph ph-bell-ringing"></i></button>
+  <button class="icon-btn"><i class="ph ph-faders"></i></button>
+  <button class="icon-btn"><i class="ph ph-x"></i></button>
+  <button class="icon-btn"><i class="ph ph-arrow-left"></i></button>
+</div></div>
+    <div class="ds-guide"><p>Кругла кнопка 36×36 з однією іконкою для другорядних дій: розгорнути, закрити, назад, фільтри, сповіщення.</p>
+<p>Клас <code>.icon-btn</code>: фон <code>fill-subtle</code>, радіус <code>radius-full</code>, іконка <code>text-primary</code>; при наведенні <code>fill-hover</code>.</p>
+<p><strong>Споживач передає:</strong> одну іконку Phosphor (лінійну, <code>ph</code>) і обов'язково <code>title</code> або <code>aria-label</code> — текст не видно.</p>
+<p><strong>Не робити:</strong> класти в неї текст; використовувати для головної дії екрана.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;row&quot;&gt;
+  &lt;button class=&quot;icon-btn&quot;&gt;&lt;i class=&quot;ph ph-caret-down&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+  &lt;button class=&quot;icon-btn&quot;&gt;&lt;i class=&quot;ph ph-bell-ringing&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+  &lt;button class=&quot;icon-btn&quot;&gt;&lt;i class=&quot;ph ph-faders&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+  &lt;button class=&quot;icon-btn&quot;&gt;&lt;i class=&quot;ph ph-x&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+  &lt;button class=&quot;icon-btn&quot;&gt;&lt;i class=&quot;ph ph-arrow-left&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fab">
+  <header class="ds-comp-head"><h3>Fab</h3><span class="ds-tag">Дії</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="row" style="gap:32px">
+  <button class="fab" style="position:static;transform:none;width:56px;padding:0"><i class="ph ph-plus"></i></button>
+  <button class="fab" style="position:static;transform:none;width:auto;padding:0 24px;gap:8px;border-radius:28px"><i class="ph ph-plus"></i><span style="font-family:inherit;font-size:1rem;font-weight:600">Новий запис</span></button>
+</div></div>
+    <div class="ds-guide"><p>Плаваюча кнопка «Новий запис» — єдиний вхід у форму додавання запису обслуговування.</p>
+<ul>
+<li>Телефон: круг 56px <code>.fab</code> над нижньою навігацією, справа; лише іконка <code>+</code>.</li>
+<li>З <code>bp-tablet</code> (768px): стає кнопкою з підписом <code>.fab-label</code> у правому нижньому куті вікна (32px від країв), радіус 28px.</li>
+<li>Заливка <code>accent-primary</code>, іконка <code>on-accent</code>, тінь <code>glow-fab</code>.</li>
+</ul>
+<p><strong>Споживач передає:</strong> обробник відкриття модалки. На екранах без навігації (<code>.hide-nav</code>, вхід) кнопка ховається.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;row&quot; style=&quot;gap:32px&quot;&gt;
+  &lt;button class=&quot;fab&quot; style=&quot;position:static;transform:none;width:56px;padding:0&quot;&gt;&lt;i class=&quot;ph ph-plus&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+  &lt;button class=&quot;fab&quot; style=&quot;position:static;transform:none;width:auto;padding:0 24px;gap:8px;border-radius:28px&quot;&gt;&lt;i class=&quot;ph ph-plus&quot;&gt;&lt;/i&gt;&lt;span style=&quot;font-family:inherit;font-size:1rem;font-weight:600&quot;&gt;Новий запис&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-integrationbutton">
+  <header class="ds-comp-head"><h3>IntegrationButton</h3><span class="ds-tag">Дії</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="integration-actions w" style="margin:0">
+  <button class="integration-btn mvs"><i class="ph ph-database"></i> Дані МВС</button>
+  <button class="integration-btn carvertical"><i class="ph ph-car"></i> Звіт CarVertical</button>
+</div></div>
+    <div class="ds-guide"><p>Пара кнопок для імпорту даних із зовнішніх джерел в історію авто.</p>
+<p><code>.integration-actions</code> &gt; <code>.integration-btn.mvs</code> (іконка <code>accent-primary</code>) і <code>.integration-btn.carvertical</code> (іконка <code>accent-orange</code>). На ноутбуці стоять стовпчиком у лівій колонці Історії.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;integration-actions w&quot; style=&quot;margin:0&quot;&gt;
+  &lt;button class=&quot;integration-btn mvs&quot;&gt;&lt;i class=&quot;ph ph-database&quot;&gt;&lt;/i&gt; Дані МВС&lt;/button&gt;
+  &lt;button class=&quot;integration-btn carvertical&quot;&gt;&lt;i class=&quot;ph ph-car&quot;&gt;&lt;/i&gt; Звіт CarVertical&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-badge">
+  <header class="ds-comp-head"><h3>Badge</h3><span class="ds-tag">Дані</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="col">
+  <div class="row">
+    <span class="status-badge good">Відмінний стан</span>
+    <span class="status-badge warning">Потребує уваги</span>
+    <span class="status-badge danger">Критично</span>
+  </div>
+  <div class="row">
+    <span class="verified-badge" style="margin:0"><i class="ph-fill ph-seal-check"></i> Перевірено AutoSync</span>
+    <span class="profile-badge"><i class="ph-fill ph-check-circle"></i> Верифіковано Дія</span>
+  </div>
+  <div class="row">
+    <span class="trust-badge verified" title="Верифіковано"><i class="ph-fill ph-check-circle"></i></span>
+    <span class="trust-badge manual" title="Вручну"><i class="ph-fill ph-user"></i></span>
+    <span class="trust-badge ai" title="ШІ"><i class="ph-fill ph-magic-wand"></i></span>
+    <span class="trust-badge imported" title="МВС"><i class="ph-fill ph-database"></i></span>
+    <span class="doc-attachment"><i class="ph ph-file-pdf"></i> 1 акт</span>
+    <span class="doc-attachment warranty"><i class="ph-fill ph-shield-check"></i> Гарантія</span>
+  </div>
+</div></div>
+    <div class="ds-guide"><p>Короткі мітки стану, довіри й вкладень.</p>
+<ul>
+<li><code>.status-badge.good|.warning|.danger</code> — стан авто чи вузла; колір <code>accent-green|orange|red</code> на відповідному <code>tint-*</code>, стиль <code>micro</code>.</li>
+<li><code>.verified-badge</code>, <code>.profile-badge</code> — підтвердження (AutoSync, Дія) з іконкою печатки чи галочки.</li>
+<li><code>.trust-badge.verified|.manual|.ai|.imported</code> — іконка-джерело запису в хронології: верифіковано (зелений), вручну (сірий), ШІ (<code>accent-ai</code>), МВС (<code>accent-primary</code>). Завжди з <code>title</code>.</li>
+<li><code>.doc-attachment</code> (+ <code>.warranty</code>) — кількість документів у записі.</li>
+</ul>
+<p><strong>Важливо:</strong> червоний текст на <code>tint-danger</code> має лише 4.18:1 — тримайте текст бейджа коротким і жирним. Зелений і червоний відрізняються в основному відтінком, тому стан завжди підписуйте словом.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;col&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;span class=&quot;status-badge good&quot;&gt;Відмінний стан&lt;/span&gt;
+    &lt;span class=&quot;status-badge warning&quot;&gt;Потребує уваги&lt;/span&gt;
+    &lt;span class=&quot;status-badge danger&quot;&gt;Критично&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;span class=&quot;verified-badge&quot; style=&quot;margin:0&quot;&gt;&lt;i class=&quot;ph-fill ph-seal-check&quot;&gt;&lt;/i&gt; Перевірено AutoSync&lt;/span&gt;
+    &lt;span class=&quot;profile-badge&quot;&gt;&lt;i class=&quot;ph-fill ph-check-circle&quot;&gt;&lt;/i&gt; Верифіковано Дія&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    &lt;span class=&quot;trust-badge verified&quot; title=&quot;Верифіковано&quot;&gt;&lt;i class=&quot;ph-fill ph-check-circle&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;span class=&quot;trust-badge manual&quot; title=&quot;Вручну&quot;&gt;&lt;i class=&quot;ph-fill ph-user&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;span class=&quot;trust-badge ai&quot; title=&quot;ШІ&quot;&gt;&lt;i class=&quot;ph-fill ph-magic-wand&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;span class=&quot;trust-badge imported&quot; title=&quot;МВС&quot;&gt;&lt;i class=&quot;ph-fill ph-database&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;span class=&quot;doc-attachment&quot;&gt;&lt;i class=&quot;ph ph-file-pdf&quot;&gt;&lt;/i&gt; 1 акт&lt;/span&gt;
+    &lt;span class=&quot;doc-attachment warranty&quot;&gt;&lt;i class=&quot;ph-fill ph-shield-check&quot;&gt;&lt;/i&gt; Гарантія&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-chip">
+  <header class="ds-comp-head"><h3>Chip</h3><span class="ds-tag">Введення</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="services-chips">
+  <button class="chip active">Всі</button>
+  <button class="chip">СТО</button>
+  <button class="chip">Шиномонтаж</button>
+  <button class="chip">Мийка</button>
+  <button class="chip">Детейлінг</button>
+</div></div>
+    <div class="ds-guide"><p>Фільтр-перемикач категорій сервісів; активний лише один.</p>
+<p>Контейнер <code>.services-chips</code> (горизонтальний скрол без смуги на телефоні, перенос рядків з <code>bp-laptop</code>), елемент <code>.chip</code>, вибраний — <code>.chip.active</code> із заливкою <code>accent-primary</code> і текстом <code>on-accent</code>.</p>
+<p><strong>Споживач передає:</strong> список категорій; перша — «Всі».</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;services-chips&quot;&gt;
+  &lt;button class=&quot;chip active&quot;&gt;Всі&lt;/button&gt;
+  &lt;button class=&quot;chip&quot;&gt;СТО&lt;/button&gt;
+  &lt;button class=&quot;chip&quot;&gt;Шиномонтаж&lt;/button&gt;
+  &lt;button class=&quot;chip&quot;&gt;Мийка&lt;/button&gt;
+  &lt;button class=&quot;chip&quot;&gt;Детейлінг&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-searchbar">
+  <header class="ds-comp-head"><h3>SearchBar</h3><span class="ds-tag">Введення</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="search-bar glass-panel w">
+  <i class="ph ph-magnifying-glass"></i>
+  <input type="text" placeholder="Знайти СТО, мийку...">
+  <button class="icon-btn"><i class="ph ph-faders"></i></button>
+</div></div>
+    <div class="ds-guide"><p>Скляна панель пошуку з іконкою лупи, полем і кнопкою фільтрів.</p>
+<p>Класи <code>.search-bar.glass-panel</code>; поле без рамки, плейсхолдер <code>text-muted</code>. На ноутбуці стоїть в одному рядку з чіпами, максимум 420px.</p>
+<p><strong>Споживач передає:</strong> плейсхолдер, що називає об'єкти пошуку («Знайти СТО, мийку...»), і обробник фільтрів.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;search-bar glass-panel w&quot;&gt;
+  &lt;i class=&quot;ph ph-magnifying-glass&quot;&gt;&lt;/i&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Знайти СТО, мийку...&quot;&gt;
+  &lt;button class=&quot;icon-btn&quot;&gt;&lt;i class=&quot;ph ph-faders&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-formfield">
+  <header class="ds-comp-head"><h3>FormField</h3><span class="ds-tag">Введення</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><form class="w" onsubmit="return false">
+  <div class="form-group"><label for="t">Тип обслуговування</label><select id="t"><option>Технічне обслуговування (ТО)</option></select></div>
+  <div class="form-group"><label for="m">Пробіг (км)</label><input id="m" type="number" value="145000"></div>
+  <div class="form-group"><label for="d">Опис робіт</label><textarea id="d" rows="2" placeholder="Що було зроблено?"></textarea></div>
+  <div class="form-group file-upload"><i class="ph ph-upload-simple"></i><span>Прикріпити фото чеку або акту</span></div>
+</form></div>
+    <div class="ds-guide"><p>Поле форми з підписом над ним: текст, число, список, багаторядковий текст, завантаження файлу.</p>
+<p>Обгортка <code>.form-group</code> (стовпчик, гап 8px), підпис <code>caption</code> кольору <code>text-secondary</code>. Поле: фон <code>rgba(0,0,0,0.2)</code>, межа <code>glass-border</code>, радіус <code>radius-sm</code>, відступ 14px, шрифт 1rem (щоб iOS не збільшував сторінку). Фокус — межа <code>accent-primary</code>.</p>
+<p><code>.file-upload</code> — пунктирна зона для фото чеку чи акту.</p>
+<p><strong>Споживач передає:</strong> <code>label</code> з <code>for</code>, поле з <code>id</code>, плейсхолдер-питання («Що було зроблено?»).</p>
+<p><strong>Не робити:</strong> прибирати підпис на користь плейсхолдера.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;form class=&quot;w&quot; onsubmit=&quot;return false&quot;&gt;
+  &lt;div class=&quot;form-group&quot;&gt;&lt;label for=&quot;t&quot;&gt;Тип обслуговування&lt;/label&gt;&lt;select id=&quot;t&quot;&gt;&lt;option&gt;Технічне обслуговування (ТО)&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+  &lt;div class=&quot;form-group&quot;&gt;&lt;label for=&quot;m&quot;&gt;Пробіг (км)&lt;/label&gt;&lt;input id=&quot;m&quot; type=&quot;number&quot; value=&quot;145000&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;form-group&quot;&gt;&lt;label for=&quot;d&quot;&gt;Опис робіт&lt;/label&gt;&lt;textarea id=&quot;d&quot; rows=&quot;2&quot; placeholder=&quot;Що було зроблено?&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
+  &lt;div class=&quot;form-group file-upload&quot;&gt;&lt;i class=&quot;ph ph-upload-simple&quot;&gt;&lt;/i&gt;&lt;span&gt;Прикріпити фото чеку або акту&lt;/span&gt;&lt;/div&gt;
+&lt;/form&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-toggle">
+  <header class="ds-comp-head"><h3>Toggle</h3><span class="ds-tag">Введення</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="settings-list w">
+  <div class="setting-item glass-panel"><div class="setting-info"><i class="ph ph-bell"></i><span>Push-сповіщення</span></div><div class="toggle active"></div></div>
+  <div class="setting-item glass-panel"><div class="setting-info"><i class="ph ph-shield-check"></i><span>Синхронізація з МВС</span></div><div class="toggle"></div></div>
+</div></div>
+    <div class="ds-guide"><p>Рядок налаштування з іконкою, назвою і перемикачем 44×24.</p>
+<p><code>.setting-item.glass-panel</code> &gt; <code>.setting-info</code> + <code>.toggle</code> (<code>.active</code> — увімкнено, трек <code>accent-green</code>).</p>
+<p><strong>Споживач передає:</strong> іконку, назву налаштування й стан. Зараз <code>.toggle</code> — це <code>div</code>; для доступності його варто зробити <code>button role="switch" aria-checked</code>.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;settings-list w&quot;&gt;
+  &lt;div class=&quot;setting-item glass-panel&quot;&gt;&lt;div class=&quot;setting-info&quot;&gt;&lt;i class=&quot;ph ph-bell&quot;&gt;&lt;/i&gt;&lt;span&gt;Push-сповіщення&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;toggle active&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;setting-item glass-panel&quot;&gt;&lt;div class=&quot;setting-info&quot;&gt;&lt;i class=&quot;ph ph-shield-check&quot;&gt;&lt;/i&gt;&lt;span&gt;Синхронізація з МВС&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;toggle&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-healthscore">
+  <header class="ds-comp-head"><h3>HealthScore</h3><span class="ds-tag">Дані</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="health-widget glass-panel w" style="margin:0">
+  <div class="health-header"><h3>Індекс здоров'я</h3><span class="status-badge warning">Потребує уваги</span></div>
+  <div class="health-circle">
+    <svg viewBox="0 0 36 36" class="circular-chart warning">
+      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+      <path class="circle" stroke-dasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+      <text x="18" y="20.35" class="percentage">75%</text>
+    </svg>
+  </div>
+  <p class="health-desc">Знос гальмівних колодок наближається до критичного рівня.</p>
+</div></div>
+    <div class="ds-guide"><p>Кільцевий індикатор загального стану авто у відсотках — головний віджет Головної.</p>
+<p><code>.health-widget.glass-panel</code> з шапкою (назва + <code>Badge</code>), SVG-кільцем <code>.circular-chart.good|.warning|.danger</code> і поясненням <code>.health-desc</code>. Заповнення задається <code>stroke-dasharray="&lt;відсоток&gt;, 100"</code> і анімується 1.5s. Число — <code>gauge-value</code> (Outfit).</p>
+<p>Пороги кольору: добре — <code>accent-green</code>, увага — <code>accent-orange</code>, критично — <code>accent-red</code>; клас кільця і бейджа мають збігатися.</p>
+<p><strong>Споживач передає:</strong> відсоток, стан і одне речення, що пояснює головну причину.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;health-widget glass-panel w&quot; style=&quot;margin:0&quot;&gt;
+  &lt;div class=&quot;health-header&quot;&gt;&lt;h3&gt;Індекс здоров&#x27;я&lt;/h3&gt;&lt;span class=&quot;status-badge warning&quot;&gt;Потребує уваги&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;health-circle&quot;&gt;
+    &lt;svg viewBox=&quot;0 0 36 36&quot; class=&quot;circular-chart warning&quot;&gt;
+      &lt;path class=&quot;circle-bg&quot; d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot;/&gt;
+      &lt;path class=&quot;circle&quot; stroke-dasharray=&quot;75, 100&quot; d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot;/&gt;
+      &lt;text x=&quot;18&quot; y=&quot;20.35&quot; class=&quot;percentage&quot;&gt;75%&lt;/text&gt;
+    &lt;/svg&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;health-desc&quot;&gt;Знос гальмівних колодок наближається до критичного рівня.&lt;/p&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-statbox">
+  <header class="ds-comp-head"><h3>StatBox</h3><span class="ds-tag">Дані</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="profile-stats w" style="margin:0">
+  <div class="stat-box glass-panel"><div class="stat-value">98%</div><div class="stat-label">Еко-Рейтинг</div></div>
+  <div class="stat-box glass-panel"><div class="stat-value">₴ 12.4k</div><div class="stat-label">Витрати/рік</div></div>
+</div></div>
+    <div class="ds-guide"><p>Плитка з одним великим числом і підписом під ним.</p>
+<p><code>.stat-box</code> (у профілі разом з <code>.glass-panel</code>, у звіті для покупця — без скла), число <code>.stat-value</code> у <code>title-lg</code> (Play), підпис <code>.stat-label</code> — <code>meta</code>, <code>text-secondary</code>. Ставте 2–3 поруч у <code>.profile-stats</code> або <code>.shared-stats</code>.</p>
+<p>Увага: клас <code>.stat-box</code> у styles.css оголошено двічі з різними стилями — другий (з ховером) перекриває перший і в звіті для покупця.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;profile-stats w&quot; style=&quot;margin:0&quot;&gt;
+  &lt;div class=&quot;stat-box glass-panel&quot;&gt;&lt;div class=&quot;stat-value&quot;&gt;98%&lt;/div&gt;&lt;div class=&quot;stat-label&quot;&gt;Еко-Рейтинг&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;stat-box glass-panel&quot;&gt;&lt;div class=&quot;stat-value&quot;&gt;₴ 12.4k&lt;/div&gt;&lt;div class=&quot;stat-label&quot;&gt;Витрати/рік&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-remindercard">
+  <header class="ds-comp-head"><h3>ReminderCard</h3><span class="ds-tag">Контент</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="reminders-list w">
+  <div class="reminder-card glass-panel alert"><div class="icon-box red"><i class="ph ph-wrench"></i></div><div class="reminder-info"><h4>Гальмівні колодки</h4><p>Заміна через 500 км</p></div><button class="action-btn">Записатись</button></div>
+  <div class="reminder-card glass-panel warning"><div class="icon-box orange"><i class="ph ph-drop"></i></div><div class="reminder-info"><h4>Моторне мастило</h4><p>Заміна через 2 300 км</p></div></div>
+  <div class="reminder-card glass-panel normal"><div class="icon-box blue"><i class="ph ph-shield-check"></i></div><div class="reminder-info"><h4>ОСЦПВ (Страховка)</h4><p>Дійсна ще 4 місяці</p></div></div>
+</div></div>
+    <div class="ds-guide"><p>Картка майбутньої події обслуговування з пріоритетом, сортується від найтерміновішої.</p>
+<p><code>.reminder-card.glass-panel</code> + <code>.alert</code> (червона смуга зліва 4px), <code>.warning</code> (помаранчева) або без модифікатора. Ліворуч <code>.icon-box.red|orange|blue</code> 44×44, у центрі <code>.reminder-info</code> (назва <code>title-xs</code>, деталь <code>meta</code>), праворуч — необов'язкова <code>.action-btn</code>.</p>
+<p><strong>Споживач передає:</strong> назву вузла, скільки залишилось (км або час), пріоритет і, для критичних, дію «Записатись».</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;reminders-list w&quot;&gt;
+  &lt;div class=&quot;reminder-card glass-panel alert&quot;&gt;&lt;div class=&quot;icon-box red&quot;&gt;&lt;i class=&quot;ph ph-wrench&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;reminder-info&quot;&gt;&lt;h4&gt;Гальмівні колодки&lt;/h4&gt;&lt;p&gt;Заміна через 500 км&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;action-btn&quot;&gt;Записатись&lt;/button&gt;&lt;/div&gt;
+  &lt;div class=&quot;reminder-card glass-panel warning&quot;&gt;&lt;div class=&quot;icon-box orange&quot;&gt;&lt;i class=&quot;ph ph-drop&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;reminder-info&quot;&gt;&lt;h4&gt;Моторне мастило&lt;/h4&gt;&lt;p&gt;Заміна через 2 300 км&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;reminder-card glass-panel normal&quot;&gt;&lt;div class=&quot;icon-box blue&quot;&gt;&lt;i class=&quot;ph ph-shield-check&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;reminder-info&quot;&gt;&lt;h4&gt;ОСЦПВ (Страховка)&lt;/h4&gt;&lt;p&gt;Дійсна ще 4 місяці&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-timelineentry">
+  <header class="ds-comp-head"><h3>TimelineEntry</h3><span class="ds-tag">Контент</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="timeline w">
+  <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content glass-panel">
+    <div class="timeline-meta"><div><span>12 Травня 2026</span> <span>• 142 500 км</span></div><span class="trust-badge verified"><i class="ph-fill ph-check-circle"></i></span></div>
+    <h4 class="title">Заміна моторного мастила та фільтрів</h4><p class="desc">СТО "АвтоДок". Мастило Motul 5W-30, фільтри Bosch.</p>
+    <div class="price-row"><div class="price">₴ 3,200</div><div class="doc-attachment"><i class="ph ph-file-pdf"></i> 1 акт</div></div>
+  </div></div>
+  <div class="timeline-item" style="margin-bottom:0"><div class="timeline-dot"></div><div class="timeline-content glass-panel">
+    <div class="timeline-meta"><div><span>10 Вересня 2025</span> <span>• 130 000 км</span></div><span class="trust-badge ai"><i class="ph-fill ph-magic-wand"></i></span></div>
+    <h4 class="title">Заміна комплекту ГРМ</h4><p class="desc">СТО "Garage". Комплект Gates + помпа.</p>
+    <div class="price-row"><div class="price">₴ 12,500</div><div class="doc-attachment"><i class="ph ph-file-pdf"></i> 2 акти</div></div>
+  </div></div>
+</div></div>
+    <div class="ds-guide"><p>Запис сервісної історії на вертикальній лінії часу — від найновішого до найстарішого.</p>
+<p><code>.timeline</code> (лінія <code>glass-border</code> зліва) &gt; <code>.timeline-item</code> &gt; <code>.timeline-dot</code> (крапка <code>accent-primary</code>) + <code>.timeline-content.glass-panel</code>. Всередині: <code>.timeline-meta</code> (дата • пробіг та <code>trust-badge</code> джерела), <code>.title</code>, <code>.desc</code> (де і що), <code>.price-row</code> (ціна <code>accent-primary</code> + вкладення <code>doc-attachment</code>).</p>
+<p><strong>Споживач передає:</strong> дату, пробіг, джерело запису, назву робіт, СТО й деталі, ціну в гривнях, документи.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;timeline w&quot;&gt;
+  &lt;div class=&quot;timeline-item&quot;&gt;&lt;div class=&quot;timeline-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;timeline-content glass-panel&quot;&gt;
+    &lt;div class=&quot;timeline-meta&quot;&gt;&lt;div&gt;&lt;span&gt;12 Травня 2026&lt;/span&gt; &lt;span&gt;• 142 500 км&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;trust-badge verified&quot;&gt;&lt;i class=&quot;ph-fill ph-check-circle&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;h4 class=&quot;title&quot;&gt;Заміна моторного мастила та фільтрів&lt;/h4&gt;&lt;p class=&quot;desc&quot;&gt;СТО &quot;АвтоДок&quot;. Мастило Motul 5W-30, фільтри Bosch.&lt;/p&gt;
+    &lt;div class=&quot;price-row&quot;&gt;&lt;div class=&quot;price&quot;&gt;₴ 3,200&lt;/div&gt;&lt;div class=&quot;doc-attachment&quot;&gt;&lt;i class=&quot;ph ph-file-pdf&quot;&gt;&lt;/i&gt; 1 акт&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;timeline-item&quot; style=&quot;margin-bottom:0&quot;&gt;&lt;div class=&quot;timeline-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;timeline-content glass-panel&quot;&gt;
+    &lt;div class=&quot;timeline-meta&quot;&gt;&lt;div&gt;&lt;span&gt;10 Вересня 2025&lt;/span&gt; &lt;span&gt;• 130 000 км&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;trust-badge ai&quot;&gt;&lt;i class=&quot;ph-fill ph-magic-wand&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;h4 class=&quot;title&quot;&gt;Заміна комплекту ГРМ&lt;/h4&gt;&lt;p class=&quot;desc&quot;&gt;СТО &quot;Garage&quot;. Комплект Gates + помпа.&lt;/p&gt;
+    &lt;div class=&quot;price-row&quot;&gt;&lt;div class=&quot;price&quot;&gt;₴ 12,500&lt;/div&gt;&lt;div class=&quot;doc-attachment&quot;&gt;&lt;i class=&quot;ph ph-file-pdf&quot;&gt;&lt;/i&gt; 2 акти&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-servicecard">
+  <header class="ds-comp-head"><h3>ServiceCard</h3><span class="ds-tag">Контент</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="service-card glass-panel w">
+  <div class="service-img" style="background:linear-gradient(135deg,#1e293b,#0f172a)"><div class="service-rating"><i class="ph-fill ph-star"></i> 4.8 (120)</div></div>
+  <div class="service-info">
+    <div class="service-meta"><h3>Bosch Service "АвтоДрайв"</h3><span class="distance"><i class="ph-fill ph-map-pin"></i> 1.2 км</span></div>
+    <p class="service-type">СТО • Діагностика • Ремонт</p>
+    <div class="service-status open"><i class="ph-fill ph-clock"></i> Відчинено до 20:00</div>
+    <div class="service-actions"><button class="btn-outline"><i class="ph ph-phone"></i></button><button class="btn-primary-sm"><i class="ph ph-navigation-arrow"></i> Прокласти маршрут</button></div>
+  </div>
+</div></div>
+    <div class="ds-guide"><p>Картка СТО, мийки чи шиномонтажу з фото, рейтингом, відстанню, графіком і діями.</p>
+<p><code>.service-card.glass-panel</code> (без внутрішнього відступу) &gt; <code>.service-img</code> 140px (160px з планшета; рейтинг поверх фото) + <code>.service-info</code>. Статус <code>.service-status.open</code> (<code>accent-green</code>) або <code>.closed</code> (<code>accent-red</code>). Дії: <code>.btn-outline</code> дзвінок + <code>.btn-primary-sm</code> маршрут.</p>
+<p>На планшеті й ноутбуці картки йдуть сіткою <code>auto-fill, minmax(280–300px, 1fr)</code>.</p>
+<p><strong>Споживач передає:</strong> фото, назву, категорії через «•», відстань, години роботи, телефон, координати. У прев'ю фото замінене градієнтом.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;service-card glass-panel w&quot;&gt;
+  &lt;div class=&quot;service-img&quot; style=&quot;background:linear-gradient(135deg,#1e293b,#0f172a)&quot;&gt;&lt;div class=&quot;service-rating&quot;&gt;&lt;i class=&quot;ph-fill ph-star&quot;&gt;&lt;/i&gt; 4.8 (120)&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;service-info&quot;&gt;
+    &lt;div class=&quot;service-meta&quot;&gt;&lt;h3&gt;Bosch Service &quot;АвтоДрайв&quot;&lt;/h3&gt;&lt;span class=&quot;distance&quot;&gt;&lt;i class=&quot;ph-fill ph-map-pin&quot;&gt;&lt;/i&gt; 1.2 км&lt;/span&gt;&lt;/div&gt;
+    &lt;p class=&quot;service-type&quot;&gt;СТО • Діагностика • Ремонт&lt;/p&gt;
+    &lt;div class=&quot;service-status open&quot;&gt;&lt;i class=&quot;ph-fill ph-clock&quot;&gt;&lt;/i&gt; Відчинено до 20:00&lt;/div&gt;
+    &lt;div class=&quot;service-actions&quot;&gt;&lt;button class=&quot;btn-outline&quot;&gt;&lt;i class=&quot;ph ph-phone&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;button class=&quot;btn-primary-sm&quot;&gt;&lt;i class=&quot;ph ph-navigation-arrow&quot;&gt;&lt;/i&gt; Прокласти маршрут&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-carcard">
+  <header class="ds-comp-head"><h3>CarCard</h3><span class="ds-tag">Контент</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="garage-list w">
+  <div class="car-card glass-panel active-car"><i class="ph-fill ph-car"></i><div class="car-info"><h4>Volkswagen Golf VII</h4><p>1.4 TSI • AI2026AX</p></div><i class="ph-fill ph-check-circle" style="color:var(--accent-green);margin-left:auto"></i></div>
+  <button class="add-car-btn glass-panel"><i class="ph ph-plus"></i> Додати авто</button>
+</div></div>
+    <div class="ds-guide"><p>Авто в гаражі користувача та кнопка додавання нового.</p>
+<p><code>.car-card.glass-panel</code>; поточне авто — <code>.active-car</code> (межа <code>accent-primary</code>, фон <code>tint-primary</code>, іконка кольору акценту, зелена галочка). <code>.add-car-btn</code> — пунктирна кнопка на всю ширину.</p>
+<p><strong>Споживач передає:</strong> марку й модель, двигун, держномер, чи активне авто.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;garage-list w&quot;&gt;
+  &lt;div class=&quot;car-card glass-panel active-car&quot;&gt;&lt;i class=&quot;ph-fill ph-car&quot;&gt;&lt;/i&gt;&lt;div class=&quot;car-info&quot;&gt;&lt;h4&gt;Volkswagen Golf VII&lt;/h4&gt;&lt;p&gt;1.4 TSI • AI2026AX&lt;/p&gt;&lt;/div&gt;&lt;i class=&quot;ph-fill ph-check-circle&quot; style=&quot;color:var(--accent-green);margin-left:auto&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+  &lt;button class=&quot;add-car-btn glass-panel&quot;&gt;&lt;i class=&quot;ph ph-plus&quot;&gt;&lt;/i&gt; Додати авто&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-navigation">
+  <header class="ds-comp-head"><h3>Navigation</h3><span class="ds-tag">Навігація</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><p class="caption" style="color:var(--text-secondary);font-size:.8rem;margin-bottom:8px">Телефон: нижня панель</p>
+<nav class="bottom-nav glass" style="position:static;transform:none;left:auto;height:70px;max-width:420px;flex-direction:row;justify-content:space-around;padding:0;border-radius:20px 20px 0 0;border-right:none;border-top:1px solid var(--glass-border)">
+  <a href="#" class="nav-item active" style="flex-direction:column;width:25%;padding:0;gap:4px;background:none"><i class="ph-fill ph-squares-four" style="font-size:1.5rem"></i><span style="font-size:.65rem">Головна</span></a>
+  <a href="#" class="nav-item" style="flex-direction:column;width:25%;padding:0;gap:4px"><i class="ph-fill ph-clock-counter-clockwise" style="font-size:1.5rem"></i><span style="font-size:.65rem">Історія</span></a>
+  <a href="#" class="nav-item" style="flex-direction:column;width:25%;padding:0;gap:4px"><i class="ph-fill ph-map-pin" style="font-size:1.5rem"></i><span style="font-size:.65rem">Сервіси</span></a>
+  <a href="#" class="nav-item" style="flex-direction:column;width:25%;padding:0;gap:4px"><i class="ph-fill ph-scan" style="font-size:1.5rem"></i><span style="font-size:.65rem">Сканер</span></a>
+</nav>
+<p class="caption" style="color:var(--text-secondary);font-size:.8rem;margin:20px 0 8px">Ноутбук: бічна панель</p>
+<nav class="bottom-nav glass" style="position:static;transform:none;left:auto;width:240px;height:auto;flex-direction:column;justify-content:flex-start;gap:4px;padding:12px;border-radius:16px;border:1px solid var(--glass-border)">
+  <a href="#" class="nav-item active" style="flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 16px;width:100%;border-radius:12px;background:var(--tint-primary)"><i class="ph-fill ph-squares-four" style="font-size:1.35rem"></i><span style="font-size:.95rem">Головна</span></a>
+  <a href="#" class="nav-item" style="flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 16px;width:100%"><i class="ph-fill ph-clock-counter-clockwise" style="font-size:1.35rem"></i><span style="font-size:.95rem">Історія</span></a>
+  <a href="#" class="nav-item" style="flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 16px;width:100%"><i class="ph-fill ph-map-pin" style="font-size:1.35rem"></i><span style="font-size:.95rem">Сервіси</span></a>
+</nav></div>
+    <div class="ds-guide"><p>Головна навігація між розділами: Головна, Історія, Сервіси, Сканер (+ Профіль на великих екранах).</p>
+<p>Один і той самий <code>nav.bottom-nav.glass</code> з <code>.nav-item</code> змінює форму за шириною:</p>
+<ul>
+<li>до <code>bp-tablet</code> — нижня панель висотою <code>nav-height</code> з іконкою над підписом (<code>nav-label</code>);</li>
+<li><code>bp-tablet</code>–<code>bp-laptop</code> — вузька бічна панель <code>sidebar-rail</code>;</li>
+<li>з <code>bp-laptop</code> — бічна панель <code>sidebar-full</code> з іконкою й підписом в один рядок; активний пункт має фон <code>tint-primary</code>.</li>
+</ul>
+<p>Іконки — заповнені Phosphor (<code>ph-fill</code>). Активний пункт — <code>accent-primary</code>, інші — <code>text-muted</code>. <code>.nav-item--desktop</code> видно лише з планшета.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;p class=&quot;caption&quot; style=&quot;color:var(--text-secondary);font-size:.8rem;margin-bottom:8px&quot;&gt;Телефон: нижня панель&lt;/p&gt;
+&lt;nav class=&quot;bottom-nav glass&quot; style=&quot;position:static;transform:none;left:auto;height:70px;max-width:420px;flex-direction:row;justify-content:space-around;padding:0;border-radius:20px 20px 0 0;border-right:none;border-top:1px solid var(--glass-border)&quot;&gt;
+  &lt;a href=&quot;#&quot; class=&quot;nav-item active&quot; style=&quot;flex-direction:column;width:25%;padding:0;gap:4px;background:none&quot;&gt;&lt;i class=&quot;ph-fill ph-squares-four&quot; style=&quot;font-size:1.5rem&quot;&gt;&lt;/i&gt;&lt;span style=&quot;font-size:.65rem&quot;&gt;Головна&lt;/span&gt;&lt;/a&gt;
+  &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; style=&quot;flex-direction:column;width:25%;padding:0;gap:4px&quot;&gt;&lt;i class=&quot;ph-fill ph-clock-counter-clockwise&quot; style=&quot;font-size:1.5rem&quot;&gt;&lt;/i&gt;&lt;span style=&quot;font-size:.65rem&quot;&gt;Історія&lt;/span&gt;&lt;/a&gt;
+  &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; style=&quot;flex-direction:column;width:25%;padding:0;gap:4px&quot;&gt;&lt;i class=&quot;ph-fill ph-map-pin&quot; style=&quot;font-size:1.5rem&quot;&gt;&lt;/i&gt;&lt;span style=&quot;font-size:.65rem&quot;&gt;Сервіси&lt;/span&gt;&lt;/a&gt;
+  &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; style=&quot;flex-direction:column;width:25%;padding:0;gap:4px&quot;&gt;&lt;i class=&quot;ph-fill ph-scan&quot; style=&quot;font-size:1.5rem&quot;&gt;&lt;/i&gt;&lt;span style=&quot;font-size:.65rem&quot;&gt;Сканер&lt;/span&gt;&lt;/a&gt;
+&lt;/nav&gt;
+&lt;p class=&quot;caption&quot; style=&quot;color:var(--text-secondary);font-size:.8rem;margin:20px 0 8px&quot;&gt;Ноутбук: бічна панель&lt;/p&gt;
+&lt;nav class=&quot;bottom-nav glass&quot; style=&quot;position:static;transform:none;left:auto;width:240px;height:auto;flex-direction:column;justify-content:flex-start;gap:4px;padding:12px;border-radius:16px;border:1px solid var(--glass-border)&quot;&gt;
+  &lt;a href=&quot;#&quot; class=&quot;nav-item active&quot; style=&quot;flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 16px;width:100%;border-radius:12px;background:var(--tint-primary)&quot;&gt;&lt;i class=&quot;ph-fill ph-squares-four&quot; style=&quot;font-size:1.35rem&quot;&gt;&lt;/i&gt;&lt;span style=&quot;font-size:.95rem&quot;&gt;Головна&lt;/span&gt;&lt;/a&gt;
+  &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; style=&quot;flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 16px;width:100%&quot;&gt;&lt;i class=&quot;ph-fill ph-clock-counter-clockwise&quot; style=&quot;font-size:1.35rem&quot;&gt;&lt;/i&gt;&lt;span style=&quot;font-size:.95rem&quot;&gt;Історія&lt;/span&gt;&lt;/a&gt;
+  &lt;a href=&quot;#&quot; class=&quot;nav-item&quot; style=&quot;flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 16px;width:100%&quot;&gt;&lt;i class=&quot;ph-fill ph-map-pin&quot; style=&quot;font-size:1.35rem&quot;&gt;&lt;/i&gt;&lt;span style=&quot;font-size:.95rem&quot;&gt;Сервіси&lt;/span&gt;&lt;/a&gt;
+&lt;/nav&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-modal">
+  <header class="ds-comp-head"><h3>Modal</h3><span class="ds-tag">Шари</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="modal-content glass-panel" style="transform:none;padding-bottom:20px;border-radius:24px;max-width:440px">
+  <div class="modal-header"><h2>Новий запис</h2><button class="icon-btn"><i class="ph ph-x"></i></button></div>
+  <div class="form-group"><label for="mm">Пробіг (км)</label><input id="mm" type="number" value="145000"></div>
+  <div class="form-group"><label for="mc">Вартість (₴)</label><input id="mc" type="number" placeholder="0"></div>
+  <button class="btn-ai-scan"><i class="ph-fill ph-magic-wand"></i> Оцифрувати документ через ШІ</button>
+  <div class="divider"><span>або вручну</span></div>
+  <button class="btn-primary" style="margin-top:0">Зберегти запис</button>
+</div></div>
+    <div class="ds-guide"><p>Вікно поверх екрана для коротких форм — зараз це «Новий запис».</p>
+<p><code>.modal-overlay</code> (фон <code>scrim</code> + розмиття 4px) &gt; <code>.modal-content.glass-panel</code>. На телефоні — нижній лист, що виїжджає знизу, з радіусом 24px зверху. З <code>bp-tablet</code> — діалог по центру шириною до 520px з повним радіусом <code>radius-lg</code> і прокруткою всередині.</p>
+<p>Закривається хрестиком <code>.icon-btn</code> і кліком по затемненню. <strong>Споживач передає:</strong> заголовок-дію («Новий запис»), поля <code>FormField</code>, одну <code>.btn-primary</code>.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;modal-content glass-panel&quot; style=&quot;transform:none;padding-bottom:20px;border-radius:24px;max-width:440px&quot;&gt;
+  &lt;div class=&quot;modal-header&quot;&gt;&lt;h2&gt;Новий запис&lt;/h2&gt;&lt;button class=&quot;icon-btn&quot;&gt;&lt;i class=&quot;ph ph-x&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;
+  &lt;div class=&quot;form-group&quot;&gt;&lt;label for=&quot;mm&quot;&gt;Пробіг (км)&lt;/label&gt;&lt;input id=&quot;mm&quot; type=&quot;number&quot; value=&quot;145000&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;form-group&quot;&gt;&lt;label for=&quot;mc&quot;&gt;Вартість (₴)&lt;/label&gt;&lt;input id=&quot;mc&quot; type=&quot;number&quot; placeholder=&quot;0&quot;&gt;&lt;/div&gt;
+  &lt;button class=&quot;btn-ai-scan&quot;&gt;&lt;i class=&quot;ph-fill ph-magic-wand&quot;&gt;&lt;/i&gt; Оцифрувати документ через ШІ&lt;/button&gt;
+  &lt;div class=&quot;divider&quot;&gt;&lt;span&gt;або вручну&lt;/span&gt;&lt;/div&gt;
+  &lt;button class=&quot;btn-primary&quot; style=&quot;margin-top:0&quot;&gt;Зберегти запис&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article>
+    </section>
+
+    <footer class="ds-foot">AutoSync Design System · згенеровано з <code>styles.css</code> та <code>index.html</code> · жовтень 2026</footer>
+  </main>
+</div>
+<script>
+  // Copy component markup
+  document.querySelectorAll('.ds-copy').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const code = btn.parentElement.querySelector('pre code');
+      const done = () => { btn.textContent = 'Скопійовано'; setTimeout(() => btn.textContent = 'Копіювати', 1500); };
+      const select = () => { const r = document.createRange(); r.selectNodeContents(code); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Виділено — Ctrl+C'; };
+      if (navigator.clipboard) navigator.clipboard.writeText(code.textContent).then(done, select); else select();
+    });
+  });
+  // Demo controls stay inert
+  document.querySelectorAll('.ds-stage a').forEach(a => a.addEventListener('click', e => e.preventDefault()));
+  document.querySelectorAll('.ds-stage .chip').forEach(c => c.addEventListener('click', () => {
+    c.parentElement.querySelectorAll('.chip').forEach(x => x.classList.remove('active')); c.classList.add('active');
+  }));
+  document.querySelectorAll('.ds-stage .toggle').forEach(t => t.addEventListener('click', () => t.classList.toggle('active')));
+  // Highlight the section in view
+  const links = [...document.querySelectorAll('.ds-nav a:not(.ds-nav-comps)')];
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) { links.forEach(l => l.classList.remove('is-active')); map.get(en.target.id)?.classList.add('is-active'); }
+  }), { rootMargin: '-30% 0px -60% 0px' });
+  map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+</script>
+</body>
+</html>

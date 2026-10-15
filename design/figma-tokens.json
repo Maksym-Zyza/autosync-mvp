@@ -1,0 +1,476 @@
+{
+  "autosync": {
+    "color": {
+      "bg-color": {
+        "value": "#050505",
+        "type": "color",
+        "description": "Фон сторінки. Під ним у застосунку лежить градієнт --bg-gradient (#050505 → #0a0a14)."
+      },
+      "glass-bg": {
+        "value": "rgba(20, 20, 30, 0.6)",
+        "type": "color",
+        "description": "Заливка скляних панелей (.glass-panel) і шапки/навігації (.glass) разом з backdrop-filter blur."
+      },
+      "glass-border": {
+        "value": "rgba(0, 229, 255, 0.15)",
+        "type": "color",
+        "description": "Тонка межа скляних панелей, полів форм, лінія хронології, роздільники."
+      },
+      "surface-modal": {
+        "value": "#171c28",
+        "type": "color",
+        "description": "Приблизний колір фону модалки; маскує лінію в роздільнику «або вручну»."
+      },
+      "scrim": {
+        "value": "rgba(0, 0, 0, 0.6)",
+        "type": "color",
+        "description": "Затемнення під модальним вікном (.modal-overlay)."
+      },
+      "fill-subtle": {
+        "value": "rgba(255, 255, 255, 0.05)",
+        "type": "color",
+        "description": "Фон іконкових кнопок, чіпів, вкладень документів, плиток статистики."
+      },
+      "fill-hover": {
+        "value": "rgba(255, 255, 255, 0.1)",
+        "type": "color",
+        "description": "Фон кнопки «Поділитись», трек вимкненого перемикача, ховер іконкових кнопок."
+      },
+      "accent-primary": {
+        "value": "#00e5ff",
+        "type": "color",
+        "description": "Неоновий блакитний: головні кнопки, активна навігація, ціни, фокус полів. 13.3:1 на bg-color."
+      },
+      "accent-glow": {
+        "value": "rgba(0, 229, 255, 0.6)",
+        "type": "color",
+        "description": "Світіння під кнопками з заливкою accent-primary і під FAB."
+      },
+      "on-accent": {
+        "value": "#050505",
+        "type": "color",
+        "description": "Текст та іконки на заливці accent-primary (13.3:1). Ніколи не білий."
+      },
+      "tint-primary": {
+        "value": "rgba(0, 229, 255, 0.1)",
+        "type": "color",
+        "description": "Фон активного пункту бічної навігації та активного авто в гаражі (0.05)."
+      },
+      "accent-green": {
+        "value": "#00ff88",
+        "type": "color",
+        "description": "Стан «добре»: верифіковано, відчинено, гарантія, активний перемикач. 15.2:1 на bg-color."
+      },
+      "tint-good": {
+        "value": "rgba(16, 185, 129, 0.2)",
+        "type": "color",
+        "description": "Фон бейджа «Добре», «Перевірено AutoSync» (0.15), гарантії."
+      },
+      "accent-orange": {
+        "value": "#ffaa00",
+        "type": "color",
+        "description": "Стан «увага»: індекс здоров'я, бейдж «Потребує уваги», смуга попередження. 10.7:1 на bg-color."
+      },
+      "tint-warning": {
+        "value": "rgba(245, 158, 11, 0.2)",
+        "type": "color",
+        "description": "Фон бейджа «Потребує уваги» та іконки-плашки orange (0.15)."
+      },
+      "accent-red": {
+        "value": "#ff2a2a",
+        "type": "color",
+        "description": "Стан «критично»: смуга нагадування, зачинено, вихід з акаунту. 5.45:1 на bg-color; на tint-danger лише 4.18:1 — не проходить AA для дрібного тексту."
+      },
+      "tint-danger": {
+        "value": "rgba(239, 68, 68, 0.2)",
+        "type": "color",
+        "description": "Фон бейджа danger та іконки-плашки red (0.15)."
+      },
+      "accent-ai": {
+        "value": "#a855f7",
+        "type": "color",
+        "description": "Все, що робить ШІ: бейдж «Оцифровано через ШІ», іконка «Резюме ШІ», межа кнопки сканування."
+      },
+      "accent-ai-text": {
+        "value": "#d8b4fe",
+        "type": "color",
+        "description": "Текст кнопки «Оцифрувати документ через ШІ» на tint-ai (8.1:1)."
+      },
+      "tint-ai": {
+        "value": "rgba(168, 85, 247, 0.15)",
+        "type": "color",
+        "description": "Фон кнопки ШІ-сканування."
+      },
+      "rating-star": {
+        "value": "#f59e0b",
+        "type": "color",
+        "description": "Зірка рейтингу на фото сервісу."
+      },
+      "text-primary": {
+        "value": "#f8fafc",
+        "type": "color",
+        "description": "Основний текст і заголовки на bg-color та glass-bg (18.4:1)."
+      },
+      "text-secondary": {
+        "value": "#94a3b8",
+        "type": "color",
+        "description": "Описи, підписи, мета-текст на bg-color та glass-bg (7.5:1)."
+      },
+      "text-muted": {
+        "value": "#64748b",
+        "type": "color",
+        "description": "Дати, плейсхолдери, неактивна навігація. Лише 4.28:1 на bg-color, 4.04:1 на glass-bg і 3.58:1 у модалці — нижче AA 4.5:1 для дрібного тексту; не використовувати для важливої інформації."
+      }
+    },
+    "spacing": {
+      "space-1": {
+        "value": "4px",
+        "type": "spacing",
+        "description": "Відступ між заголовком і підзаголовком, гап у бейджах."
+      },
+      "space-2": {
+        "value": "8px",
+        "type": "spacing",
+        "description": "Гап між іконкою і текстом у кнопках, між чіпами."
+      },
+      "space-3": {
+        "value": "12px",
+        "type": "spacing",
+        "description": "Гап між картками нагадувань і кнопками-інтеграціями."
+      },
+      "space-4": {
+        "value": "16px",
+        "type": "spacing",
+        "description": "Внутрішній відступ карток, гап між сервісами, відступи полів форми."
+      },
+      "space-5": {
+        "value": "20px",
+        "type": "spacing",
+        "description": "Відступ панелей (.glass-panel), бічні поля контенту на телефоні."
+      },
+      "space-6": {
+        "value": "24px",
+        "type": "spacing",
+        "description": "Між секціями, нижній відступ шапок розділів, гап колонок на ноутбуці."
+      },
+      "space-8": {
+        "value": "32px",
+        "type": "spacing",
+        "description": "Між великими блоками; поля контенту з планшета."
+      },
+      "space-10": {
+        "value": "40px",
+        "type": "spacing",
+        "description": "Бічні поля контенту на ноутбуці."
+      }
+    },
+    "borderRadius": {
+      "radius-sm": {
+        "value": "12px",
+        "type": "borderRadius",
+        "description": "Поля форм, іконки-плашки, кнопки в картках."
+      },
+      "radius-md": {
+        "value": "16px",
+        "type": "borderRadius",
+        "description": "Скляні панелі та картки."
+      },
+      "radius-lg": {
+        "value": "24px",
+        "type": "borderRadius",
+        "description": "Модалка, кнопка «Поділитись», великі поверхні."
+      },
+      "radius-pill": {
+        "value": "20px",
+        "type": "borderRadius",
+        "description": "Бейджі, чіпи, компактні кнопки (.action-btn)."
+      },
+      "radius-full": {
+        "value": "50%",
+        "type": "borderRadius",
+        "description": "Аватар, іконкові кнопки, FAB, крапки хронології."
+      }
+    },
+    "blur": {
+      "blur-header": {
+        "value": "12px",
+        "type": "dimension",
+        "description": "backdrop-filter шапки та навігації (.glass)."
+      },
+      "blur-panel": {
+        "value": "16px",
+        "type": "dimension",
+        "description": "backdrop-filter скляних панелей (.glass-panel)."
+      }
+    },
+    "sizing": {
+      "nav-height": {
+        "value": "70px",
+        "type": "sizing",
+        "description": "Висота нижньої навігації на телефоні."
+      },
+      "mobile-max": {
+        "value": "480px",
+        "type": "sizing",
+        "description": "Максимальна ширина мобільного контейнера й модалки на телефоні."
+      },
+      "header-height": {
+        "value": "80px",
+        "type": "sizing",
+        "description": "Висота шапки з планшета (≥768px)."
+      },
+      "sidebar-rail": {
+        "value": "96px",
+        "type": "sizing",
+        "description": "Ширина вузької бічної панелі з іконками на планшеті."
+      },
+      "sidebar-full": {
+        "value": "240px",
+        "type": "sizing",
+        "description": "Ширина бічної панелі з підписами на ноутбуці (≥1024px)."
+      },
+      "sidebar-wide": {
+        "value": "260px",
+        "type": "sizing",
+        "description": "Ширина бічної панелі на великому екрані (≥1440px)."
+      },
+      "content-max": {
+        "value": "1200px",
+        "type": "sizing",
+        "description": "Максимальна ширина контенту на ноутбуці (1320px з 1440px)."
+      },
+      "bp-tablet": {
+        "value": "768px",
+        "type": "sizing",
+        "description": "Нижня навігація стає бічною, FAB стає кнопкою з підписом, модалка по центру."
+      },
+      "bp-laptop": {
+        "value": "1024px",
+        "type": "sizing",
+        "description": "Бічна панель з підписами, двоколонкові Історія, Сервіси, Профіль."
+      },
+      "bp-wide": {
+        "value": "1200px",
+        "type": "sizing",
+        "description": "Головна у дві колонки."
+      },
+      "bp-desktop": {
+        "value": "1440px",
+        "type": "sizing",
+        "description": "Ширша бічна панель і контент."
+      }
+    },
+    "boxShadow": {
+      "glass-shadow": {
+        "value": {
+          "x": "0",
+          "y": "8",
+          "blur": "32",
+          "spread": "0",
+          "color": "rgba(0, 229, 255, 0.05)",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Ледь помітне світіння скляних панелей."
+      },
+      "glow-accent": {
+        "value": {
+          "x": "0",
+          "y": "4",
+          "blur": "12",
+          "spread": "0",
+          "color": "rgba(0, 229, 255, 0.6)",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Під кнопками з заливкою accent-primary."
+      },
+      "glow-fab": {
+        "value": {
+          "x": "0",
+          "y": "8",
+          "blur": "24",
+          "spread": "0",
+          "color": "rgba(0, 229, 255, 0.6)",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Під плаваючою кнопкою «Новий запис»."
+      },
+      "hover-lift": {
+        "value": {
+          "x": "0",
+          "y": "12",
+          "blur": "32",
+          "spread": "0",
+          "color": "rgba(0, 229, 255, 0.08)",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Картки при наведенні миші (лише пристрої з курсором)."
+      }
+    },
+    "typography": {
+      "display-xl": {
+        "value": {
+          "fontFamily": "Play",
+          "fontWeight": "700",
+          "fontSize": "40px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.03em"
+        },
+        "type": "typography",
+        "description": "Назва на екрані входу."
+      },
+      "title-lg": {
+        "value": {
+          "fontFamily": "Play",
+          "fontWeight": "700",
+          "fontSize": "24px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.03em"
+        },
+        "type": "typography",
+        "description": "Ім'я в профілі, назва авто у звіті, значення статистики."
+      },
+      "title-md": {
+        "value": {
+          "fontFamily": "Play",
+          "fontWeight": "700",
+          "fontSize": "20px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.03em"
+        },
+        "type": "typography",
+        "description": "Заголовок модалки та розділу Історії (1.2rem)."
+      },
+      "title-sm": {
+        "value": {
+          "fontFamily": "Play",
+          "fontWeight": "600",
+          "fontSize": "17.6px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.03em"
+        },
+        "type": "typography",
+        "description": "Заголовки секцій, назва авто, назва сервісу."
+      },
+      "title-xs": {
+        "value": {
+          "fontFamily": "Play",
+          "fontWeight": "600",
+          "fontSize": "15.2px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.03em"
+        },
+        "type": "typography",
+        "description": "Назва нагадування, запису в хронології (1rem)."
+      },
+      "body": {
+        "value": {
+          "fontFamily": "Exo 2",
+          "fontWeight": "400",
+          "fontSize": "16px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.01em"
+        },
+        "type": "typography",
+        "description": "Основний текст, поля форм."
+      },
+      "body-sm": {
+        "value": {
+          "fontFamily": "Exo 2",
+          "fontWeight": "400",
+          "fontSize": "14.4px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.01em"
+        },
+        "type": "typography",
+        "description": "Підзаголовки, текст сканера."
+      },
+      "caption": {
+        "value": {
+          "fontFamily": "Exo 2",
+          "fontWeight": "400",
+          "fontSize": "13.6px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.01em"
+        },
+        "type": "typography",
+        "description": "Описи в картках, підписи полів."
+      },
+      "meta": {
+        "value": {
+          "fontFamily": "Exo 2",
+          "fontWeight": "400",
+          "fontSize": "12.8px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.01em"
+        },
+        "type": "typography",
+        "description": "Друга лінія нагадувань, відстань, підписи статистики."
+      },
+      "micro": {
+        "value": {
+          "fontFamily": "Exo 2",
+          "fontWeight": "600",
+          "fontSize": "12px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.01em"
+        },
+        "type": "typography",
+        "description": "Бейджі статусу, дата в хронології (400)."
+      },
+      "nav-label": {
+        "value": {
+          "fontFamily": "Exo 2",
+          "fontWeight": "500",
+          "fontSize": "10.4px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.01em"
+        },
+        "type": "typography",
+        "description": "Підписи нижньої навігації на телефоні (0.95rem у бічній панелі на ноутбуці)."
+      },
+      "button": {
+        "value": {
+          "fontFamily": "Exo 2",
+          "fontWeight": "600",
+          "fontSize": "16px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.01em"
+        },
+        "type": "typography",
+        "description": "Великі кнопки (.btn-primary, .auth-btn)."
+      },
+      "button-sm": {
+        "value": {
+          "fontFamily": "Exo 2",
+          "fontWeight": "600",
+          "fontSize": "12.8px",
+          "lineHeight": "150%",
+          "letterSpacing": "0.01em"
+        },
+        "type": "typography",
+        "description": "Компактна кнопка дії в картці (.action-btn)."
+      },
+      "gauge-value": {
+        "value": {
+          "fontFamily": "Outfit",
+          "fontWeight": "700",
+          "fontSize": "36px",
+          "lineHeight": "100%",
+          "letterSpacing": "0"
+        },
+        "type": "typography",
+        "description": "Відсоток у кільці індексу здоров'я. У коді це 0.5rem всередині SVG viewBox 36, що дає ≈36px у колі 160px."
+      }
+    }
+  },
+  "$themes": [],
+  "$metadata": {
+    "tokenSetOrder": [
+      "autosync"
+    ]
+  }
+}
