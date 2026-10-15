@@ -56,13 +56,13 @@
     /* Accents darkened so they stay readable on a light background */
     --accent-primary: #0e7490;
     --accent-glow: rgba(14, 116, 144, 0.35);
-    --accent-red: #dc2626;
+    --accent-red: #c81e1e;
     --accent-orange: #c2410c;
     --accent-green: #047857;
 
     --text-primary: #0f172a;
     --text-secondary: #475569;
-    --text-muted: #64748b;
+    --text-muted: #5b6b80;
 
     --fill-03: rgba(15, 23, 42, 0.036);
     --fill-04: rgba(15, 23, 42, 0.048);

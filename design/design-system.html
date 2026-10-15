@@ -11,7 +11,20 @@
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><path d='M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM212.72,104H173.85a48.16,48.16,0,0,0-16.14-38.93l27.53-27.54A88.08,88.08,0,0,1,212.72,104ZM128,160a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM118.41,75.76a48.06,48.06,0,0,0-36.29,0l-15.65-38.4a87.65,87.65,0,0,1,67,0ZM112,215.35V173.85a48.16,48.16,0,0,0-38.93-16.14l-27.54,27.53A88.08,88.08,0,0,1,43.28,152H82.15a48.16,48.16,0,0,0,16.14-38.93L70.76,85.53A88.08,88.08,0,0,1,104,43.28v38.87a48.16,48.16,0,0,0,38.93,16.14l27.53-27.54A88.08,88.08,0,0,1,212.72,104H173.85a48.16,48.16,0,0,0-16.14,38.93l27.54,27.53A88.08,88.08,0,0,1,152,212.72V173.85a48.16,48.16,0,0,0-38.93,16.14Z' fill='%2300e5ff'/></svg>">
 <!-- The app's own stylesheet: every component below is rendered with the real classes -->
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css?v=1.7">
+<script>
+(function () {
+            var KEY = 'autosync-theme', root = document.documentElement;
+            try { var t = localStorage.getItem(KEY); if (t === 'light' || t === 'dark') root.setAttribute('data-theme', t); } catch (e) {}
+            document.addEventListener('click', function (e) {
+                var btn = e.target.closest && e.target.closest('#theme-toggle');
+                if (!btn) return;
+                var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                root.setAttribute('data-theme', next);
+                try { localStorage.setItem(KEY, next); } catch (err) {}
+            });
+        })();
+</script>
 <style>
 /* Layout: sticky token index on the left, specimen sheet on the right; collapses to a top tab strip on phones */
 :root {
@@ -44,6 +57,25 @@
   --ds-line: rgba(148, 163, 184, 0.14);
   color-scheme: dark;
 }
+
+/* Light theme: values for the tokens defined only in this sheet (shared tokens come from styles.css) */
+:root[data-theme="light"] {
+  --surface-modal: #ffffff;
+  --scrim: rgba(15, 23, 42, 0.45);
+  --fill-subtle: rgba(15, 23, 42, 0.06);
+  --fill-hover: rgba(15, 23, 42, 0.1);
+  --tint-primary: rgba(14, 116, 144, 0.1);
+  --tint-good: rgba(4, 120, 87, 0.12);
+  --tint-warning: rgba(194, 65, 12, 0.12);
+  --tint-danger: rgba(200, 30, 30, 0.12);
+  --accent-ai: #7e22ce;
+  --accent-ai-text: #6b21a8;
+  --tint-ai: rgba(126, 34, 206, 0.1);
+  --rating-star: #b45309;
+  --ds-line: rgba(71, 85, 105, 0.22);
+}
+:root[data-theme="light"] .ds-code pre { background: rgba(15, 23, 42, 0.05); }
+.ds-theme { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 0.85rem; color: var(--text-secondary); }
 html { scroll-behavior: smooth; scroll-padding-top: 24px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { display: block; min-height: 100vh; }
@@ -231,6 +263,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
       <div class="ds-nav-label ds-nav-comps">Компоненти</div>
       <a class="ds-nav-comps" href="#c-glasspanel">GlassPanel</a><a class="ds-nav-comps" href="#c-button">Button</a><a class="ds-nav-comps" href="#c-iconbutton">IconButton</a><a class="ds-nav-comps" href="#c-fab">Fab</a><a class="ds-nav-comps" href="#c-integrationbutton">IntegrationButton</a><a class="ds-nav-comps" href="#c-badge">Badge</a><a class="ds-nav-comps" href="#c-chip">Chip</a><a class="ds-nav-comps" href="#c-searchbar">SearchBar</a><a class="ds-nav-comps" href="#c-formfield">FormField</a><a class="ds-nav-comps" href="#c-toggle">Toggle</a><a class="ds-nav-comps" href="#c-healthscore">HealthScore</a><a class="ds-nav-comps" href="#c-statbox">StatBox</a><a class="ds-nav-comps" href="#c-remindercard">ReminderCard</a><a class="ds-nav-comps" href="#c-timelineentry">TimelineEntry</a><a class="ds-nav-comps" href="#c-servicecard">ServiceCard</a><a class="ds-nav-comps" href="#c-carcard">CarCard</a><a class="ds-nav-comps" href="#c-navigation">Navigation</a><a class="ds-nav-comps" href="#c-modal">Modal</a>
     </nav>
+    <div class="ds-theme"><span>Тема</span><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Перемкнути тему" title="Світла / темна тема"><i class="ph-fill ph-moon"></i><i class="ph-fill ph-sun"></i></button></div>
     <a class="ds-back" href="../index.html"><i class="ph ph-arrow-left"></i> До застосунку</a>
   </aside>
 
@@ -266,7 +299,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
     <section class="ds-section" id="colors">
       <div class="ds-eyebrow">01 · tokens.color</div>
       <h2>Кольори</h2>
-      <p class="ds-lead">Одна темна тема. Біля кожного кольору показано контраст з фоном <code>bg-color</code>; WCAG AA вимагає щонайменше 4.5:1 для звичайного тексту.</p>
+      <p class="ds-lead">Дві теми: темна (за замовчуванням) і світла; перемикач — у бічній панелі та в шапці застосунку, вибір спільний. Нижче основні значення — темної теми, а значення світлої зібрані в підрозділі «Світла тема». Біля кожного кольору показано контраст з фоном <code>bg-color</code>; WCAG AA вимагає щонайменше 4.5:1 для звичайного тексту.</p>
       <div class="ds-sub"><h3>Поверхні</h3><p class=ds-lead-sm>Скляний темний інтерфейс: фон, скло, межі, затемнення.</p><div class="ds-swatches"><div class="ds-swatch">
   <div class="ds-chip" style="background:#050505"></div>
   <div class="ds-sw-body">
@@ -451,6 +484,135 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
     <p>Дати, плейсхолдери, неактивна навігація. Лише 4.28:1 на bg-color, 4.04:1 на glass-bg і 3.58:1 у модалці — нижче AA 4.5:1 для дрібного тексту; не використовувати для важливої інформації.</p>
   </div>
 </div></div></div>
+<div class="ds-sub" id="light-theme"><h3>Світла тема</h3><p class=ds-lead-sm>Те саме ім'я токена, інше значення: у застосунку це <code>:root[data-theme="light"]</code> у styles.css. Акценти й статусні кольори затемнені, щоб читатись на світлому фоні; контраст показано з фоном <code>#f1f5f9</code>. Напівпрозорі заливки (<code>--fill-03 … --fill-15</code>) змінюють базу з білого на <code>rgb(15, 23, 42)</code>.</p><div class="ds-swatches"><div class="ds-swatch">
+  <div class="ds-chip" style="background:#f1f5f9"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--bg-color</code></div>
+    <div class="ds-val">#f1f5f9</div>
+    <p>Фон сторінки. Градієнт --bg-gradient: #f8fafc → #e2e8f0. Темна: <code>#050505</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(255, 255, 255, 0.78)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--glass-bg</code></div>
+    <div class="ds-val">rgba(255, 255, 255, 0.78)</div>
+    <p>Заливка скляних панелей, шапки й навігації. Темна: <code>rgba(20, 20, 30, 0.6)</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(14, 116, 144, 0.18)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--glass-border</code></div>
+    <div class="ds-val">rgba(14, 116, 144, 0.18)</div>
+    <p>Межі панелей і полів. Темна: <code>rgba(0, 229, 255, 0.15)</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#ffffff"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--surface-modal</code></div>
+    <div class="ds-val">#ffffff</div>
+    <p>Фон модалки (маска в роздільнику «або вручну»). Темна: <code>#171c28</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:rgba(15, 23, 42, 0.45)"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--scrim</code></div>
+    <div class="ds-val">rgba(15, 23, 42, 0.45)</div>
+    <p>Затемнення під модальним вікном. Темна: <code>rgba(0, 0, 0, 0.6)</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#0f172a"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--text-primary</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">16.3:1</span></div>
+    <div class="ds-val">#0f172a</div>
+    <p>Основний текст. Темна: <code>#f8fafc</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#475569"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--text-secondary</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">6.9:1</span></div>
+    <div class="ds-val">#475569</div>
+    <p>Описи та підписи. Темна: <code>#94a3b8</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#5b6b80"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--text-muted</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">5.0:1</span></div>
+    <div class="ds-val">#5b6b80</div>
+    <p>Дати, плейсхолдери, неактивна навігація. У світлій темі вже проходить AA. Темна: <code>#64748b</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#0e7490"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-primary</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">4.9:1</span></div>
+    <div class="ds-val">#0e7490</div>
+    <p>Акцент: посилання, активна навігація, кнопки (текст на ньому — --on-accent). Темна: <code>#00e5ff</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#ffffff"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--on-accent</code></div>
+    <div class="ds-val">#ffffff</div>
+    <p>Текст на акцентних кнопках; контраст 5.4:1 з --accent-primary. Темна: <code>#050505</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#047857"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-green</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">5.0:1</span></div>
+    <div class="ds-val">#047857</div>
+    <p>Статус «добре». Темна: <code>#00ff88</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#c2410c"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-orange</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">4.7:1</span></div>
+    <div class="ds-val">#c2410c</div>
+    <p>Статус «увага». Темна: <code>#ffaa00</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#c81e1e"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-red</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">5.2:1</span></div>
+    <div class="ds-val">#c81e1e</div>
+    <p>Статус «критично». Темна: <code>#ff2a2a</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#7e22ce"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-ai</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">6.4:1</span></div>
+    <div class="ds-val">#7e22ce</div>
+    <p>Позначка «Оцифровано ШІ». Темна: <code>#a855f7</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#6b21a8"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--accent-ai-text</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">8.0:1</span></div>
+    <div class="ds-val">#6b21a8</div>
+    <p>Текст бейджа ШІ. Темна: <code>#d8b4fe</code>.</p>
+  </div>
+</div>
+<div class="ds-swatch">
+  <div class="ds-chip" style="background:#b45309"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--rating-star</code><span class="ds-cr ok" title="Контраст зі світлим bg-color">4.6:1</span></div>
+    <div class="ds-val">#b45309</div>
+    <p>Зірка рейтингу. Темна: <code>#f59e0b</code>.</p>
+  </div>
+</div>
+</div></div>
 <div class="ds-sub"><h3>Інше</h3><div class="ds-swatches"><div class="ds-swatch">
   <div class="ds-chip" style="background:#f59e0b"></div>
   <div class="ds-sw-body">
