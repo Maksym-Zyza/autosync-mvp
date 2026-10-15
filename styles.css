@@ -60,6 +60,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     background: radial-gradient(circle at top right, rgba(59,130,246,0.15), transparent 400px);
     overflow-x: hidden;
+    overflow-x: clip; /* clip doesn't create a scroll container, so sticky header/sidebar keep working */
     padding-bottom: calc(var(--nav-height) + var(--safe-area-bottom) + 20px);
 }
 
@@ -252,6 +253,11 @@ h1, h2, h3, h4, h5, h6 {
 .section-header h3 {
     font-size: 1.1rem;
     font-weight: 600;
+}
+
+.section-header > div {
+    display: flex;
+    align-items: center;
 }
 
 .text-btn {
@@ -453,6 +459,8 @@ h1, h2, h3, h4, h5, h6 {
 .nav-item i { font-size: 1.5rem; }
 .nav-item span { font-size: 0.65rem; font-weight: 500; }
 .nav-item.active { color: var(--accent-primary); }
+.nav-item--desktop { display: none; }
+.fab-label { display: none; }
 
 /* Modal */
 .modal-overlay {
@@ -850,6 +858,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .distance {
     font-size: 0.8rem;
+    white-space: nowrap;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
@@ -983,3 +992,261 @@ h1, h2, h3, h4, h5, h6 {
 .toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: #fff; border-radius: 50%; transition: 0.3s; }
 .toggle.active { background: var(--accent-green); }
 .toggle.active::after { left: calc(100% - 22px); }
+
+/* =========================================================
+   Responsive: Tablet (≥768px), Laptop (≥1024px), Desktop (≥1440px)
+   Mobile styles above stay the default (mobile-first).
+   ========================================================= */
+
+/* --- Tablet: icon rail on the left instead of bottom nav --- */
+@media (min-width: 768px) {
+    :root {
+        --header-height: 80px;
+        --sidebar-width: 96px;
+    }
+
+    body { display: block; }
+
+    .app-container {
+        max-width: none;
+        display: grid;
+        grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+        grid-template-rows: var(--header-height) 1fr;
+        grid-template-areas:
+            "header header"
+            "nav    main";
+        padding-bottom: 0;
+        background:
+            radial-gradient(circle at 85% 0%, rgba(0, 229, 255, 0.08), transparent 600px),
+            radial-gradient(circle at 0% 100%, rgba(59, 130, 246, 0.08), transparent 500px);
+    }
+
+    .app-header {
+        grid-area: header;
+        height: var(--header-height);
+        padding: 0 32px;
+    }
+
+    .content-area {
+        grid-area: main;
+        width: 100%;
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 32px;
+    }
+
+    /* Bottom nav → sticky sidebar */
+    .bottom-nav {
+        grid-area: nav;
+        position: sticky;
+        top: var(--header-height);
+        left: auto;
+        bottom: auto;
+        transform: none;
+        width: auto;
+        max-width: none;
+        height: calc(100vh - var(--header-height));
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 8px;
+        padding: 24px 12px;
+        border-top: none;
+        border-right: 1px solid var(--glass-border);
+        border-radius: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        padding: 12px 4px;
+        border-radius: var(--radius-sm);
+        transition: color 0.2s, background 0.2s;
+    }
+    .nav-item:hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.04); }
+    .nav-item.active { background: rgba(0, 229, 255, 0.1); }
+    .nav-item--desktop { display: flex; margin-top: auto; }
+
+    /* Layout without nav (shared view) and without header (auth) */
+    .app-container.hide-nav {
+        grid-template-areas:
+            "header header"
+            "main   main";
+    }
+    .app-container.auth-mode {
+        grid-template-rows: 1fr;
+        grid-template-areas: "main main";
+    }
+    .app-container.auth-mode .content-area {
+        max-width: none;
+        padding: 0;
+    }
+    .auth-screen { min-height: 100vh; }
+
+    /* FAB → extended button in the corner of the viewport */
+    .fab,
+    .fab:active {
+        right: 32px;
+        bottom: 32px;
+        transform: none;
+    }
+    .fab {
+        width: auto;
+        padding: 0 24px;
+        gap: 8px;
+        border-radius: 28px;
+    }
+    .fab:hover { transform: translateY(-2px); }
+    .fab-label {
+        display: inline;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    /* Modal → centered dialog */
+    .modal-overlay { align-items: center; padding: 24px; }
+    .modal-content {
+        max-width: 520px;
+        max-height: calc(100vh - 48px);
+        overflow-y: auto;
+        border-radius: var(--radius-lg);
+        padding-bottom: 24px;
+        transform: translateY(24px) scale(0.97);
+    }
+    .modal-overlay.active .modal-content { transform: none; }
+
+    /* Grids that already make sense on tablet */
+    .services-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    .service-img { height: 160px; }
+
+    .health-circle { width: 180px; height: 180px; }
+}
+
+/* --- Laptop: full sidebar with labels + multi-column views --- */
+@media (min-width: 1024px) {
+    :root { --sidebar-width: 240px; }
+
+    .content-area { max-width: 1200px; padding: 32px 40px 48px; }
+
+    .bottom-nav { padding: 24px 16px; gap: 4px; }
+    .nav-item {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+    .nav-item i { font-size: 1.35rem; }
+    .nav-item span { font-size: 0.95rem; }
+
+    /* Dashboard stays single column until there's room for two (see ≥1200px) */
+    #dashboard-view { max-width: 760px; margin: 0 auto; }
+
+    /* History: sticky summary on the left, timeline on the right */
+    #history-view.active {
+        display: grid;
+        grid-template-columns: 320px minmax(0, 1fr);
+        gap: 32px;
+        align-items: start;
+    }
+    .history-aside {
+        position: sticky;
+        top: calc(var(--header-height) + 32px);
+    }
+    .history-aside .integration-actions { flex-direction: column; }
+    .history-aside .integration-btn { padding: 14px; }
+
+    /* Services: wider search, 3 columns */
+    .services-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .services-header .search-bar { flex: 1; max-width: 420px; margin-bottom: 0; }
+    .services-header .services-chips { padding-bottom: 0; flex-wrap: wrap; }
+    .services-list { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+
+    /* Profile: identity on the left, garage + settings on the right */
+    #profile-view.active {
+        display: grid;
+        grid-template-columns: 340px minmax(0, 1fr);
+        gap: 32px;
+        align-items: start;
+    }
+    .profile-aside {
+        position: sticky;
+        top: calc(var(--header-height) + 32px);
+    }
+    .profile-aside .profile-hero {
+        padding: 32px 20px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-md);
+    }
+    .profile-main .logout-btn { width: auto !important; padding: 0 24px; margin-left: auto; }
+
+    /* Focused single-column views */
+    #scanner-view,
+    #shared-view {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    /* Auth: bigger hero */
+    .auth-hero .logo-large { font-size: 5rem; }
+    .auth-hero h1 { font-size: 3.25rem; }
+}
+
+/* --- Wide laptop: dashboard in two columns --- */
+@media (min-width: 1200px) {
+    #dashboard-view { max-width: none; }
+    /* Dashboard: car on top, health left, reminders right */
+    #dashboard-view.active {
+        display: grid;
+        grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "car    car"
+            "health head"
+            "health list";
+        column-gap: 24px;
+        align-items: start;
+    }
+    #dashboard-view .car-selector { grid-area: car; }
+    #dashboard-view .health-widget { grid-area: health; margin-bottom: 0; }
+    #dashboard-view .section-header { grid-area: head; }
+    #dashboard-view .reminders-list { grid-area: list; }
+}
+
+/* --- Large desktop --- */
+@media (min-width: 1440px) {
+    :root { --sidebar-width: 260px; }
+    .content-area { max-width: 1320px; padding: 40px 56px 56px; }
+    #dashboard-view.active { grid-template-columns: 420px minmax(0, 1fr); }
+    .health-circle { width: 220px; height: 220px; }
+}
+
+/* Hover feedback only on devices with a real pointer */
+@media (hover: hover) and (pointer: fine) {
+    .service-card,
+    .reminder-card,
+    .timeline-content,
+    .car-card {
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .service-card:hover,
+    .timeline-content:hover,
+    .car-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(0, 229, 255, 0.35);
+        box-shadow: 0 12px 32px rgba(0, 229, 255, 0.08);
+    }
+    .reminder-card:hover { transform: translateX(2px); }
+    .icon-btn:hover { background: rgba(255, 255, 255, 0.12); }
+    .chip:not(.active):hover { color: var(--text-primary); border-color: rgba(0, 229, 255, 0.35); }
+    .btn-primary:hover,
+    .btn-primary-sm:hover,
+    .action-btn:hover { filter: brightness(1.1); }
+}

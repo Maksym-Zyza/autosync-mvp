@@ -102,6 +102,7 @@
 
             <!-- History View -->
             <section id="history-view" class="view">
+                <div class="history-aside">
                 <div class="history-header glass-panel">
                     <h2>Історія обслуговування</h2>
                     <p>Верифікований цифровий слід</p>
@@ -111,6 +112,7 @@
                 <div class="integration-actions">
                     <button class="integration-btn mvs"><i class="ph ph-database"></i> Дані МВС</button>
                     <button class="integration-btn carvertical"><i class="ph ph-car"></i> Звіт CarVertical</button>
+                </div>
                 </div>
 
                 <div class="timeline">
@@ -336,6 +338,7 @@
 
             <!-- Profile View -->
             <section id="profile-view" class="view">
+                <div class="profile-aside">
                 <div class="profile-hero">
                     <div class="profile-avatar">
                         <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Taras" alt="User">
@@ -354,7 +357,9 @@
                         <div class="stat-label">Витрати/рік</div>
                     </div>
                 </div>
+                </div>
 
+                <div class="profile-main">
                 <div class="profile-section">
                     <h3>Мій Гараж</h3>
                     <div class="garage-list">
@@ -395,6 +400,7 @@
                 <button class="btn-outline logout-btn" id="logout-btn" style="margin-top: 24px; color: var(--accent-red); border-color: var(--accent-red); width: 100%; gap: 8px;">
                     <i class="ph ph-sign-out"></i> Вийти з акаунту
                 </button>
+                </div>
             </section>
 
             <!-- Scanner View -->
@@ -453,6 +459,7 @@
         <!-- Floating Add Button -->
         <button id="add-record-btn" class="fab">
             <i class="ph ph-plus"></i>
+            <span class="fab-label">Новий запис</span>
         </button>
 
         <!-- Bottom Navigation -->
@@ -472,6 +479,10 @@
             <a href="#" class="nav-item" data-target="scanner-view">
                 <i class="ph-fill ph-scan"></i>
                 <span>Сканер</span>
+            </a>
+            <a href="#" class="nav-item nav-item--desktop" data-target="profile-view">
+                <i class="ph-fill ph-user-circle"></i>
+                <span>Профіль</span>
             </a>
         </nav>
         
