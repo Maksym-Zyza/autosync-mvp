@@ -13,12 +13,13 @@
     <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
     <link rel="icon" href="favicon.ico?v=2" sizes="48x48">
     <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
-    <link rel="stylesheet" href="styles.css?v=2.0">
+    <link rel="stylesheet" href="styles.css?v=2.1">
     <!-- Apply saved theme before first paint (avoids a dark flash) -->
     <script>
         (function () {
             var KEY = 'autosync-theme', root = document.documentElement;
-            try { var t = localStorage.getItem(KEY); if (t === 'light' || t === 'dark') root.setAttribute('data-theme', t); } catch (e) {}
+            var t = 'light'; try { var saved = localStorage.getItem(KEY); if (saved === 'light' || saved === 'dark') t = saved; } catch (e) {}
+            root.setAttribute('data-theme', t);
             document.addEventListener('click', function (e) {
                 var btn = e.target.closest && e.target.closest('#theme-toggle');
                 if (!btn) return;

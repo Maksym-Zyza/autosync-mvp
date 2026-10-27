@@ -13,11 +13,12 @@
     <link rel="icon" href="../favicon.ico?v=2" sizes="48x48">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=2">
 <!-- The app's own stylesheet: every component below is rendered with the real classes -->
-<link rel="stylesheet" href="../styles.css?v=2.0">
+<link rel="stylesheet" href="../styles.css?v=2.1">
 <script>
 (function () {
             var KEY = 'autosync-theme', root = document.documentElement;
-            try { var t = localStorage.getItem(KEY); if (t === 'light' || t === 'dark') root.setAttribute('data-theme', t); } catch (e) {}
+            var t = 'light'; try { var saved = localStorage.getItem(KEY); if (saved === 'light' || saved === 'dark') t = saved; } catch (e) {}
+            root.setAttribute('data-theme', t);
             document.addEventListener('click', function (e) {
                 var btn = e.target.closest && e.target.closest('#theme-toggle');
                 if (!btn) return;
@@ -204,7 +205,8 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
 .ds-comp-head h3 { font-size: 1.15rem; }
 .ds-tag.mvp { background: rgba(0,255,136,.12); color: var(--accent-green); }
 .ds-tag.post { background: rgba(255,170,0,.14); color: var(--accent-orange); }
-.ds-comp-head .ds-tag + .ds-tag { margin-left: 6px; }
+.ds-comp-head { justify-content: flex-start; gap: 8px; flex-wrap: wrap; }
+.ds-comp-head h3 { margin-right: auto; }
 .ds-tag { font-size: 0.72rem; padding: 4px 10px; border-radius: var(--radius-pill); background: var(--fill-subtle); color: var(--text-secondary); }
 .ds-comp-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
 .ds-stage { padding: 28px 24px; background: var(--bg-color); background-image: radial-gradient(var(--ds-line) 1px, transparent 1px); background-size: 16px 16px; border-right: 1px solid var(--ds-line); min-width: 0; overflow-x: auto; }
@@ -1404,7 +1406,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   <label class="radio-card"><input type="radio" name="ds-vis" checked><span><i class="ph ph-notebook"></i> Усю історію</span></label>
   <label class="radio-card"><input type="radio" name="ds-vis"><span><i class="ph ph-eye-slash"></i> Нічого</span></label>
 </div>
-<div class="link-field" style="margin-top:12px"><input type="text" readonly value="https://autosync.app/r/golf-7k3x"><button type="button" class="btn-ghost sm"><i class="ph ph-copy"></i> Копіювати</button></div></div>
+<div class="link-field" style="margin-top:12px"><input type="text" readonly value="https://autosync/golf-7k3x"><button type="button" class="btn-ghost sm"><i class="ph ph-copy"></i> Копіювати</button></div></div>
     <div class="ds-guide"><p><code>.radio-card</code> — вибір із двох-трьох варіантів великими картками (видимість історії для СТО). <code>.link-field</code> — поле для посилання лише для читання з кнопкою копіювання.</p>
 <p>СТО відкриває запит за посиланням без акаунта.</p></div>
   </div>
@@ -1412,7 +1414,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   &lt;label class=&quot;radio-card&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ds-vis&quot; checked&gt;&lt;span&gt;&lt;i class=&quot;ph ph-notebook&quot;&gt;&lt;/i&gt; Усю історію&lt;/span&gt;&lt;/label&gt;
   &lt;label class=&quot;radio-card&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ds-vis&quot;&gt;&lt;span&gt;&lt;i class=&quot;ph ph-eye-slash&quot;&gt;&lt;/i&gt; Нічого&lt;/span&gt;&lt;/label&gt;
 &lt;/div&gt;
-&lt;div class=&quot;link-field&quot; style=&quot;margin-top:12px&quot;&gt;&lt;input type=&quot;text&quot; readonly value=&quot;https://autosync.app/r/golf-7k3x&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;btn-ghost sm&quot;&gt;&lt;i class=&quot;ph ph-copy&quot;&gt;&lt;/i&gt; Копіювати&lt;/button&gt;&lt;/div&gt;</code></pre></details>
+&lt;div class=&quot;link-field&quot; style=&quot;margin-top:12px&quot;&gt;&lt;input type=&quot;text&quot; readonly value=&quot;https://autosync/golf-7k3x&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;btn-ghost sm&quot;&gt;&lt;i class=&quot;ph ph-copy&quot;&gt;&lt;/i&gt; Копіювати&lt;/button&gt;&lt;/div&gt;</code></pre></details>
 </article><article class="ds-comp" id="c-mileage">
   <header class="ds-comp-head"><h3>MileageCard</h3><span class="ds-tag">Дані</span><span class="ds-tag mvp">MVP</span></header>
   <div class="ds-comp-grid">

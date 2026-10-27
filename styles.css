@@ -642,6 +642,11 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-secondary);
     cursor: pointer;
     flex-direction: row;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 12px;
 }
 
 .btn-primary {
@@ -1595,3 +1600,14 @@ h1, h2, h3, h4, h5, h6 {
     .plan-head { flex-direction: column; align-items: stretch; }
     .step { font-size: 0.6rem; }
 }
+
+/* v2.0.1: modal spacing */
+.modal-content .soon-btn { margin-top: 0 !important; margin-bottom: 12px; }
+.modal-content .field-error:empty { display: none; }
+
+/* v2.1: overlap / overflow fixes */
+.form-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.form-row .form-group, .form-row input, .form-row select { min-width: 0; width: 100%; box-sizing: border-box; }
+.action-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 8px; }
+.action-row > * { flex: 1 1 160px; margin: 0; justify-content: center; }
+.action-row .btn-primary { width: auto; margin-top: 0; }

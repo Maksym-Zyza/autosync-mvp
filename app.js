@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!r.stoName) return '';
         return `
         <div class="detail-card glass-panel"><h4>Посилання для СТО</h4>
-            <div class="link-field"><input type="text" readonly value="https://autosync.app/r/${linkToken(r)}"><button type="button" class="btn-ghost sm" data-act="copy-link"><i class="ph ph-copy"></i> Копіювати</button></div>
+            <div class="link-field"><input type="text" readonly value="https://autosync/${linkToken(r)}"><button type="button" class="btn-ghost sm" data-act="copy-link"><i class="ph ph-copy"></i> Копіювати</button></div>
             <p class="form-hint" style="margin-top:8px">Для «${esc(r.stoName)}» • історія: ${r.visibility === 'all' ? 'уся' : 'не показується'} • діє до ${fmtDate(r.expiresAt)}</p>
             <div class="action-row"><button type="button" class="btn-ghost" data-act="open-sto" data-id="${r.id}"><i class="ph ph-storefront"></i> Відкрити як СТО (демо)</button></div>
         </div>`;
