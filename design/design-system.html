@@ -13,7 +13,7 @@
     <link rel="icon" href="../favicon.ico?v=2" sizes="48x48">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=2">
 <!-- The app's own stylesheet: every component below is rendered with the real classes -->
-<link rel="stylesheet" href="../styles.css?v=1.8">
+<link rel="stylesheet" href="../styles.css?v=2.0">
 <script>
 (function () {
             var KEY = 'autosync-theme', root = document.documentElement;
@@ -202,6 +202,9 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
 .ds-comp { border-radius: var(--radius-lg); border: 1px solid var(--glass-border); background: var(--glass-bg); overflow: hidden; scroll-margin-top: 24px; }
 .ds-comp-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--ds-line); }
 .ds-comp-head h3 { font-size: 1.15rem; }
+.ds-tag.mvp { background: rgba(0,255,136,.12); color: var(--accent-green); }
+.ds-tag.post { background: rgba(255,170,0,.14); color: var(--accent-orange); }
+.ds-comp-head .ds-tag + .ds-tag { margin-left: 6px; }
 .ds-tag { font-size: 0.72rem; padding: 4px 10px; border-radius: var(--radius-pill); background: var(--fill-subtle); color: var(--text-secondary); }
 .ds-comp-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
 .ds-stage { padding: 28px 24px; background: var(--bg-color); background-image: radial-gradient(var(--ds-line) 1px, transparent 1px); background-size: 16px 16px; border-right: 1px solid var(--ds-line); min-width: 0; overflow-x: auto; }
@@ -263,7 +266,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
       <a href="#icons">Іконки</a>
       <a href="#components">Компоненти</a>
       <div class="ds-nav-label ds-nav-comps">Компоненти</div>
-      <a class="ds-nav-comps" href="#c-glasspanel">GlassPanel</a><a class="ds-nav-comps" href="#c-button">Button</a><a class="ds-nav-comps" href="#c-iconbutton">IconButton</a><a class="ds-nav-comps" href="#c-fab">Fab</a><a class="ds-nav-comps" href="#c-integrationbutton">IntegrationButton</a><a class="ds-nav-comps" href="#c-badge">Badge</a><a class="ds-nav-comps" href="#c-chip">Chip</a><a class="ds-nav-comps" href="#c-searchbar">SearchBar</a><a class="ds-nav-comps" href="#c-formfield">FormField</a><a class="ds-nav-comps" href="#c-toggle">Toggle</a><a class="ds-nav-comps" href="#c-healthscore">HealthScore</a><a class="ds-nav-comps" href="#c-statbox">StatBox</a><a class="ds-nav-comps" href="#c-remindercard">ReminderCard</a><a class="ds-nav-comps" href="#c-timelineentry">TimelineEntry</a><a class="ds-nav-comps" href="#c-servicecard">ServiceCard</a><a class="ds-nav-comps" href="#c-carcard">CarCard</a><a class="ds-nav-comps" href="#c-navigation">Navigation</a><a class="ds-nav-comps" href="#c-modal">Modal</a>
+      <a class="ds-nav-comps" href="#c-glasspanel">GlassPanel</a><a class="ds-nav-comps" href="#c-button">Button</a><a class="ds-nav-comps" href="#c-iconbutton">IconButton</a><a class="ds-nav-comps" href="#c-fab">Fab</a><a class="ds-nav-comps" href="#c-integrationbutton">IntegrationButton</a><a class="ds-nav-comps" href="#c-badge">Badge</a><a class="ds-nav-comps" href="#c-chip">Chip</a><a class="ds-nav-comps" href="#c-searchbar">SearchBar</a><a class="ds-nav-comps" href="#c-formfield">FormField</a><a class="ds-nav-comps" href="#c-toggle">Toggle</a><a class="ds-nav-comps" href="#c-healthscore">HealthScore</a><a class="ds-nav-comps" href="#c-statbox">StatBox</a><a class="ds-nav-comps" href="#c-remindercard">ReminderCard</a><a class="ds-nav-comps" href="#c-timelineentry">TimelineEntry</a><a class="ds-nav-comps" href="#c-servicecard">ServiceCard</a><a class="ds-nav-comps" href="#c-carcard">CarCard</a><a class="ds-nav-comps" href="#c-navigation">Navigation</a><a class="ds-nav-comps" href="#c-modal">Modal</a><a class="ds-nav-comps" href="#c-soon">SoonChip / SoonButton</a><a class="ds-nav-comps" href="#c-toast">Toast</a><a class="ds-nav-comps" href="#c-seg">SegmentedControl</a><a class="ds-nav-comps" href="#c-alert">Alert</a><a class="ds-nav-comps" href="#c-statusdot">StatusDot + PlanItem</a><a class="ds-nav-comps" href="#c-author">AuthorBadge</a><a class="ds-nav-comps" href="#c-stepper">Stepper + RequestCard</a><a class="ds-nav-comps" href="#c-photo">PhotoSlot</a><a class="ds-nav-comps" href="#c-radiocard">RadioCard + LinkField</a><a class="ds-nav-comps" href="#c-mileage">MileageCard</a><a class="ds-nav-comps" href="#c-table">Table</a>
     </nav>
     <div class="ds-theme"><span>Тема</span><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Перемкнути тему" title="Світла / темна тема"><i class="ph-fill ph-moon"></i><i class="ph-fill ph-sun"></i></button></div>
     <a class="ds-back" href="../index.html"><i class="ph ph-arrow-left"></i> До застосунку</a>
@@ -272,9 +275,9 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   <main class="ds-main">
     <section class="ds-hero" id="overview">
       <div>
-        <h1>AutoSync<span>Design System · v1.5</span></h1>
+        <h1>AutoSync<span>Design System · v2.0</span></h1>
         <p>Мова інтерфейсу цифрового сервісного паспорта авто: темне скло, неоновий блакитний акцент і кольори стану, як на панелі приладів. Усі приклади нижче намальовані справжніми класами з <code>styles.css</code>.</p>
-        <div class="ds-facts"><span><b>24</b> кольори</span><span><b>14</b> стилів тексту</span><span><b>18</b> компонентів</span><span><b>4</b> контрольні точки</span></div>
+        <div class="ds-facts"><span><b>24</b> кольори</span><span><b>14</b> стилів тексту</span><span><b>29</b> компонентів</span><span><b>4</b> контрольні точки</span></div>
       </div>
       <svg viewBox="470 0 490 288" aria-hidden="true">
         <rect class="cyan" x="600" y="-24" width="384" height="216" rx="24"/>
@@ -805,7 +808,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
       <div class="ds-eyebrow">07 · components</div>
       <h2>Компоненти</h2>
       <p class="ds-lead">Кожен приклад — живий HTML зі справжніми класами застосунку. Розгорніть «HTML-розмітка», щоб скопіювати код.</p>
-      <div class="ds-comp-index"><a href="#c-glasspanel">GlassPanel</a><a href="#c-button">Button</a><a href="#c-iconbutton">IconButton</a><a href="#c-fab">Fab</a><a href="#c-integrationbutton">IntegrationButton</a><a href="#c-badge">Badge</a><a href="#c-chip">Chip</a><a href="#c-searchbar">SearchBar</a><a href="#c-formfield">FormField</a><a href="#c-toggle">Toggle</a><a href="#c-healthscore">HealthScore</a><a href="#c-statbox">StatBox</a><a href="#c-remindercard">ReminderCard</a><a href="#c-timelineentry">TimelineEntry</a><a href="#c-servicecard">ServiceCard</a><a href="#c-carcard">CarCard</a><a href="#c-navigation">Navigation</a><a href="#c-modal">Modal</a></div>
+      <div class="ds-comp-index"><a href="#c-glasspanel">GlassPanel</a><a href="#c-button">Button</a><a href="#c-iconbutton">IconButton</a><a href="#c-fab">Fab</a><a href="#c-integrationbutton">IntegrationButton</a><a href="#c-badge">Badge</a><a href="#c-chip">Chip</a><a href="#c-searchbar">SearchBar</a><a href="#c-formfield">FormField</a><a href="#c-toggle">Toggle</a><a href="#c-healthscore">HealthScore</a><a href="#c-statbox">StatBox</a><a href="#c-remindercard">ReminderCard</a><a href="#c-timelineentry">TimelineEntry</a><a href="#c-servicecard">ServiceCard</a><a href="#c-carcard">CarCard</a><a href="#c-navigation">Navigation</a><a href="#c-modal">Modal</a><a href="#c-soon">SoonChip / SoonButton</a><a href="#c-toast">Toast</a><a href="#c-seg">SegmentedControl</a><a href="#c-alert">Alert</a><a href="#c-statusdot">StatusDot + PlanItem</a><a href="#c-author">AuthorBadge</a><a href="#c-stepper">Stepper + RequestCard</a><a href="#c-photo">PhotoSlot</a><a href="#c-radiocard">RadioCard + LinkField</a><a href="#c-mileage">MileageCard</a><a href="#c-table">Table</a></div>
       <article class="ds-comp" id="c-glasspanel">
   <header class="ds-comp-head"><h3>GlassPanel</h3><span class="ds-tag">Поверхні</span></header>
   <div class="ds-comp-grid">
@@ -906,7 +909,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   &lt;button class=&quot;fab&quot; style=&quot;position:static;transform:none;width:auto;padding:0 24px;gap:8px;border-radius:28px&quot;&gt;&lt;i class=&quot;ph ph-plus&quot;&gt;&lt;/i&gt;&lt;span style=&quot;font-family:inherit;font-size:1rem;font-weight:600&quot;&gt;Новий запис&lt;/span&gt;&lt;/button&gt;
 &lt;/div&gt;</code></pre></details>
 </article><article class="ds-comp" id="c-integrationbutton">
-  <header class="ds-comp-head"><h3>IntegrationButton</h3><span class="ds-tag">Дії</span></header>
+  <header class="ds-comp-head"><h3>IntegrationButton</h3><span class="ds-tag">Дії</span><span class="ds-tag post">Після MVP</span></header>
   <div class="ds-comp-grid">
     <div class="ds-stage"><div class="integration-actions w" style="margin:0">
   <button class="integration-btn mvs"><i class="ph ph-database"></i> Дані МВС</button>
@@ -991,7 +994,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   &lt;button class=&quot;chip&quot;&gt;Детейлінг&lt;/button&gt;
 &lt;/div&gt;</code></pre></details>
 </article><article class="ds-comp" id="c-searchbar">
-  <header class="ds-comp-head"><h3>SearchBar</h3><span class="ds-tag">Введення</span></header>
+  <header class="ds-comp-head"><h3>SearchBar</h3><span class="ds-tag">Введення</span><span class="ds-tag post">Після MVP</span></header>
   <div class="ds-comp-grid">
     <div class="ds-stage"><div class="search-bar glass-panel w">
   <i class="ph ph-magnifying-glass"></i>
@@ -1137,7 +1140,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   &lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre></details>
 </article><article class="ds-comp" id="c-servicecard">
-  <header class="ds-comp-head"><h3>ServiceCard</h3><span class="ds-tag">Контент</span></header>
+  <header class="ds-comp-head"><h3>ServiceCard</h3><span class="ds-tag">Контент</span><span class="ds-tag post">Після MVP</span></header>
   <div class="ds-comp-grid">
     <div class="ds-stage"><div class="service-card glass-panel w">
   <div class="service-img" style="background:linear-gradient(135deg,#1e293b,#0f172a)"><div class="service-rating"><i class="ph-fill ph-star"></i> 4.8 (120)</div></div>
@@ -1238,6 +1241,222 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   &lt;div class=&quot;divider&quot;&gt;&lt;span&gt;або вручну&lt;/span&gt;&lt;/div&gt;
   &lt;button class=&quot;btn-primary&quot; style=&quot;margin-top:0&quot;&gt;Зберегти запис&lt;/button&gt;
 &lt;/div&gt;</code></pre></details>
+</article>
+
+<div class="ds-sub" id="mvp-components"><h3>Компоненти MVP (v2.0)</h3><p class=ds-lead-sm>Додано під завдання Jira. Функції поза MVP показуються через SoonChip / SoonButton і ведуть на екран «Що далі».</p></div>
+<article class="ds-comp" id="c-soon">
+  <header class="ds-comp-head"><h3>SoonChip / SoonButton</h3><span class="ds-tag">Роадмап</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="soon-stack">
+  <button type="button" class="soon-btn"><i class="ph ph-file-csv"></i><span>Експорт у CSV</span><em class="soon-chip">Скоро</em></button>
+  <button type="button" class="soon-btn"><i class="ph ph-qr-code"></i><span>QR-код авто з PIN</span><em class="soon-chip next">Далі</em></button>
+</div></div>
+    <div class="ds-guide"><p>Позначка функції, яку заплановано поза MVP. Користувач бачить, що вона буде, але не може нею скористатись.</p>
+<p><code>.soon-btn</code> — приглушена кнопка (пунктирна межа) з <code>.soon-chip</code> праворуч; <code>.soon-chip.next</code> — акцентний варіант «Далі». Клік показує <code>Toast</code> із дією «Що ще буде», що веде на екран роадмапу.</p>
+<p><strong>Споживач передає:</strong> іконку, підпис і атрибут <code>data-soon</code> з назвою майбутньої функції.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;soon-stack&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;soon-btn&quot;&gt;&lt;i class=&quot;ph ph-file-csv&quot;&gt;&lt;/i&gt;&lt;span&gt;Експорт у CSV&lt;/span&gt;&lt;em class=&quot;soon-chip&quot;&gt;Скоро&lt;/em&gt;&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;soon-btn&quot;&gt;&lt;i class=&quot;ph ph-qr-code&quot;&gt;&lt;/i&gt;&lt;span&gt;QR-код авто з PIN&lt;/span&gt;&lt;em class=&quot;soon-chip next&quot;&gt;Далі&lt;/em&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-toast">
+  <header class="ds-comp-head"><h3>Toast</h3><span class="ds-tag">Зворотний зв'язок</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="toast show" style="position:static;transform:none;opacity:1;"><span>Експорт у CSV — буде в наступних версіях</span><button type="button" class="toast-action">Що ще буде</button></div></div>
+    <div class="ds-guide"><p>Короткий статус унизу екрана; зникає сам, може мати одну дію.</p>
+<p><code>#toast</code> з <code>.toast-action</code>; клас <code>.show</code> вмикає появу. У застосунку один екземпляр на сторінку, текст і дію задає функція <code>toast(text, action)</code>.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;toast show&quot; style=&quot;position:static;transform:none;opacity:1;&quot;&gt;&lt;span&gt;Експорт у CSV — буде в наступних версіях&lt;/span&gt;&lt;button type=&quot;button&quot; class=&quot;toast-action&quot;&gt;Що ще буде&lt;/button&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-seg">
+  <header class="ds-comp-head"><h3>SegmentedControl</h3><span class="ds-tag">Введення</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="seg">
+  <button type="button" class="active">Вхід</button>
+  <button type="button">Реєстрація</button>
+</div></div>
+    <div class="ds-guide"><p>Перемикач двох-трьох взаємовиключних режимів в одному контейнері (вхід / реєстрація).</p>
+<p>Контейнер <code>.seg</code>, активна кнопка — <code>.active</code> із заливкою акценту.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;seg&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;active&quot;&gt;Вхід&lt;/button&gt;
+  &lt;button type=&quot;button&quot;&gt;Реєстрація&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-alert">
+  <header class="ds-comp-head"><h3>Alert</h3><span class="ds-tag">Зворотний зв'язок</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="alert warn"><i class="ph-fill ph-warning"></i><span>Пробіг менший за попередній запис — перевірте значення.</span></div>
+<div class="alert ok" style="margin-top:8px"><i class="ph-fill ph-check-circle"></i><span>Лист надіслано. Перевірте пошту.</span></div>
+<div class="alert info" style="margin-top:8px"><i class="ph-fill ph-info"></i><span>Цей екран бачать лише адміністратори.</span></div></div>
+    <div class="ds-guide"><p>Вбудоване повідомлення в потоці сторінки: <code>.alert.warn</code> — попередження (не блокує збереження), <code>.ok</code> — успіх, <code>.info</code> — довідка.</p>
+<p>Використовується для аномалій пробігу, статусів запиту й підказок. Іконка — Phosphor fill, колір береться з токенів стану.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;alert warn&quot;&gt;&lt;i class=&quot;ph-fill ph-warning&quot;&gt;&lt;/i&gt;&lt;span&gt;Пробіг менший за попередній запис — перевірте значення.&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;alert ok&quot; style=&quot;margin-top:8px&quot;&gt;&lt;i class=&quot;ph-fill ph-check-circle&quot;&gt;&lt;/i&gt;&lt;span&gt;Лист надіслано. Перевірте пошту.&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;alert info&quot; style=&quot;margin-top:8px&quot;&gt;&lt;i class=&quot;ph-fill ph-info&quot;&gt;&lt;/i&gt;&lt;span&gt;Цей екран бачать лише адміністратори.&lt;/span&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-statusdot">
+  <header class="ds-comp-head"><h3>StatusDot + PlanItem</h3><span class="ds-tag">Дані</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="plan-item glass-panel yellow">
+  <div class="plan-top">
+    <i class="status-dot yellow"></i>
+    <div class="icon-box orange"><i class="ph ph-drop"></i></div>
+    <div class="reminder-info"><h4>Заміна моторної оливи</h4><p>Через 800 км</p></div>
+    <span class="status-badge warning">У вікні ТО</span>
+  </div>
+  <div class="plan-meta">
+    <span><i class="ph ph-arrows-clockwise"></i> Інтервал: 10 000 км / 12 місяців</span>
+    <span><i class="ph ph-clock-counter-clockwise"></i> Востаннє: 12 бер 2026</span>
+  </div>
+  <div class="plan-actions">
+    <button type="button" class="btn-ghost sm"><i class="ph ph-pencil-simple"></i> Змінити</button>
+    <button type="button" class="btn-ghost sm"><i class="ph ph-wrench"></i> Створити запит</button>
+  </div>
+</div>
+<div class="legend" style="margin-top:12px">
+  <span><i class="status-dot green"></i> Робота далеко</span>
+  <span><i class="status-dot yellow"></i> У вікні ТО</span>
+  <span><i class="status-dot red"></i> Прострочена</span>
+</div></div>
+    <div class="ds-guide"><p>Елемент плану ТО. Статус обчислюється з пробігу та дати: <strong>зелений</strong> — далеко, <strong>жовтий</strong> — у вікні, <strong>червоний</strong> — прострочено.</p>
+<p><code>.plan-item.{green|yellow|red}</code> фарбує ліву межу; <code>.status-dot</code> дублює стан (колір не єдиний носій — є ще текст бейджа). Дії «Змінити» й «Створити запит» — <code>.btn-ghost.sm</code>.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;plan-item glass-panel yellow&quot;&gt;
+  &lt;div class=&quot;plan-top&quot;&gt;
+    &lt;i class=&quot;status-dot yellow&quot;&gt;&lt;/i&gt;
+    &lt;div class=&quot;icon-box orange&quot;&gt;&lt;i class=&quot;ph ph-drop&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+    &lt;div class=&quot;reminder-info&quot;&gt;&lt;h4&gt;Заміна моторної оливи&lt;/h4&gt;&lt;p&gt;Через 800 км&lt;/p&gt;&lt;/div&gt;
+    &lt;span class=&quot;status-badge warning&quot;&gt;У вікні ТО&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;plan-meta&quot;&gt;
+    &lt;span&gt;&lt;i class=&quot;ph ph-arrows-clockwise&quot;&gt;&lt;/i&gt; Інтервал: 10 000 км / 12 місяців&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;ph ph-clock-counter-clockwise&quot;&gt;&lt;/i&gt; Востаннє: 12 бер 2026&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;plan-actions&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn-ghost sm&quot;&gt;&lt;i class=&quot;ph ph-pencil-simple&quot;&gt;&lt;/i&gt; Змінити&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn-ghost sm&quot;&gt;&lt;i class=&quot;ph ph-wrench&quot;&gt;&lt;/i&gt; Створити запит&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;legend&quot; style=&quot;margin-top:12px&quot;&gt;
+  &lt;span&gt;&lt;i class=&quot;status-dot green&quot;&gt;&lt;/i&gt; Робота далеко&lt;/span&gt;
+  &lt;span&gt;&lt;i class=&quot;status-dot yellow&quot;&gt;&lt;/i&gt; У вікні ТО&lt;/span&gt;
+  &lt;span&gt;&lt;i class=&quot;status-dot red&quot;&gt;&lt;/i&gt; Прострочена&lt;/span&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-author">
+  <header class="ds-comp-head"><h3>AuthorBadge</h3><span class="ds-tag">Дані</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><span class="author-badge"><i class="ph-fill ph-user"></i> Я</span>
+<span class="author-badge sto"><i class="ph-fill ph-wrench"></i> СТО «АвтоДок»</span></div>
+    <div class="ds-guide"><p>Показує, хто додав запис у щоденнику: власник чи СТО. Записи від СТО створюються автоматично після закриття запиту на ремонт.</p>
+<p><code>.author-badge</code> / <code>.author-badge.sto</code> (акцентний варіант).</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;span class=&quot;author-badge&quot;&gt;&lt;i class=&quot;ph-fill ph-user&quot;&gt;&lt;/i&gt; Я&lt;/span&gt;
+&lt;span class=&quot;author-badge sto&quot;&gt;&lt;i class=&quot;ph-fill ph-wrench&quot;&gt;&lt;/i&gt; СТО «АвтоДок»&lt;/span&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-stepper">
+  <header class="ds-comp-head"><h3>Stepper + RequestCard</h3><span class="ds-tag">Навігація</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="req-card glass-panel">
+  <div class="req-head"><h4>Гальмівні колодки</h4><span class="status-badge warning">Відповідь СТО</span></div>
+  <p class="req-sub">Golf VII • 14 жов 2026 • СТО «АвтоДок»</p>
+  <div class="mini-steps"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+<div class="stepper" style="margin-top:16px">
+  <div class="step done"><div class="dot"><i class="ph-bold ph-check"></i></div><span>Відкрито</span></div>
+  <div class="step current"><div class="dot">2</div><span>Відповідь</span></div>
+  <div class="step"><div class="dot">3</div><span>Погоджено</span></div>
+  <div class="step"><div class="dot">4</div><span>Виконано</span></div>
+  <div class="step"><div class="dot">5</div><span>Вирішено</span></div>
+</div></div>
+    <div class="ds-guide"><p>Життєвий цикл запиту на ремонт: відкрито → відповідь СТО → погоджено → виконано → вирішено. Закрити запит можна на будь-якому кроці — пропущені кроки стають <code>.skipped</code>.</p>
+<p><code>.req-card</code> + <code>.mini-steps</code> — компактно у списку; <code>.stepper</code> з <code>.step.{done|current|skipped}</code> — на екрані запиту.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;req-card glass-panel&quot;&gt;
+  &lt;div class=&quot;req-head&quot;&gt;&lt;h4&gt;Гальмівні колодки&lt;/h4&gt;&lt;span class=&quot;status-badge warning&quot;&gt;Відповідь СТО&lt;/span&gt;&lt;/div&gt;
+  &lt;p class=&quot;req-sub&quot;&gt;Golf VII • 14 жов 2026 • СТО «АвтоДок»&lt;/p&gt;
+  &lt;div class=&quot;mini-steps&quot;&gt;&lt;i class=&quot;on&quot;&gt;&lt;/i&gt;&lt;i class=&quot;on&quot;&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;stepper&quot; style=&quot;margin-top:16px&quot;&gt;
+  &lt;div class=&quot;step done&quot;&gt;&lt;div class=&quot;dot&quot;&gt;&lt;i class=&quot;ph-bold ph-check&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;span&gt;Відкрито&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;step current&quot;&gt;&lt;div class=&quot;dot&quot;&gt;2&lt;/div&gt;&lt;span&gt;Відповідь&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;step&quot;&gt;&lt;div class=&quot;dot&quot;&gt;3&lt;/div&gt;&lt;span&gt;Погоджено&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;step&quot;&gt;&lt;div class=&quot;dot&quot;&gt;4&lt;/div&gt;&lt;span&gt;Виконано&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;step&quot;&gt;&lt;div class=&quot;dot&quot;&gt;5&lt;/div&gt;&lt;span&gt;Вирішено&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-photo">
+  <header class="ds-comp-head"><h3>PhotoSlot</h3><span class="ds-tag">Введення</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="photo-grid">
+  <label class="photo-slot"><i class="ph ph-gauge"></i><span>Одометр</span></label>
+  <label class="photo-slot"><i class="ph ph-wrench"></i><span>Стара деталь</span></label>
+  <label class="photo-slot filled"><i class="ph ph-package"></i><span>Нова деталь</span></label>
+</div></div>
+    <div class="ds-guide"><p>Три обов'язкові фото фотозвіту СТО: одометр, стара й нова деталь. Слот із фото отримує <code>.filled</code> і показує зображення як фон.</p>
+<p>Сітка <code>.photo-grid</code> (3 колонки), слот <code>.photo-slot</code> — це <code>label</code> з прихованим <code>input[type=file]</code>.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;photo-grid&quot;&gt;
+  &lt;label class=&quot;photo-slot&quot;&gt;&lt;i class=&quot;ph ph-gauge&quot;&gt;&lt;/i&gt;&lt;span&gt;Одометр&lt;/span&gt;&lt;/label&gt;
+  &lt;label class=&quot;photo-slot&quot;&gt;&lt;i class=&quot;ph ph-wrench&quot;&gt;&lt;/i&gt;&lt;span&gt;Стара деталь&lt;/span&gt;&lt;/label&gt;
+  &lt;label class=&quot;photo-slot filled&quot;&gt;&lt;i class=&quot;ph ph-package&quot;&gt;&lt;/i&gt;&lt;span&gt;Нова деталь&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-radiocard">
+  <header class="ds-comp-head"><h3>RadioCard + LinkField</h3><span class="ds-tag">Введення</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="form-row">
+  <label class="radio-card"><input type="radio" name="ds-vis" checked><span><i class="ph ph-notebook"></i> Усю історію</span></label>
+  <label class="radio-card"><input type="radio" name="ds-vis"><span><i class="ph ph-eye-slash"></i> Нічого</span></label>
+</div>
+<div class="link-field" style="margin-top:12px"><input type="text" readonly value="https://autosync.app/r/golf-7k3x"><button type="button" class="btn-ghost sm"><i class="ph ph-copy"></i> Копіювати</button></div></div>
+    <div class="ds-guide"><p><code>.radio-card</code> — вибір із двох-трьох варіантів великими картками (видимість історії для СТО). <code>.link-field</code> — поле для посилання лише для читання з кнопкою копіювання.</p>
+<p>СТО відкриває запит за посиланням без акаунта.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;form-row&quot;&gt;
+  &lt;label class=&quot;radio-card&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ds-vis&quot; checked&gt;&lt;span&gt;&lt;i class=&quot;ph ph-notebook&quot;&gt;&lt;/i&gt; Усю історію&lt;/span&gt;&lt;/label&gt;
+  &lt;label class=&quot;radio-card&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ds-vis&quot;&gt;&lt;span&gt;&lt;i class=&quot;ph ph-eye-slash&quot;&gt;&lt;/i&gt; Нічого&lt;/span&gt;&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class=&quot;link-field&quot; style=&quot;margin-top:12px&quot;&gt;&lt;input type=&quot;text&quot; readonly value=&quot;https://autosync.app/r/golf-7k3x&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;btn-ghost sm&quot;&gt;&lt;i class=&quot;ph ph-copy&quot;&gt;&lt;/i&gt; Копіювати&lt;/button&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-mileage">
+  <header class="ds-comp-head"><h3>MileageCard</h3><span class="ds-tag">Дані</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="mileage-card glass-panel">
+  <div class="mileage-top">
+    <div><div class="stat-label" style="margin:0 0 4px;">Поточний пробіг</div><div class="mileage-value">145 200 км</div></div>
+    <button type="button" class="btn-ghost"><i class="ph ph-gauge"></i> Оновити</button>
+  </div>
+  <form class="mileage-form" onsubmit="return false">
+    <div class="mileage-row"><input type="number" placeholder="Новий пробіг, км"><button type="submit" class="btn-primary inline">Зберегти</button></div>
+    <div class="alert warn"><i class="ph-fill ph-warning"></i><span>Стрибок понад 20 000 км — перевірте значення.</span></div>
+  </form>
+</div></div>
+    <div class="ds-guide"><p>Швидке оновлення пробігу з дашборда. Аномалії (менше за поточний, великий стрибок) не блокують збереження, а лише показують <code>Alert.warn</code>.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;mileage-card glass-panel&quot;&gt;
+  &lt;div class=&quot;mileage-top&quot;&gt;
+    &lt;div&gt;&lt;div class=&quot;stat-label&quot; style=&quot;margin:0 0 4px;&quot;&gt;Поточний пробіг&lt;/div&gt;&lt;div class=&quot;mileage-value&quot;&gt;145 200 км&lt;/div&gt;&lt;/div&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn-ghost&quot;&gt;&lt;i class=&quot;ph ph-gauge&quot;&gt;&lt;/i&gt; Оновити&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;form class=&quot;mileage-form&quot; onsubmit=&quot;return false&quot;&gt;
+    &lt;div class=&quot;mileage-row&quot;&gt;&lt;input type=&quot;number&quot; placeholder=&quot;Новий пробіг, км&quot;&gt;&lt;button type=&quot;submit&quot; class=&quot;btn-primary inline&quot;&gt;Зберегти&lt;/button&gt;&lt;/div&gt;
+    &lt;div class=&quot;alert warn&quot;&gt;&lt;i class=&quot;ph-fill ph-warning&quot;&gt;&lt;/i&gt;&lt;span&gt;Стрибок понад 20 000 км — перевірте значення.&lt;/span&gt;&lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-table">
+  <header class="ds-comp-head"><h3>Table</h3><span class="ds-tag">Дані</span><span class="ds-tag mvp">MVP</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="glass-panel table-wrap"><table class="table">
+  <thead><tr><th>Email</th><th>Авто</th><th>Запити</th><th>Статус</th></tr></thead>
+  <tbody>
+    <tr><td>owner@example.com</td><td>2</td><td>3</td><td><span class="status-badge good">Активний</span></td></tr>
+    <tr class="blocked"><td>spam@example.com</td><td>0</td><td>0</td><td><span class="status-badge danger">Заблокований</span></td></tr>
+  </tbody>
+</table></div></div>
+    <div class="ds-guide"><p>Таблиця адмін-екрана: користувачі, авто, запити. Заблокований рядок — <code>tr.blocked</code> (приглушений). На вузькому екрані контейнер <code>.table-wrap</code> скролиться по горизонталі.</p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;glass-panel table-wrap&quot;&gt;&lt;table class=&quot;table&quot;&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Авто&lt;/th&gt;&lt;th&gt;Запити&lt;/th&gt;&lt;th&gt;Статус&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;owner@example.com&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;status-badge good&quot;&gt;Активний&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr class=&quot;blocked&quot;&gt;&lt;td&gt;spam@example.com&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;status-badge danger&quot;&gt;Заблокований&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;</code></pre></details>
 </article>
     </section>
 

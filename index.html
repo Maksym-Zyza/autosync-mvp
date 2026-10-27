@@ -13,7 +13,7 @@
     <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
     <link rel="icon" href="favicon.ico?v=2" sizes="48x48">
     <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
-    <link rel="stylesheet" href="styles.css?v=1.9">
+    <link rel="stylesheet" href="styles.css?v=2.0">
     <!-- Apply saved theme before first paint (avoids a dark flash) -->
     <script>
         (function () {
@@ -30,7 +30,7 @@
     </script>
 </head>
 <body>
-    <div class="app-container">
+    <div class="app-container" id="app" data-view="dashboard-view">
         <!-- Header -->
         <header class="app-header glass">
             <div class="logo">
@@ -42,444 +42,334 @@
                     <i class="ph-fill ph-moon"></i>
                     <i class="ph-fill ph-sun"></i>
                 </button>
-                <div class="user-avatar" id="header-profile-btn" style="cursor: pointer;">
-                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Taras" alt="User Avatar">
+                <div class="user-avatar" id="header-profile-btn" role="button" tabindex="0" aria-label="Профіль" style="cursor: pointer;">
+                    <span class="avatar-initial" id="header-avatar">Т</span>
                 </div>
             </div>
         </header>
 
         <!-- Main Content Area -->
         <main class="content-area">
-            
-            <!-- Login View -->
+
+            <!-- ============ AUTH (AUTO-7: email, вхід, відновлення пароля) ============ -->
             <section id="login-view" class="view auth-screen">
                 <div class="auth-hero">
                     <div class="logo-large">
                         <i class="ph-fill ph-steering-wheel"></i>
                         <h1>AutoSync</h1>
                     </div>
-                    <p>Інтелект вашого авто</p>
+                    <p>Щоденник і план ТО вашого авто</p>
                 </div>
-                <div class="auth-actions">
-                    <button class="btn-primary auth-btn" id="login-diia-btn" style="background: #000; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--accent-primary);">
-                        <span style="font-family: system-ui, -apple-system, sans-serif; font-weight: 700; letter-spacing: -0.5px; font-size: 1rem;">Дія</span>
-                        Увійти через Дія
-                    </button>
-                    <button class="btn-outline auth-btn" id="login-google-btn" style="width: 100%; margin-top: 16px; color: var(--text-primary); display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--fill-05); border: 1px solid var(--glass-border);">
-                        <i class="ph ph-google-logo" style="font-size: 1.2rem;"></i>
-                        Увійти через Google
-                    </button>
-                    <p class="auth-terms">Авторизуючись, ви погоджуєтесь з політикою конфіденційності.</p>
+                <div class="auth-actions auth-card glass-panel">
+                    <div class="seg" id="auth-tabs" role="tablist">
+                        <button type="button" class="active" data-auth="login">Вхід</button>
+                        <button type="button" data-auth="register">Реєстрація</button>
+                    </div>
+
+                    <form class="auth-form" id="form-login" novalidate>
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" value="taras@example.com">
+                            <span class="field-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-pass">Пароль</label>
+                            <input type="password" id="login-pass" placeholder="Мінімум 8 символів" autocomplete="current-password" value="password123">
+                            <span class="field-error"></span>
+                        </div>
+                        <button type="submit" class="btn-primary">Увійти</button>
+                        <p class="auth-switch"><button type="button" class="link-btn" data-auth="recover">Забули пароль?</button></p>
+                    </form>
+
+                    <form class="auth-form" id="form-register" novalidate hidden>
+                        <div class="form-group">
+                            <label for="reg-email">Email</label>
+                            <input type="email" id="reg-email" placeholder="you@example.com" autocomplete="email">
+                            <span class="field-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-pass">Пароль</label>
+                            <input type="password" id="reg-pass" placeholder="Мінімум 8 символів" autocomplete="new-password">
+                            <span class="field-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-pass2">Повторіть пароль</label>
+                            <input type="password" id="reg-pass2" placeholder="Ще раз" autocomplete="new-password">
+                            <span class="field-error"></span>
+                        </div>
+                        <button type="submit" class="btn-primary">Створити акаунт</button>
+                    </form>
+
+                    <form class="auth-form" id="form-recover" novalidate hidden>
+                        <p class="form-hint" style="margin-bottom: 12px;">Вкажіть email — ми надішлемо посилання для відновлення пароля.</p>
+                        <div class="form-group">
+                            <label for="rec-email">Email</label>
+                            <input type="email" id="rec-email" placeholder="you@example.com" autocomplete="email">
+                            <span class="field-error"></span>
+                        </div>
+                        <div class="alert ok" id="recover-ok" hidden><i class="ph-fill ph-check-circle"></i><span>Лист надіслано. Перевірте пошту.</span></div>
+                        <button type="submit" class="btn-primary">Надіслати лист</button>
+                        <p class="auth-switch"><button type="button" class="link-btn" data-auth="login">← Назад до входу</button></p>
+                    </form>
+
+                    <div class="divider"><span>скоро</span></div>
+                    <div class="soon-stack">
+                        <button type="button" class="soon-btn" data-soon="Реєстрація за номером телефону"><i class="ph ph-device-mobile"></i><span>Увійти за номером телефону</span><em class="soon-chip">Скоро</em></button>
+                    </div>
+                    <p class="auth-terms">Реєструючись, ви погоджуєтесь з політикою конфіденційності.</p>
                 </div>
             </section>
 
-            <!-- Dashboard View -->
+            <!-- ============ ГОЛОВНА (AUTO-7 п.3, AUTO-9) ============ -->
             <section id="dashboard-view" class="view active">
-                <div class="car-selector glass-panel">
+                <div class="car-selector glass-panel" id="car-selector" role="button" tabindex="0" aria-label="Обрати авто">
                     <div class="car-info">
-                        <h2>Volkswagen Golf VII</h2>
-                        <p>1.4 TSI • 145 000 км</p>
+                        <h2 id="dash-car-name">—</h2>
+                        <p id="dash-car-meta">—</p>
                     </div>
-                    <button class="icon-btn"><i class="ph ph-caret-down"></i></button>
+                    <span class="icon-btn"><i class="ph ph-caret-down"></i></span>
                 </div>
 
-                <!-- Health Score Widget -->
-                <div class="health-widget glass-panel">
-                    <div class="health-header">
-                        <h3>Індекс здоров'я</h3>
-                        <span class="status-badge warning">Потребує уваги</span>
-                    </div>
-                    <div class="health-circle">
-                        <svg viewBox="0 0 36 36" class="circular-chart warning">
-                            <path class="circle-bg"
-                                d="M18 2.0845
-                                a 15.9155 15.9155 0 0 1 0 31.831
-                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                            />
-                            <path class="circle" id="health-circle-path"
-                                stroke-dasharray="0, 100"
-                                d="M18 2.0845
-                                a 15.9155 15.9155 0 0 1 0 31.831
-                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                            />
-                            <text x="18" y="20.35" class="percentage">75%</text>
-                        </svg>
-                    </div>
-                    <p class="health-desc">Знос гальмівних колодок наближається до критичного рівня.</p>
-                </div>
-
-                <!-- Upcoming Reminders -->
-                <div class="section-header">
-                    <h3>Найближчі події</h3>
-                    <div>
-                        <button id="enable-notifications-btn" class="icon-btn" title="Увімкнути сповіщення" style="margin-right: 8px;"><i class="ph ph-bell-ringing"></i></button>
-                        <button class="text-btn">Всі</button>
-                    </div>
-                </div>
-                
-                <div class="reminders-list" id="reminders-container">
-                    <!-- Reminders will be injected here by app.js -->
-                </div>
-            </section>
-
-            <!-- History View -->
-            <section id="history-view" class="view">
-                <div class="history-aside">
-                <div class="history-header glass-panel">
-                    <h2>Історія обслуговування</h2>
-                    <p>Верифікований цифровий слід</p>
-                    <button id="share-btn-action" class="share-btn"><i class="ph ph-share-network"></i> Поділитись для продажу</button>
-                </div>
-
-                <div class="integration-actions">
-                    <button class="integration-btn mvs"><i class="ph ph-database"></i> Дані МВС</button>
-                    <button class="integration-btn carvertical"><i class="ph ph-car"></i> Звіт CarVertical</button>
-                </div>
-                </div>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content glass-panel">
-                            <div class="timeline-meta">
-                                <div><span class="date">12 Травня 2026</span> <span class="mileage">• 142 500 км</span></div>
-                                <span class="trust-badge verified" title="Верифіковано в AutoSync"><i class="ph-fill ph-check-circle"></i></span>
+                <div class="dash-grid">
+                    <div class="dash-col">
+                        <!-- Індекс стану -->
+                        <div class="health-widget glass-panel">
+                            <div class="health-header">
+                                <h3>Індекс стану</h3>
+                                <span class="status-badge warning" id="health-badge">—</span>
                             </div>
-                            <h4 class="title">Заміна моторного мастила та фільтрів</h4>
-                            <p class="desc">СТО "АвтоДок". Мастило Motul 5W-30, фільтри Bosch.</p>
-                            <div class="price-row">
-                                <div class="price">₴ 3,200</div>
-                                <div class="doc-attachment"><i class="ph ph-file-pdf"></i> 1 акт</div>
+                            <div class="health-circle">
+                                <svg viewBox="0 0 36 36" class="circular-chart warning" id="health-chart">
+                                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <path class="circle" id="health-circle-path" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                    <text x="18" y="20.35" class="percentage" id="health-pct">0%</text>
+                                </svg>
                             </div>
+                            <p class="health-desc" id="health-desc">—</p>
+                            <p class="form-hint" style="text-align:center; margin-top:8px;">Рахується за станом робіт у <button type="button" class="link-btn" data-goto="plan-view">плані ТО</button></p>
                         </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content glass-panel">
-                            <div class="timeline-meta">
-                                <div><span class="date">05 Березня 2026</span> <span class="mileage">• 138 000 км</span></div>
-                                <span class="trust-badge verified" title="Верифіковано в AutoSync"><i class="ph-fill ph-check-circle"></i></span>
-                            </div>
-                            <h4 class="title">Діагностика ходової</h4>
-                            <p class="desc">Офіційний дилер. Рекомендовано заміну стійок стабілізатора.</p>
-                            <div class="price-row">
-                                <div class="price">₴ 800</div>
-                                <div class="doc-attachment"><i class="ph ph-file-text"></i> 1 висновок</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content glass-panel">
-                            <div class="timeline-meta">
-                                <div><span class="date">15 Листопада 2025</span> <span class="mileage">• 134 200 км</span></div>
-                                <span class="trust-badge manual" title="Додано вручну"><i class="ph-fill ph-user"></i></span>
-                            </div>
-                            <h4 class="title">Заміна гальмівних колодок</h4>
-                            <p class="desc">СТО "Швидкість". Передні та задні колодки Brembo.</p>
-                            <div class="price-row">
-                                <div class="price">₴ 4,500</div>
-                                <div class="doc-attachment"><i class="ph ph-receipt"></i> 2 чеки</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content glass-panel">
-                            <div class="timeline-meta">
-                                <div><span class="date">10 Вересня 2025</span> <span class="mileage">• 130 000 км</span></div>
-                                <span class="trust-badge ai" title="Оцифровано через ШІ"><i class="ph-fill ph-magic-wand"></i></span>
-                            </div>
-                            <h4 class="title">Заміна комплекту ГРМ</h4>
-                            <p class="desc">СТО "Garage". Комплект Gates + помпа.</p>
-                            <div class="price-row">
-                                <div class="price">₴ 12,500</div>
-                                <div class="doc-attachment"><i class="ph ph-file-pdf"></i> 2 акти</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content glass-panel">
-                            <div class="timeline-meta">
-                                <div><span class="date">22 Серпня 2025</span> <span class="mileage">• 128 500 км</span></div>
-                                <span class="trust-badge imported" title="Імпортовано з МВС"><i class="ph-fill ph-database"></i></span>
-                            </div>
-                            <h4 class="title">Новий акумулятор</h4>
-                            <p class="desc">Магазин "АвтоСвіт". Varta Silver Dynamic 77Ah.</p>
-                            <div class="price-row">
-                                <div class="price">₴ 4,100</div>
-                                <div class="docs-group">
-                                    <div class="doc-attachment"><i class="ph ph-receipt"></i> 1 чек</div>
-                                    <div class="doc-attachment warranty"><i class="ph-fill ph-shield-check"></i> Гарантія</div>
+
+                        <!-- Швидке оновлення пробігу -->
+                        <div class="mileage-card glass-panel">
+                            <div class="mileage-top">
+                                <div>
+                                    <div class="stat-label" style="margin:0 0 4px;">Поточний пробіг</div>
+                                    <div class="mileage-value" id="dash-mileage">—</div>
                                 </div>
+                                <button type="button" class="btn-ghost" id="mileage-toggle"><i class="ph ph-gauge"></i> Оновити</button>
                             </div>
+                            <form class="mileage-form" id="mileage-form" hidden novalidate>
+                                <div class="mileage-row">
+                                    <input type="number" id="mileage-input" inputmode="numeric" min="0" placeholder="Новий пробіг, км">
+                                    <button type="submit" class="btn-primary inline" id="mileage-save">Зберегти</button>
+                                </div>
+                                <div class="alert warn" id="mileage-warning" hidden><i class="ph-fill ph-warning"></i><span></span></div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="dash-col">
+                        <!-- Найближчі роботи з плану ТО -->
+                        <div class="section-header">
+                            <h3>Найближчі роботи</h3>
+                            <div><button class="text-btn" data-goto="plan-view">Весь план</button></div>
+                        </div>
+                        <div class="reminders-list" id="dash-works"></div>
+
+                        <!-- Активні запити -->
+                        <div id="dash-request"></div>
+
+                        <!-- Канали нагадувань -->
+                        <div class="info-strip glass-panel">
+                            <i class="ph-fill ph-bell-ringing"></i>
+                            <span>Нагадування приходять у кабінет і на email.</span>
+                            <em class="soon-chip" data-soon="Push-сповіщення" role="button" tabindex="0">Push — скоро</em>
+                        </div>
+
+                        <!-- Тизер: що далі -->
+                        <div class="teaser glass-panel" data-goto="roadmap-view" role="button" tabindex="0">
+                            <div class="icon-box purple"><i class="ph-fill ph-rocket-launch"></i></div>
+                            <div class="reminder-info">
+                                <h4>Що буде далі</h4>
+                                <p>Дані авто за VIN з реєстру МВС, QR-код з PIN, експорт історії та інше.</p>
+                            </div>
+                            <i class="ph ph-caret-right" style="color: var(--text-muted);"></i>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Shared View (For Buyers) -->
-            <section id="shared-view" class="view">
+            <!-- ============ ЩОДЕННИК (AUTO-7 п.4–5) ============ -->
+            <section id="diary-view" class="view">
+                <div class="history-aside">
+                    <div class="history-header glass-panel">
+                        <h2>Щоденник обслуговування</h2>
+                        <p>Усі роботи з вашим авто в одному місці</p>
+                        <div class="diary-summary">
+                            <div><strong id="diary-count">0</strong><span>записів</span></div>
+                            <div><strong id="diary-total">₴ 0</strong><span>витрат</span></div>
+                        </div>
+                        <button type="button" class="btn-primary" id="diary-add-btn" style="margin-top: 16px;"><i class="ph ph-plus"></i> Додати запис</button>
+                    </div>
+                    <div class="soon-stack">
+                        <button type="button" class="soon-btn" data-soon="Експорт історії в CSV"><i class="ph ph-file-csv"></i><span>Експорт у CSV</span><em class="soon-chip">Скоро</em></button>
+                        <button type="button" class="soon-btn" data-soon="QR-код авто з PIN-кодом для СТО"><i class="ph ph-qr-code"></i><span>QR-код авто з PIN</span><em class="soon-chip">Скоро</em></button>
+                        <button type="button" class="soon-btn" data-soon="Передача авто покупцю"><i class="ph ph-handshake"></i><span>Передати авто покупцю</span><em class="soon-chip">Скоро</em></button>
+                    </div>
+                </div>
+                <div class="timeline" id="diary-list"></div>
+            </section>
+
+            <!-- ============ ПЛАН ТО (AUTO-9) ============ -->
+            <section id="plan-view" class="view">
+                <div class="history-header glass-panel plan-head">
+                    <div>
+                        <h2>План ТО</h2>
+                        <p>Типові роботи з інтервалами. Змініть інтервал і пріоритет під своє авто.</p>
+                    </div>
+                    <button type="button" class="btn-primary inline" id="plan-add-btn"><i class="ph ph-plus"></i> Додати роботу</button>
+                </div>
+                <div class="legend">
+                    <span><i class="status-dot green"></i> Робота далеко</span>
+                    <span><i class="status-dot yellow"></i> У вікні ТО</span>
+                    <span><i class="status-dot red"></i> Прострочена</span>
+                </div>
+                <div class="plan-list" id="plan-list"></div>
+
+                <div class="profile-section" style="margin-top: 24px;">
+                    <h3>Нагадування</h3>
+                    <div class="settings-list">
+                        <div class="setting-item glass-panel"><div class="setting-info"><i class="ph ph-browser"></i><span>У кабінеті</span></div><span class="status-badge good">Увімкнено</span></div>
+                        <div class="setting-item glass-panel"><div class="setting-info"><i class="ph ph-envelope-simple"></i><span>На email</span></div><div class="toggle active" id="toggle-email" role="switch" aria-checked="true" tabindex="0"></div></div>
+                    </div>
+                    <div class="soon-stack" style="margin-top: 12px;">
+                        <button type="button" class="soon-btn" data-soon="Відкласти нагадування на N днів або км"><i class="ph ph-alarm"></i><span>Відкласти нагадування</span><em class="soon-chip">Скоро</em></button>
+                        <button type="button" class="soon-btn" data-soon="Підписка на план ТО в календарі (ICS)"><i class="ph ph-calendar-plus"></i><span>Додати план у календар</span><em class="soon-chip">Скоро</em></button>
+                        <button type="button" class="soon-btn" data-soon="Push-сповіщення"><i class="ph ph-bell"></i><span>Push-сповіщення</span><em class="soon-chip">Скоро</em></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ ЗАПИТИ НА РЕМОНТ (AUTO-11) ============ -->
+            <section id="requests-view" class="view">
+                <div class="history-header glass-panel plan-head">
+                    <div>
+                        <h2>Запити на ремонт</h2>
+                        <p>Опишіть проблему — СТО відповість за посиланням, без реєстрації.</p>
+                    </div>
+                    <button type="button" class="btn-primary inline" id="req-add-btn"><i class="ph ph-plus"></i> Новий запит</button>
+                </div>
+                <div class="services-chips" id="req-filter">
+                    <button class="chip active" data-filter="active">Активні</button>
+                    <button class="chip" data-filter="archive">Архів</button>
+                </div>
+                <div id="req-list"></div>
+                <div class="soon-stack" style="margin-top: 16px;">
+                    <button type="button" class="soon-btn" data-soon="Запит одразу кільком СТО"><i class="ph ph-users-three"></i><span>Надіслати кільком СТО</span><em class="soon-chip">Скоро</em></button>
+                    <button type="button" class="soon-btn" data-soon="Друга думка від іншої СТО"><i class="ph ph-chat-circle-dots"></i><span>Друга думка</span><em class="soon-chip">Скоро</em></button>
+                    <button type="button" class="soon-btn" data-soon="СТО на мапі з оцінками"><i class="ph ph-map-pin-area"></i><span>СТО на мапі та оцінки</span><em class="soon-chip">Скоро</em></button>
+                </div>
+            </section>
+
+            <!-- Запит: деталі -->
+            <section id="request-view" class="view">
                 <div class="shared-nav">
-                    <button id="back-to-history-btn" class="icon-btn"><i class="ph ph-arrow-left"></i></button>
-                    <span>Опублікована історія</span>
-                    <div style="width: 36px;"></div> <!-- spacer -->
+                    <button class="icon-btn" data-goto="requests-view" aria-label="Назад"><i class="ph ph-arrow-left"></i></button>
+                    <span>Запит на ремонт</span>
+                    <div style="width: 36px;"></div>
                 </div>
-
-                <div class="shared-hero glass-panel">
-                    <div class="verified-badge">
-                        <i class="ph-fill ph-seal-check"></i> Перевірено AutoSync
-                    </div>
-                    <h2 class="shared-title">Volkswagen Golf VII</h2>
-                    <p class="shared-subtitle">1.4 TSI • 2018 рік • 145 000 км</p>
-                    
-                    <div class="shared-stats">
-                        <div class="stat-box">
-                            <div class="stat-value">5</div>
-                            <div class="stat-label">Власників</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-value">12</div>
-                            <div class="stat-label">Записів ТО</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-value">₴ 0</div>
-                            <div class="stat-label">ДТП</div>
-                        </div>
-                    </div>
-
-                    <button class="btn-primary download-btn">
-                        <i class="ph ph-download-simple"></i> Завантажити PDF звіт
-                    </button>
-                </div>
-
-                <div class="shared-info-block">
-                    <h3>Звіт згенеровано:</h3>
-                    <p>09 Серпня 2026, 14:30</p>
-                    <p class="text-muted">Цей звіт містить повну сервісну історію автомобіля, задокументовану власником. Усі прикріплені чеки та акти виконаних робіт включені до PDF файлу.</p>
-                </div>
+                <div id="req-detail"></div>
             </section>
 
-            <!-- Services View -->
-            <section id="services-view" class="view">
-                <div class="services-header">
-                    <div class="search-bar glass-panel">
-                        <i class="ph ph-magnifying-glass"></i>
-                        <input type="text" placeholder="Знайти СТО, мийку...">
-                        <button class="icon-btn"><i class="ph ph-faders"></i></button>
-                    </div>
-                    
-                    <div class="services-chips">
-                        <button class="chip active">Всі</button>
-                        <button class="chip">СТО</button>
-                        <button class="chip">Шиномонтаж</button>
-                        <button class="chip">Мийка</button>
-                        <button class="chip">Детейлінг</button>
-                    </div>
+            <!-- Сторінка СТО за посиланням (без акаунта) -->
+            <section id="sto-view" class="view">
+                <div class="shared-nav">
+                    <button class="icon-btn" id="sto-back" aria-label="Назад"><i class="ph ph-arrow-left"></i></button>
+                    <span>Так бачить СТО</span>
+                    <div style="width: 36px;"></div>
                 </div>
-
-                <div class="services-list">
-                    <!-- Card 1 -->
-                    <div class="service-card glass-panel" data-category="СТО">
-                        <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1625047509168-a7026f36de04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                            <div class="service-rating"><i class="ph-fill ph-star"></i> 4.8 (120)</div>
-                        </div>
-                        <div class="service-info">
-                            <div class="service-meta">
-                                <h3>Bosch Service "АвтоДрайв"</h3>
-                                <span class="distance"><i class="ph-fill ph-map-pin"></i> 1.2 км</span>
-                            </div>
-                            <p class="service-type">СТО • Діагностика • Ремонт</p>
-                            <div class="service-status open"><i class="ph-fill ph-clock"></i> Відчинено до 20:00</div>
-                            <div class="service-actions">
-                                <button class="btn-outline"><i class="ph ph-phone"></i></button>
-                                <button class="btn-primary-sm"><i class="ph ph-navigation-arrow"></i> Прокласти маршрут</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="service-card glass-panel" data-category="Шиномонтаж">
-                        <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                            <div class="service-rating"><i class="ph-fill ph-star"></i> 4.5 (85)</div>
-                        </div>
-                        <div class="service-info">
-                            <div class="service-meta">
-                                <h3>Твоя Шина</h3>
-                                <span class="distance"><i class="ph-fill ph-map-pin"></i> 2.5 км</span>
-                            </div>
-                            <p class="service-type">Шиномонтаж • Зберігання шин</p>
-                            <div class="service-status closed"><i class="ph-fill ph-clock"></i> Зачинено (до 09:00)</div>
-                            <div class="service-actions">
-                                <button class="btn-outline"><i class="ph ph-phone"></i></button>
-                                <button class="btn-primary-sm"><i class="ph ph-navigation-arrow"></i> Прокласти маршрут</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="service-card glass-panel" data-category="Мийка">
-                        <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                            <div class="service-rating"><i class="ph-fill ph-star"></i> 4.9 (210)</div>
-                        </div>
-                        <div class="service-info">
-                            <div class="service-meta">
-                                <h3>AquaClean Premium</h3>
-                                <span class="distance"><i class="ph-fill ph-map-pin"></i> 0.8 км</span>
-                            </div>
-                            <p class="service-type">Мийка • Безконтактна • Ручна</p>
-                            <div class="service-status open"><i class="ph-fill ph-clock"></i> Працює цілодобово</div>
-                            <div class="service-actions">
-                                <button class="btn-outline"><i class="ph ph-phone"></i></button>
-                                <button class="btn-primary-sm"><i class="ph ph-navigation-arrow"></i> Прокласти маршрут</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="service-card glass-panel" data-category="Детейлінг">
-                        <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                            <div class="service-rating"><i class="ph-fill ph-star"></i> 5.0 (42)</div>
-                        </div>
-                        <div class="service-info">
-                            <div class="service-meta">
-                                <h3>Gleam Auto Detailing</h3>
-                                <span class="distance"><i class="ph-fill ph-map-pin"></i> 3.1 км</span>
-                            </div>
-                            <p class="service-type">Детейлінг • Полірування • Кераміка</p>
-                            <div class="service-status open"><i class="ph-fill ph-clock"></i> Відчинено до 19:00</div>
-                            <div class="service-actions">
-                                <button class="btn-outline"><i class="ph ph-phone"></i></button>
-                                <button class="btn-primary-sm"><i class="ph ph-navigation-arrow"></i> Прокласти маршрут</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="sto-page" id="sto-content"></div>
             </section>
 
-            <!-- Profile View -->
+            <!-- ============ ПРОФІЛЬ ============ -->
             <section id="profile-view" class="view">
                 <div class="profile-aside">
-                <div class="profile-hero">
-                    <div class="profile-avatar">
-                        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Taras" alt="User">
+                    <div class="profile-hero">
+                        <div class="profile-avatar"><span class="avatar-initial" id="profile-initial">Т</span></div>
+                        <h2 id="profile-email">taras@example.com</h2>
+                        <span class="status-badge good">Акаунт активний</span>
                     </div>
-                    <h2>Тарас Шевченко</h2>
-                    <span class="profile-badge"><i class="ph-fill ph-check-circle"></i> Верифіковано Дія</span>
-                </div>
-
-                <div class="profile-stats">
-                    <div class="stat-box glass-panel" onclick="alert('Детальна статистика Еко-Рейтингу буде доступна в наступних версіях додатку.')">
-                        <div class="stat-value">98%</div>
-                        <div class="stat-label">Еко-Рейтинг</div>
+                    <div class="profile-stats">
+                        <div class="stat-box glass-panel"><div class="stat-value" id="stat-cars">0</div><div class="stat-label">Авто</div></div>
+                        <div class="stat-box glass-panel"><div class="stat-value" id="stat-entries">0</div><div class="stat-label">Записів</div></div>
                     </div>
-                    <div class="stat-box glass-panel" onclick="alert('Детальна статистика витрат буде доступна в наступних версіях додатку.')">
-                        <div class="stat-value">₴ 12.4k</div>
-                        <div class="stat-label">Витрати/рік</div>
-                    </div>
-                </div>
                 </div>
 
                 <div class="profile-main">
-                <div class="profile-section">
-                    <h3>Мій Гараж</h3>
-                    <div class="garage-list">
-                        <div class="car-card glass-panel active-car">
-                            <i class="ph-fill ph-car"></i>
-                            <div class="car-info">
-                                <h4>Volkswagen Golf VII</h4>
-                                <p>1.4 TSI • AI2026AX</p>
-                            </div>
-                            <i class="ph-fill ph-check-circle" style="color: var(--accent-green)"></i>
-                        </div>
-                        <button class="add-car-btn glass-panel">
-                            <i class="ph ph-plus"></i> Додати авто
-                        </button>
+                    <div class="profile-section">
+                        <h3>Мій гараж</h3>
+                        <div class="garage-list" id="profile-cars"></div>
+                        <button class="add-car-btn" id="profile-add-car"><i class="ph ph-plus"></i> Додати авто</button>
                     </div>
-                </div>
 
-                <div class="profile-section">
-                    <h3>Налаштування</h3>
-                    <div class="settings-list">
-                        <div class="setting-item glass-panel">
-                            <div class="setting-info">
-                                <i class="ph ph-bell"></i>
-                                <span>Push-сповіщення</span>
-                            </div>
-                            <div class="toggle active"></div>
-                        </div>
-                        <div class="setting-item glass-panel">
-                            <div class="setting-info">
-                                <i class="ph ph-shield-check"></i>
-                                <span>Синхронізація з МВС</span>
-                            </div>
-                            <div class="toggle active"></div>
+                    <div class="profile-section">
+                        <h3>Налаштування</h3>
+                        <div class="settings-list">
+                            <div class="setting-item glass-panel"><div class="setting-info"><i class="ph ph-envelope-simple"></i><span>Нагадування на email</span></div><div class="toggle active" id="toggle-email-2" role="switch" aria-checked="true" tabindex="0"></div></div>
+                            <button type="button" class="soon-btn" data-soon="Налаштування сповіщень"><i class="ph ph-sliders-horizontal"></i><span>Тонке налаштування сповіщень</span><em class="soon-chip">Скоро</em></button>
+                            <button type="button" class="soon-btn" data-soon="Експорт історії в PDF"><i class="ph ph-file-pdf"></i><span>Експорт історії в PDF</span><em class="soon-chip">Скоро</em></button>
                         </div>
                     </div>
-                </div>
-                
-                <button class="btn-outline logout-btn" id="logout-btn" style="margin-top: 24px; color: var(--accent-red); border-color: var(--accent-red); width: 100%; gap: 8px;">
-                    <i class="ph ph-sign-out"></i> Вийти з акаунту
-                </button>
+
+                    <div class="profile-section">
+                        <h3>Ще</h3>
+                        <div class="settings-list">
+                            <button type="button" class="menu-row glass-panel" data-goto="roadmap-view"><i class="ph ph-rocket-launch"></i><span>Що буде далі</span><i class="ph ph-caret-right"></i></button>
+                            <button type="button" class="menu-row glass-panel" data-goto="admin-view"><i class="ph ph-shield-star"></i><span>Адмін-панель <small>(лише для адмінів)</small></span><i class="ph ph-caret-right"></i></button>
+                        </div>
+                    </div>
+
+                    <button class="btn-outline logout-btn" id="logout-btn" style="margin-top: 24px; color: var(--accent-red); border-color: var(--accent-red); width: 100%; gap: 8px;">
+                        <i class="ph ph-sign-out"></i> Вийти з акаунту
+                    </button>
                 </div>
             </section>
 
-            <!-- Scanner View -->
-            <section id="scanner-view" class="view">
-                <div class="scanner-hero" style="text-align: center; margin-bottom: 24px;">
-                    <i class="ph-fill ph-scan" style="font-size: 3rem; color: var(--accent-primary); text-shadow: 0 0 15px var(--accent-glow);"></i>
-                    <h2 style="font-size: 1.5rem; margin-top: 12px; margin-bottom: 4px;">Перевірка Авто</h2>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Перевірте історію авто перед купівлею по базах МВС та за допомогою ШІ.</p>
+            <!-- ============ АДМІНКА (AUTO-16) ============ -->
+            <section id="admin-view" class="view">
+                <div class="shared-nav">
+                    <button class="icon-btn" data-goto="profile-view" aria-label="Назад"><i class="ph ph-arrow-left"></i></button>
+                    <span>Адмін-панель</span>
+                    <div style="width: 36px;"></div>
                 </div>
+                <div class="alert info" style="margin-bottom: 16px;"><i class="ph-fill ph-info"></i><span>Цей екран бачать лише адміністратори платформи.</span></div>
+                <div class="stat-grid">
+                    <div class="stat-box glass-panel"><div class="stat-value" id="adm-users">0</div><div class="stat-label">Користувачів</div></div>
+                    <div class="stat-box glass-panel"><div class="stat-value" id="adm-cars">0</div><div class="stat-label">Авто</div></div>
+                    <div class="stat-box glass-panel"><div class="stat-value" id="adm-reqs">0</div><div class="stat-label">Запитів на ремонт</div></div>
+                </div>
+                <div class="profile-section" style="margin-top: 24px;">
+                    <h3>Користувачі</h3>
+                    <div class="glass-panel table-wrap"><table class="table" id="adm-table"></table></div>
+                </div>
+                <div class="soon-stack">
+                    <button type="button" class="soon-btn" data-soon="Модерація скарг на оцінки СТО"><i class="ph ph-flag"></i><span>Модерація скарг на оцінки</span><em class="soon-chip">Скоро</em></button>
+                    <button type="button" class="soon-btn" data-soon="Редагування списку робіт в інтерфейсі"><i class="ph ph-list-plus"></i><span>Редагування списку робіт</span><em class="soon-chip">Скоро</em></button>
+                </div>
+            </section>
 
-                <div class="scanner-input-group glass-panel" style="display: flex; align-items: stretch; gap: 8px; margin-bottom: 24px; padding: 8px;">
-                    <input type="text" id="scanner-input" placeholder="Введіть VIN або Держ. номер..." style="flex: 1; background: var(--fill-05); border: 1px solid var(--glass-border); border-radius: 12px; padding: 12px 16px; color: var(--text-primary); font-size: 1rem; outline: none; margin: 0;">
-                    <button class="btn-primary" id="scanner-btn" style="margin: 0; width: auto; display: flex; align-items: center; justify-content: center; border-radius: 12px; padding: 0 20px; font-weight: 600;">
-                        <i class="ph ph-magnifying-glass" style="font-size: 1.2rem;"></i>
-                    </button>
+            <!-- ============ ЩО БУДЕ ДАЛІ ============ -->
+            <section id="roadmap-view" class="view">
+                <div class="history-header glass-panel">
+                    <h2>Що буде далі</h2>
+                    <p>AutoSync розвивається. Тут усе, що ми плануємо додати після першого релізу. Порядок і строки можуть змінюватись.</p>
                 </div>
-                
-                <div id="scanner-loading" style="display: none; text-align: center; margin: 40px 0;">
-                    <i class="ph ph-spinner ph-spin" style="font-size: 2rem; color: var(--accent-primary);"></i>
-                    <p style="margin-top: 12px; color: var(--text-secondary);">Збір даних з МВС, CarVertical та СТО...</p>
-                </div>
-
-                <div id="scanner-result" style="display: none;">
-                    <div class="glass-panel" style="margin-bottom: 24px; border: 1px solid var(--accent-primary); box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-                            <div>
-                                <h3 style="font-size: 1.2rem; margin-bottom: 4px;">Toyota Camry</h3>
-                                <p style="color: var(--text-secondary); font-size: 0.9rem;">2018 • 2.5 Hybrid • AA1234BC</p>
-                            </div>
-                            <span style="color: var(--accent-green); font-size: 1.5rem;"><i class="ph-fill ph-check-circle"></i></span>
-                        </div>
-                        
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
-                            <div style="background: var(--fill-05); padding: 12px; border-radius: 12px; text-align: center;">
-                                <div style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 4px;">Пробіг</div>
-                                <div style="font-weight: 700; color: var(--text-primary);">85 000 км</div>
-                            </div>
-                            <div style="background: var(--fill-05); padding: 12px; border-radius: 12px; text-align: center;">
-                                <div style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 4px;">ДТП (МВС)</div>
-                                <div style="font-weight: 700; color: var(--accent-green);">Не знайдено</div>
-                            </div>
-                        </div>
-
-                        <div style="border-top: 1px dashed var(--glass-border); padding-top: 16px;">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                <i class="ph-fill ph-magic-wand" style="color: #a855f7; font-size: 1.2rem;"></i>
-                                <h4 style="font-size: 1rem;">Резюме ШІ</h4>
-                            </div>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4;">Автомобіль має прозору історію обслуговування (знайдено 4 записи на офіційному СТО). Пробіг відповідає віку. <strong style="color: var(--text-primary);">Рекомендовано до огляду. Оцінка: 85/100.</strong></p>
-                        </div>
-                    </div>
-                </div>
+                <div id="roadmap-body"></div>
             </section>
         </main>
 
-        <!-- Floating Add Button -->
-        <button id="add-record-btn" class="fab">
+        <!-- Floating Add Button (діє на «Головній» і в «Щоденнику») -->
+        <button id="add-record-btn" class="fab" aria-label="Новий запис">
             <i class="ph ph-plus"></i>
             <span class="fab-label">Новий запис</span>
         </button>
@@ -490,17 +380,21 @@
                 <i class="ph-fill ph-squares-four"></i>
                 <span>Головна</span>
             </a>
-            <a href="#" class="nav-item" data-target="history-view">
-                <i class="ph-fill ph-clock-counter-clockwise"></i>
-                <span>Історія</span>
+            <a href="#" class="nav-item" data-target="diary-view">
+                <i class="ph-fill ph-notebook"></i>
+                <span>Щоденник</span>
             </a>
-            <a href="#" class="nav-item" data-target="services-view">
-                <i class="ph-fill ph-map-pin"></i>
-                <span>Сервіси</span>
+            <a href="#" class="nav-item" data-target="plan-view">
+                <i class="ph-fill ph-list-checks"></i>
+                <span>План ТО</span>
             </a>
-            <a href="#" class="nav-item" data-target="scanner-view">
-                <i class="ph-fill ph-scan"></i>
-                <span>Сканер</span>
+            <a href="#" class="nav-item" data-target="requests-view">
+                <i class="ph-fill ph-wrench"></i>
+                <span>Запити</span>
+            </a>
+            <a href="#" class="nav-item nav-item--desktop nav-item--push" data-target="roadmap-view">
+                <i class="ph-fill ph-rocket-launch"></i>
+                <span>Що далі</span>
             </a>
             <a href="#" class="nav-item nav-item--desktop" data-target="profile-view">
                 <i class="ph-fill ph-user-circle"></i>
@@ -511,50 +405,151 @@
                 <span>Дизайн-система</span>
             </a>
         </nav>
-        
-        <!-- Add Record Modal -->
-        <div id="add-modal" class="modal-overlay">
+
+        <!-- ============ МОДАЛКИ ============ -->
+
+        <!-- Новий запис щоденника -->
+        <div id="entry-modal" class="modal-overlay">
             <div class="modal-content glass-panel">
                 <div class="modal-header">
                     <h2>Новий запис</h2>
-                    <button id="close-modal-btn" class="icon-btn"><i class="ph ph-x"></i></button>
+                    <button class="icon-btn" data-close aria-label="Закрити"><i class="ph ph-x"></i></button>
                 </div>
-                <form class="add-form">
-                    <div class="form-group">
-                        <label>Тип обслуговування</label>
-                        <select>
-                            <option>Технічне обслуговування (ТО)</option>
-                            <option>Ремонт</option>
-                            <option>Шиномонтаж</option>
-                            <option>Страхування</option>
-                            <option>Інше</option>
-                        </select>
+                <form class="add-form" id="entry-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="entry-date">Дата</label>
+                            <input type="date" id="entry-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="entry-mileage">Пробіг (км)</label>
+                            <input type="number" id="entry-mileage" inputmode="numeric" min="0">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Пробіг (км)</label>
-                        <input type="number" value="145000">
+                        <label for="entry-work">Робота</label>
+                        <input type="text" id="entry-work" list="work-options" placeholder="Наприклад, заміна оливи">
+                        <datalist id="work-options"></datalist>
                     </div>
                     <div class="form-group">
-                        <label>Опис робіт</label>
-                        <textarea rows="3" placeholder="Що було зроблено?"></textarea>
+                        <label for="entry-price">Ціна (₴)</label>
+                        <input type="number" id="entry-price" inputmode="decimal" min="0" placeholder="0">
                     </div>
                     <div class="form-group">
-                        <label>Вартість (₴)</label>
-                        <input type="number" placeholder="0">
+                        <label for="entry-note">Нотатка</label>
+                        <textarea id="entry-note" rows="2" placeholder="Що було зроблено, де, які деталі"></textarea>
                     </div>
-                    <div class="form-group file-upload">
-                        <i class="ph ph-upload-simple"></i>
-                        <span>Прикріпити фото чеку або акту</span>
-                    </div>
-                    <button type="button" class="btn-ai-scan">
-                        <i class="ph-fill ph-magic-wand"></i> Оцифрувати документ через ШІ
-                    </button>
-                    <div class="divider"><span>або вручну</span></div>
-                    <button type="button" class="btn-primary" id="save-record-btn">Зберегти запис</button>
+                    <label class="file-upload" for="entry-files">
+                        <i class="ph ph-paperclip"></i>
+                        <span id="entry-files-label">Додати фото та файли</span>
+                        <input type="file" id="entry-files" multiple hidden>
+                    </label>
+                    <button type="button" class="soon-btn" data-soon="Розпізнавання чеків і актів з фото" style="margin-top: 12px;"><i class="ph ph-magic-wand"></i><span>Розпізнати з фото</span><em class="soon-chip">Скоро</em></button>
+                    <p class="form-hint" style="margin-top: 12px;"><i class="ph ph-user"></i> Автор запису: ви.</p>
+                    <div class="alert warn" id="entry-warning" hidden><i class="ph-fill ph-warning"></i><span></span></div>
+                    <div class="field-error" id="entry-error"></div>
+                    <button type="submit" class="btn-primary" id="entry-save">Зберегти запис</button>
                 </form>
             </div>
         </div>
+
+        <!-- Мої авто / додати авто -->
+        <div id="car-modal" class="modal-overlay">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2 id="car-modal-title">Мої авто</h2>
+                    <button class="icon-btn" data-close aria-label="Закрити"><i class="ph ph-x"></i></button>
+                </div>
+                <div id="car-pick">
+                    <div class="garage-list" id="car-list"></div>
+                    <button class="add-car-btn" id="car-add-btn"><i class="ph ph-plus"></i> Додати авто</button>
+                </div>
+                <form class="add-form" id="car-form" novalidate hidden>
+                    <div class="form-row">
+                        <div class="form-group"><label for="car-make">Марка</label><input type="text" id="car-make" placeholder="Volkswagen"></div>
+                        <div class="form-group"><label for="car-model">Модель</label><input type="text" id="car-model" placeholder="Golf VII"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label for="car-year">Рік</label><input type="number" id="car-year" inputmode="numeric" min="1950" max="2100" placeholder="2018"></div>
+                        <div class="form-group"><label for="car-fuel">Пальне</label>
+                            <select id="car-fuel"><option>Бензин</option><option>Дизель</option><option>Гібрид</option><option>Електро</option><option>Газ / бензин</option></select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label for="car-mileage">Пробіг (км)</label><input type="number" id="car-mileage" inputmode="numeric" min="0" placeholder="145000"></div>
+                    <div class="form-group"><label for="car-vin">VIN</label><input type="text" id="car-vin" maxlength="17" placeholder="17 символів" autocapitalize="characters"><span class="form-hint">Латиниця й цифри, без I, O, Q.</span></div>
+                    <button type="button" class="soon-btn" data-soon="Автозаповнення авто за VIN з реєстру МВС"><i class="ph ph-database"></i><span>Заповнити за VIN з реєстру МВС</span><em class="soon-chip">Скоро</em></button>
+                    <div class="field-error" id="car-error"></div>
+                    <button type="submit" class="btn-primary">Зберегти авто</button>
+                    <p class="auth-switch"><button type="button" class="link-btn" id="car-back">← До списку авто</button></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Робота плану ТО -->
+        <div id="plan-modal" class="modal-overlay">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2 id="plan-modal-title">Робота в плані ТО</h2>
+                    <button class="icon-btn" data-close aria-label="Закрити"><i class="ph ph-x"></i></button>
+                </div>
+                <form class="add-form" id="plan-form" novalidate>
+                    <div class="form-group">
+                        <label for="plan-work">Робота</label>
+                        <select id="plan-work"></select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label for="plan-km">Інтервал, км</label><input type="number" id="plan-km" inputmode="numeric" min="0" placeholder="10000"></div>
+                        <div class="form-group"><label for="plan-months">Інтервал, міс</label><input type="number" id="plan-months" inputmode="numeric" min="0" placeholder="12"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="plan-priority">Пріоритет</label>
+                        <select id="plan-priority"><option value="high">Високий</option><option value="med">Середній</option><option value="low">Низький</option></select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label for="plan-last-date">Востаннє: дата</label><input type="date" id="plan-last-date"></div>
+                        <div class="form-group"><label for="plan-last-km">Востаннє: пробіг</label><input type="number" id="plan-last-km" inputmode="numeric" min="0"></div>
+                    </div>
+                    <label class="check-row"><input type="checkbox" id="plan-unknown"> <span>Не знаю, коли робили востаннє</span></label>
+                    <div class="field-error" id="plan-error"></div>
+                    <button type="submit" class="btn-primary">Зберегти</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Новий запит на ремонт -->
+        <div id="request-modal" class="modal-overlay">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2>Новий запит на ремонт</h2>
+                    <button class="icon-btn" data-close aria-label="Закрити"><i class="ph ph-x"></i></button>
+                </div>
+                <form class="add-form" id="request-form" novalidate>
+                    <div class="form-group">
+                        <label for="req-source">З якої роботи плану ТО</label>
+                        <select id="req-source"></select>
+                    </div>
+                    <div class="form-group" id="req-title-group">
+                        <label for="req-title">Коротко про проблему</label>
+                        <input type="text" id="req-title" placeholder="Наприклад, стукіт у підвісці">
+                    </div>
+                    <div class="form-group">
+                        <label for="req-desc">Опис</label>
+                        <textarea id="req-desc" rows="4" placeholder="Що саме відбувається, коли виникає, що вже перевіряли"></textarea>
+                    </div>
+                    <label class="file-upload" for="req-files">
+                        <i class="ph ph-paperclip"></i>
+                        <span id="req-files-label">Фото, файли, аудіо (як файл)</span>
+                        <input type="file" id="req-files" multiple accept="image/*,audio/*,.pdf,.doc,.docx" hidden>
+                    </label>
+                    <button type="button" class="soon-btn" data-soon="Запис голосу й фото прямо на сторінці" style="margin-top: 12px;"><i class="ph ph-microphone"></i><span>Записати голос</span><em class="soon-chip">Скоро</em></button>
+                    <div class="field-error" id="req-error"></div>
+                    <button type="submit" class="btn-primary">Створити запит</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-text"></span><button type="button" class="toast-action" id="toast-action" hidden></button></div>
     </div>
-    <script src="app.js?v=1.9"></script>
+    <script src="app.js?v=2.0"></script>
 </body>
 </html>
