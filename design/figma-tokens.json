@@ -76,6 +76,11 @@
         "type": "color",
         "description": "Фон бейджа «Потребує уваги» та іконки-плашки orange (0.15)."
       },
+      "accent-caution": {
+        "value": "#facc15",
+        "type": "color",
+        "description": "Жовтий статус «У вікні ТО» / «потрібна увага» (React-фронтенд, --caution): кільце здоров'я 40–70%, Badge caution, IconBox yellow, пріоритет «середній». В обох темах той самий; у світлій текст на ньому — #0f172a на підкладці 40%."
+      },
       "accent-red": {
         "value": "#ff2a2a",
         "type": "color",

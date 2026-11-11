@@ -13,7 +13,7 @@
     <link rel="icon" href="../favicon.ico?v=2" sizes="48x48">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=2">
 <!-- The app's own stylesheet: every component below is rendered with the real classes -->
-<link rel="stylesheet" href="../styles.css?v=2.1">
+<link rel="stylesheet" href="../styles.css?v=2.2">
 <script>
 (function () {
             var KEY = 'autosync-theme', root = document.documentElement;
@@ -251,6 +251,115 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   .ds-type-usage { grid-column: auto; }
   .ds-comp-head, .ds-guide, .ds-stage { padding-left: 16px; padding-right: 16px; }
 }
+
+/* ===== v2.1: компоненти, синхронізовані з React-фронтендом (frontend/src) ===== */
+:root { --accent-caution: #facc15; --caution-text: #facc15; }
+:root[data-theme="light"] { --caution-text: #0f172a; }
+.ds-tag.fe { background: var(--tint-ai); color: var(--accent-ai-text, var(--accent-ai)); }
+.fx-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.fx-col { display: flex; flex-direction: column; gap: 12px; }
+.fx-lab { font-size: .8rem; color: var(--text-muted); }
+.fx-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 14px; font: 600 1rem 'Exo 2', sans-serif; height: 48px; padding: 0 20px; border: 1px solid transparent; cursor: pointer; white-space: nowrap; color: var(--text-primary); background: none; }
+.fx-btn.default { background: var(--accent-primary); color: var(--on-accent); box-shadow: 0 4px 12px var(--accent-glow); }
+.fx-btn.outline { border-color: var(--glass-border); background: var(--fill-subtle); }
+.fx-btn.secondary { background: var(--fill-subtle); }
+.fx-btn.ghost:hover { background: var(--tint-primary); }
+.fx-btn.destructive { background: var(--accent-red); color: #fff; }
+.fx-btn.outline-destructive { border-color: var(--accent-red); color: var(--accent-red); }
+.fx-btn.ai { border-color: var(--accent-ai); background: var(--tint-ai); color: var(--accent-ai-text, var(--accent-ai)); }
+.fx-btn.sm { height: 36px; border-radius: 999px; padding: 0 16px; font-size: .875rem; }
+.fx-btn.lg { height: 56px; padding: 0 32px; }
+.fx-btn.icon { width: 40px; height: 40px; padding: 0; border-radius: 999px; background: var(--fill-subtle); color: var(--accent-primary); }
+.fx-badge { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 4px 12px; font-size: .75rem; font-weight: 600; white-space: nowrap; }
+.fx-badge.info { background: var(--tint-primary); color: var(--accent-primary); }
+.fx-badge.caution { background: color-mix(in srgb, var(--accent-caution) 20%, transparent); color: var(--caution-text); }
+:root[data-theme="light"] .fx-badge.caution { background: color-mix(in srgb, var(--accent-caution) 40%, transparent); }
+.fx-badge.purple { border: 1px solid color-mix(in srgb, var(--accent-ai) 30%, transparent); background: var(--tint-ai); color: var(--accent-ai-text, var(--accent-ai)); }
+.fx-badge.success { background: var(--tint-good); color: var(--accent-green); }
+.fx-badge.warning { background: var(--tint-warning); color: var(--accent-orange); }
+.fx-badge.danger { background: var(--tint-danger); color: var(--accent-red); }
+.fx-badge.muted { background: var(--fill-subtle); color: var(--text-muted); }
+.fx-ibox { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; font-size: 1.4rem; }
+.fx-ibox.red { background: var(--tint-danger); color: var(--accent-red); }
+.fx-ibox.orange { background: var(--tint-warning); color: var(--accent-orange); }
+.fx-ibox.yellow { background: color-mix(in srgb, var(--accent-caution) 20%, transparent); color: var(--caution-text); }
+.fx-ibox.green { background: var(--tint-good); color: var(--accent-green); }
+.fx-ibox.purple { background: var(--tint-ai); color: var(--accent-ai-text, var(--accent-ai)); }
+.fx-ibox.blue { background: var(--tint-primary); color: var(--accent-primary); }
+.fx-alert { display: flex; gap: 12px; align-items: flex-start; border-radius: 12px; border: 1px solid; padding: 16px; font-size: .875rem; }
+.fx-alert i { font-size: 1.4rem; flex: none; }
+.fx-alert b { display: block; font-family: 'Play', sans-serif; }
+.fx-alert span { color: var(--text-secondary); }
+.fx-alert.error { border-color: color-mix(in srgb, var(--accent-red) 50%, transparent); background: var(--tint-danger); } .fx-alert.error i { color: var(--accent-red); }
+.fx-alert.warning { border-color: color-mix(in srgb, var(--accent-orange) 50%, transparent); background: var(--tint-warning); } .fx-alert.warning i { color: var(--accent-orange); }
+.fx-alert.success { border-color: color-mix(in srgb, var(--accent-green) 50%, transparent); background: var(--tint-good); } .fx-alert.success i { color: var(--accent-green); }
+.fx-alert.info { border-color: var(--glass-border); background: var(--tint-primary); } .fx-alert.info i { color: var(--accent-primary); }
+.fx-card { border-radius: 16px; border: 1px solid var(--glass-border); background: var(--glass-bg); backdrop-filter: blur(16px); padding: 16px; }
+.fx-card.interactive { transition: border-color .3s, transform .3s cubic-bezier(.22,1,.36,1); cursor: pointer; }
+.fx-card.interactive:hover { border-color: color-mix(in srgb, var(--accent-primary) 50%, transparent); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .fx-card.interactive:hover { transform: none; } }
+.fx-carsel { display: flex; align-items: center; gap: 12px; }
+.fx-logo { width: 56px; height: 56px; flex: none; border-radius: 12px; background: #fff; display: flex; align-items: center; justify-content: center; color: #0f172a; font: 700 1.1rem 'Play', sans-serif; }
+.fx-logo.fallback { background: var(--fill-subtle); color: var(--text-muted); font-size: 1.8rem; }
+.fx-logo.active { box-shadow: 0 0 0 2px var(--accent-primary); }
+.fx-carsel h4 { margin: 0; font: 700 1.5rem 'Play', sans-serif; }
+.fx-carsel p { margin: 0; font-size: .875rem; color: var(--text-muted); }
+.fx-caret { margin-left: auto; width: 36px; height: 36px; border-radius: 50%; background: var(--fill-subtle); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.fx-panel { margin-top: 8px; border-radius: 16px; border: 1px solid var(--glass-border); background: var(--surface-modal); padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+.fx-opt { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 12px; border: 1px solid var(--glass-border); }
+.fx-opt.on { border-color: var(--accent-primary); background: var(--tint-primary); }
+.fx-opt .fx-logo { width: 44px; height: 44px; font-size: .9rem; }
+.fx-opt b { display: block; font-weight: 600; } .fx-opt small { color: var(--text-muted); }
+.fx-opt.add { border-style: dashed; justify-content: center; color: var(--accent-primary); }
+.fx-rings { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; }
+.fx-ring { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: .75rem; color: var(--text-muted); text-align: center; }
+.fx-ring svg { display: block; }
+.fx-ring .tr { stroke: var(--fill-hover); } .fx-ring .good { stroke: var(--accent-green); } .fx-ring .caution { stroke: var(--accent-caution); } .fx-ring .danger { stroke: var(--accent-red); }
+.fx-ring text { fill: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 700; }
+.fx-check { width: 44px; height: 24px; border-radius: 999px; background: var(--fill-hover); position: relative; flex: none; }
+.fx-check.on { background: var(--accent-green); }
+.fx-check::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.fx-check.on::after { transform: translateX(20px); }
+.fx-pick { display: flex; align-items: center; gap: 8px; border-radius: 12px; border: 1px dashed var(--glass-border); background: var(--fill-subtle); padding: 12px 14px; font-size: .875rem; color: var(--text-muted); }
+.fx-pick i { color: var(--accent-primary); }
+.fx-field { border-radius: 12px; border: 1px solid var(--glass-border); background: var(--fill-subtle); padding: 12px 14px; display: flex; align-items: center; gap: 12px; color: var(--text-muted); }
+.fx-menu { border-radius: 12px; border: 1px solid var(--glass-border); background: var(--surface-modal); overflow: hidden; margin-top: 4px; }
+.fx-menu .sec { padding: 8px 14px 4px; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
+.fx-menu .cat { display: flex; justify-content: space-between; padding: 10px 14px; background: var(--fill-subtle); border-bottom: 1px solid var(--ds-line); }
+.fx-menu .cat.open { background: var(--tint-primary); }
+.fx-menu .cat small { color: var(--text-muted); }
+.fx-menu .wk { padding: 9px 14px 9px 28px; }
+.fx-wl { border-radius: 12px; border: 1px solid var(--glass-border); overflow: hidden; max-width: 460px; }
+.fx-wl .hd, .fx-wl .li { display: flex; align-items: center; gap: 8px; padding: 6px 8px; }
+.fx-wl .hd { background: var(--fill-subtle); border-bottom: 1px solid var(--glass-border); font-size: .875rem; }
+.fx-wl .hd b { flex: 1; font-weight: 500; } .fx-wl .hd small { color: var(--text-muted); }
+.fx-wl .li + .li { border-top: 1px solid var(--ds-line); }
+.fx-wl .li span { flex: 1; font-size: .875rem; }
+.fx-wl .amt { width: 96px; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--fill-subtle); padding: 6px 10px; text-align: right; font-size: .875rem; color: var(--text-primary); }
+.fx-wl .amt.off { opacity: .45; }
+.fx-wl .x { width: 28px; height: 28px; flex: none; color: var(--accent-red); display: inline-flex; align-items: center; justify-content: center; }
+.fx-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 16px; background: var(--fill-subtle); }
+.fx-tabs button { border: 0; background: none; color: var(--text-secondary); font: 600 .9rem 'Exo 2', sans-serif; padding: 8px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; gap: 8px; }
+.fx-tabs button.on { background: var(--accent-primary); color: var(--on-accent); }
+.fx-tabs small { opacity: .8; font-weight: 400; }
+.fx-fchip { border: 1px solid transparent; background: none; padding: 2px; border-radius: 999px; cursor: pointer; }
+.fx-fchip.on { border-color: var(--accent-primary); }
+.fx-fchip .fx-badge small { opacity: .8; font-weight: 400; }
+.fx-plan { border-radius: 16px; border: 1px solid var(--glass-border); background: var(--fill-subtle); padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+.fx-plan .top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.fx-plan .top h4 { margin: 0; font: 600 1rem 'Play', sans-serif; } .fx-plan .top p { margin: 0; font-size: .875rem; color: var(--text-muted); }
+.fx-plan .top .nm { flex: 1; min-width: 140px; }
+.fx-facts { display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: .875rem; color: var(--text-muted); margin: 0; padding: 0 4px; }
+.fx-facts div { display: flex; align-items: center; gap: 6px; }
+.fx-facts b { font-weight: 600; color: var(--text-primary); }
+.fx-facts .hi { color: var(--accent-red); } .fx-facts .med { color: var(--caution-text); }
+:root[data-theme="light"] .fx-facts .med { color: #a16207; }
+.fx-untracked { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border-radius: 16px; border: 1px dashed var(--glass-border); background: var(--fill-subtle); padding: 10px 12px; }
+.fx-untracked div { flex: 1; min-width: 160px; } .fx-untracked p { margin: 0; font-size: .875rem; color: var(--text-muted); }
+.fx-link { color: var(--accent-primary); font-size: .875rem; text-decoration: underline; text-underline-offset: 4px; }
+.fx-reqsteps { display: flex; gap: 4px; max-width: 320px; } .fx-reqsteps i { flex: 1; height: 4px; border-radius: 4px; background: var(--fill-hover); } .fx-reqsteps i.on { background: var(--accent-primary); }
+@media (max-width: 560px) { .fx-wl .amt { width: 80px; } }
+
 </style>
 </head>
 <body>
@@ -268,7 +377,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
       <a href="#icons">Іконки</a>
       <a href="#components">Компоненти</a>
       <div class="ds-nav-label ds-nav-comps">Компоненти</div>
-      <a class="ds-nav-comps" href="#c-glasspanel">GlassPanel</a><a class="ds-nav-comps" href="#c-button">Button</a><a class="ds-nav-comps" href="#c-iconbutton">IconButton</a><a class="ds-nav-comps" href="#c-fab">Fab</a><a class="ds-nav-comps" href="#c-integrationbutton">IntegrationButton</a><a class="ds-nav-comps" href="#c-badge">Badge</a><a class="ds-nav-comps" href="#c-chip">Chip</a><a class="ds-nav-comps" href="#c-searchbar">SearchBar</a><a class="ds-nav-comps" href="#c-formfield">FormField</a><a class="ds-nav-comps" href="#c-toggle">Toggle</a><a class="ds-nav-comps" href="#c-healthscore">HealthScore</a><a class="ds-nav-comps" href="#c-statbox">StatBox</a><a class="ds-nav-comps" href="#c-remindercard">ReminderCard</a><a class="ds-nav-comps" href="#c-timelineentry">TimelineEntry</a><a class="ds-nav-comps" href="#c-servicecard">ServiceCard</a><a class="ds-nav-comps" href="#c-carcard">CarCard</a><a class="ds-nav-comps" href="#c-navigation">Navigation</a><a class="ds-nav-comps" href="#c-modal">Modal</a><a class="ds-nav-comps" href="#c-soon">SoonChip / SoonButton</a><a class="ds-nav-comps" href="#c-toast">Toast</a><a class="ds-nav-comps" href="#c-seg">SegmentedControl</a><a class="ds-nav-comps" href="#c-alert">Alert</a><a class="ds-nav-comps" href="#c-statusdot">StatusDot + PlanItem</a><a class="ds-nav-comps" href="#c-author">AuthorBadge</a><a class="ds-nav-comps" href="#c-stepper">Stepper + RequestCard</a><a class="ds-nav-comps" href="#c-photo">PhotoSlot</a><a class="ds-nav-comps" href="#c-radiocard">RadioCard + LinkField</a><a class="ds-nav-comps" href="#c-mileage">MileageCard</a><a class="ds-nav-comps" href="#c-table">Table</a>
+      <a class="ds-nav-comps" href="#c-glasspanel">GlassPanel</a><a class="ds-nav-comps" href="#c-button">Button</a><a class="ds-nav-comps" href="#c-iconbutton">IconButton</a><a class="ds-nav-comps" href="#c-fab">Fab</a><a class="ds-nav-comps" href="#c-integrationbutton">IntegrationButton</a><a class="ds-nav-comps" href="#c-badge">Badge</a><a class="ds-nav-comps" href="#c-chip">Chip</a><a class="ds-nav-comps" href="#c-searchbar">SearchBar</a><a class="ds-nav-comps" href="#c-formfield">FormField</a><a class="ds-nav-comps" href="#c-toggle">Toggle</a><a class="ds-nav-comps" href="#c-healthscore">HealthScore</a><a class="ds-nav-comps" href="#c-statbox">StatBox</a><a class="ds-nav-comps" href="#c-remindercard">ReminderCard</a><a class="ds-nav-comps" href="#c-timelineentry">TimelineEntry</a><a class="ds-nav-comps" href="#c-servicecard">ServiceCard</a><a class="ds-nav-comps" href="#c-carcard">CarCard</a><a class="ds-nav-comps" href="#c-navigation">Navigation</a><a class="ds-nav-comps" href="#c-modal">Modal</a><a class="ds-nav-comps" href="#c-soon">SoonChip / SoonButton</a><a class="ds-nav-comps" href="#c-toast">Toast</a><a class="ds-nav-comps" href="#c-seg">SegmentedControl</a><a class="ds-nav-comps" href="#c-alert">Alert</a><a class="ds-nav-comps" href="#c-statusdot">StatusDot + PlanItem</a><a class="ds-nav-comps" href="#c-author">AuthorBadge</a><a class="ds-nav-comps" href="#c-stepper">Stepper + RequestCard</a><a class="ds-nav-comps" href="#c-photo">PhotoSlot</a><a class="ds-nav-comps" href="#c-radiocard">RadioCard + LinkField</a><a class="ds-nav-comps" href="#c-mileage">MileageCard</a><a class="ds-nav-comps" href="#c-table">Table</a><a class="ds-nav-comps" href="#c-fx-button">Button · варіанти</a><a class="ds-nav-comps" href="#c-fx-badge">Badge · тони</a><a class="ds-nav-comps" href="#c-fx-iconbox">IconBox</a><a class="ds-nav-comps" href="#c-fx-carselector">CarSelector + BrandLogo</a><a class="ds-nav-comps" href="#c-fx-rings">HealthRing + MiniRing</a><a class="ds-nav-comps" href="#c-fx-checkbox">Checkbox + FilePick + Select</a><a class="ds-nav-comps" href="#c-fx-picker">PlanWorkPicker (Combobox)</a><a class="ds-nav-comps" href="#c-fx-worklist">WorkList</a><a class="ds-nav-comps" href="#c-fx-tabs">Tabs + StatusFilter</a><a class="ds-nav-comps" href="#c-fx-plancard">PlanCard · CategorySection</a><a class="ds-nav-comps" href="#c-fx-interactive">InteractiveCard</a>
     </nav>
     <div class="ds-theme"><span>Тема</span><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Перемкнути тему" title="Світла / темна тема"><i class="ph-fill ph-moon"></i><i class="ph-fill ph-sun"></i></button></div>
     <a class="ds-back" href="../index.html"><i class="ph ph-arrow-left"></i> До застосунку</a>
@@ -277,9 +386,9 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   <main class="ds-main">
     <section class="ds-hero" id="overview">
       <div>
-        <h1>AutoSync<span>Design System · v2.0</span></h1>
+        <h1>AutoSync<span>Design System · v2.1</span></h1>
         <p>Мова інтерфейсу цифрового сервісного паспорта авто: темне скло, неоновий блакитний акцент і кольори стану, як на панелі приладів. Усі приклади нижче намальовані справжніми класами з <code>styles.css</code>.</p>
-        <div class="ds-facts"><span><b>24</b> кольори</span><span><b>14</b> стилів тексту</span><span><b>29</b> компонентів</span><span><b>4</b> контрольні точки</span></div>
+        <div class="ds-facts"><span><b>24</b> кольори</span><span><b>14</b> стилів тексту</span><span><b>40</b> компонентів</span><span><b>4</b> контрольні точки</span></div>
       </div>
       <svg viewBox="470 0 490 288" aria-hidden="true">
         <rect class="cyan" x="600" y="-24" width="384" height="216" rx="24"/>
@@ -489,6 +598,14 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
     <div class="ds-sw-head"><code class="ds-name">--text-muted</code><span class="ds-cr bad" title="Контраст з bg-color">4.3:1 · нижче AA</span></div>
     <div class="ds-val">#64748b</div>
     <p>Дати, плейсхолдери, неактивна навігація. Лише 4.28:1 на bg-color, 4.04:1 на glass-bg і 3.58:1 у модалці — нижче AA 4.5:1 для дрібного тексту; не використовувати для важливої інформації.</p>
+  </div>
+</div></div></div>
+<div class="ds-sub" id="caution-token"><h3>Caution — жовтий статус (v2.1)</h3><p class=ds-lead-sm>У React-застосунку стан «У вікні ТО» і «потрібна увага» — жовтий, а не помаранчевий. Помаранчевий <code>--accent-orange</code> лишається для попереджень.</p><div class="ds-swatches"><div class="ds-swatch">
+  <div class="ds-chip" style="background:#facc15"></div>
+  <div class="ds-sw-body">
+    <div class="ds-sw-head"><code class="ds-name">--caution</code></div>
+    <div class="ds-val">#facc15 (обидві теми)</div>
+    <p>Кільце здоров'я 40–70%, Badge «caution», IconBox yellow, пріоритет «середній», крапка статусу «У вікні ТО». У світлій темі текст на жовтому — <code>--foreground</code> (#0f172a), підкладка 40%; жовтий текст на світлому фоні не читається. У токенах shadcn: <code>--caution</code> / <code>text-caution</code>.</p>
   </div>
 </div></div></div>
 <div class="ds-sub" id="light-theme"><h3>Світла тема</h3><p class=ds-lead-sm>Те саме ім'я токена, інше значення: у застосунку це <code>:root[data-theme="light"]</code> у styles.css. Акценти й статусні кольори затемнені, щоб читатись на світлому фоні; контраст показано з фоном <code>#f1f5f9</code>. Напівпрозорі заливки (<code>--fill-03 … --fill-15</code>) змінюють базу з білого на <code>rgb(15, 23, 42)</code>.</p><div class="ds-swatches"><div class="ds-swatch">
@@ -810,7 +927,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
       <div class="ds-eyebrow">07 · components</div>
       <h2>Компоненти</h2>
       <p class="ds-lead">Кожен приклад — живий HTML зі справжніми класами застосунку. Розгорніть «HTML-розмітка», щоб скопіювати код.</p>
-      <div class="ds-comp-index"><a href="#c-glasspanel">GlassPanel</a><a href="#c-button">Button</a><a href="#c-iconbutton">IconButton</a><a href="#c-fab">Fab</a><a href="#c-integrationbutton">IntegrationButton</a><a href="#c-badge">Badge</a><a href="#c-chip">Chip</a><a href="#c-searchbar">SearchBar</a><a href="#c-formfield">FormField</a><a href="#c-toggle">Toggle</a><a href="#c-healthscore">HealthScore</a><a href="#c-statbox">StatBox</a><a href="#c-remindercard">ReminderCard</a><a href="#c-timelineentry">TimelineEntry</a><a href="#c-servicecard">ServiceCard</a><a href="#c-carcard">CarCard</a><a href="#c-navigation">Navigation</a><a href="#c-modal">Modal</a><a href="#c-soon">SoonChip / SoonButton</a><a href="#c-toast">Toast</a><a href="#c-seg">SegmentedControl</a><a href="#c-alert">Alert</a><a href="#c-statusdot">StatusDot + PlanItem</a><a href="#c-author">AuthorBadge</a><a href="#c-stepper">Stepper + RequestCard</a><a href="#c-photo">PhotoSlot</a><a href="#c-radiocard">RadioCard + LinkField</a><a href="#c-mileage">MileageCard</a><a href="#c-table">Table</a></div>
+      <div class="ds-comp-index"><a href="#c-glasspanel">GlassPanel</a><a href="#c-button">Button</a><a href="#c-iconbutton">IconButton</a><a href="#c-fab">Fab</a><a href="#c-integrationbutton">IntegrationButton</a><a href="#c-badge">Badge</a><a href="#c-chip">Chip</a><a href="#c-searchbar">SearchBar</a><a href="#c-formfield">FormField</a><a href="#c-toggle">Toggle</a><a href="#c-healthscore">HealthScore</a><a href="#c-statbox">StatBox</a><a href="#c-remindercard">ReminderCard</a><a href="#c-timelineentry">TimelineEntry</a><a href="#c-servicecard">ServiceCard</a><a href="#c-carcard">CarCard</a><a href="#c-navigation">Navigation</a><a href="#c-modal">Modal</a><a href="#c-soon">SoonChip / SoonButton</a><a href="#c-toast">Toast</a><a href="#c-seg">SegmentedControl</a><a href="#c-alert">Alert</a><a href="#c-statusdot">StatusDot + PlanItem</a><a href="#c-author">AuthorBadge</a><a href="#c-stepper">Stepper + RequestCard</a><a href="#c-photo">PhotoSlot</a><a href="#c-radiocard">RadioCard + LinkField</a><a href="#c-mileage">MileageCard</a><a href="#c-table">Table</a><a href="#c-fx-button">Button · варіанти</a><a href="#c-fx-badge">Badge · тони</a><a href="#c-fx-iconbox">IconBox</a><a href="#c-fx-carselector">CarSelector + BrandLogo</a><a href="#c-fx-rings">HealthRing + MiniRing</a><a href="#c-fx-checkbox">Checkbox + FilePick + Select</a><a href="#c-fx-picker">PlanWorkPicker (Combobox)</a><a href="#c-fx-worklist">WorkList</a><a href="#c-fx-tabs">Tabs + StatusFilter</a><a href="#c-fx-plancard">PlanCard · CategorySection</a><a href="#c-fx-interactive">InteractiveCard</a></div>
       <article class="ds-comp" id="c-glasspanel">
   <header class="ds-comp-head"><h3>GlassPanel</h3><span class="ds-tag">Поверхні</span></header>
   <div class="ds-comp-grid">
@@ -1284,17 +1401,23 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   &lt;button type=&quot;button&quot;&gt;Реєстрація&lt;/button&gt;
 &lt;/div&gt;</code></pre></details>
 </article><article class="ds-comp" id="c-alert">
-  <header class="ds-comp-head"><h3>Alert</h3><span class="ds-tag">Зворотний зв'язок</span><span class="ds-tag mvp">MVP</span></header>
+  <header class="ds-comp-head"><h3>Alert</h3><span class="ds-tag">Зворотний зв'язок</span><span class="ds-tag fe">React · v2.1</span></header>
   <div class="ds-comp-grid">
-    <div class="ds-stage"><div class="alert warn"><i class="ph-fill ph-warning"></i><span>Пробіг менший за попередній запис — перевірте значення.</span></div>
-<div class="alert ok" style="margin-top:8px"><i class="ph-fill ph-check-circle"></i><span>Лист надіслано. Перевірте пошту.</span></div>
-<div class="alert info" style="margin-top:8px"><i class="ph-fill ph-info"></i><span>Цей екран бачать лише адміністратори.</span></div></div>
-    <div class="ds-guide"><p>Вбудоване повідомлення в потоці сторінки: <code>.alert.warn</code> — попередження (не блокує збереження), <code>.ok</code> — успіх, <code>.info</code> — довідка.</p>
-<p>Використовується для аномалій пробігу, статусів запиту й підказок. Іконка — Phosphor fill, колір береться з токенів стану.</p></div>
+    <div class="ds-stage"><div class="fx-col">
+<div class="fx-alert error" role="alert"><i class="ph-fill ph-warning-circle"></i><div><b>Не вдалося зберегти</b><span>Перевірте з'єднання й спробуйте ще раз.</span></div></div>
+<div class="fx-alert warning"><i class="ph-fill ph-warning"></i><div><span>Пробіг менший за попередній запис — перевірте значення.</span></div></div>
+<div class="fx-alert success"><i class="ph-fill ph-check-circle"></i><div><span>Запит створено. Посилання для СТО скопійовано.</span></div></div>
+<div class="fx-alert info"><i class="ph-fill ph-info"></i><div><span>Роботи без відстеження не впливають на індекс стану.</span></div></div>
+</div></div>
+    <div class="ds-guide"><p>Повідомлення в потоці сторінки з іконкою, заголовком (необов'язково) і текстом. Варіанти: <strong>error</strong> (новий; <code>role="alert"</code>), <strong>warning</strong>, <strong>success</strong>, <strong>info</strong>.</p>
+<p>Текст лишається в кольорі тексту: червоний на червоній підкладці не проходить WCAG AA («Відомі проблеми контрасту»). Стан несуть іконка (fill, 22px), межа 50% і підкладка 15%. Помилки оголошуються одразу, решта — ввічливо (<code>role="status"</code>).</p><p class="fx-lab">Код: <code>components/ui/alert.tsx</code></p></div>
   </div>
-  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;alert warn&quot;&gt;&lt;i class=&quot;ph-fill ph-warning&quot;&gt;&lt;/i&gt;&lt;span&gt;Пробіг менший за попередній запис — перевірте значення.&lt;/span&gt;&lt;/div&gt;
-&lt;div class=&quot;alert ok&quot; style=&quot;margin-top:8px&quot;&gt;&lt;i class=&quot;ph-fill ph-check-circle&quot;&gt;&lt;/i&gt;&lt;span&gt;Лист надіслано. Перевірте пошту.&lt;/span&gt;&lt;/div&gt;
-&lt;div class=&quot;alert info&quot; style=&quot;margin-top:8px&quot;&gt;&lt;i class=&quot;ph-fill ph-info&quot;&gt;&lt;/i&gt;&lt;span&gt;Цей екран бачать лише адміністратори.&lt;/span&gt;&lt;/div&gt;</code></pre></details>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-col&quot;&gt;
+&lt;div class=&quot;fx-alert error&quot; role=&quot;alert&quot;&gt;&lt;i class=&quot;ph-fill ph-warning-circle&quot;&gt;&lt;/i&gt;&lt;div&gt;&lt;b&gt;Не вдалося зберегти&lt;/b&gt;&lt;span&gt;Перевірте з&#x27;єднання й спробуйте ще раз.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-alert warning&quot;&gt;&lt;i class=&quot;ph-fill ph-warning&quot;&gt;&lt;/i&gt;&lt;div&gt;&lt;span&gt;Пробіг менший за попередній запис — перевірте значення.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-alert success&quot;&gt;&lt;i class=&quot;ph-fill ph-check-circle&quot;&gt;&lt;/i&gt;&lt;div&gt;&lt;span&gt;Запит створено. Посилання для СТО скопійовано.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-alert info&quot;&gt;&lt;i class=&quot;ph-fill ph-info&quot;&gt;&lt;/i&gt;&lt;div&gt;&lt;span&gt;Роботи без відстеження не впливають на індекс стану.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
 </article><article class="ds-comp" id="c-statusdot">
   <header class="ds-comp-head"><h3>StatusDot + PlanItem</h3><span class="ds-tag">Дані</span><span class="ds-tag mvp">MVP</span></header>
   <div class="ds-comp-grid">
@@ -1406,7 +1529,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   <label class="radio-card"><input type="radio" name="ds-vis" checked><span><i class="ph ph-notebook"></i> Усю історію</span></label>
   <label class="radio-card"><input type="radio" name="ds-vis"><span><i class="ph ph-eye-slash"></i> Нічого</span></label>
 </div>
-<div class="link-field" style="margin-top:12px"><input type="text" readonly value="https://autosync/golf-7k3x"><button type="button" class="btn-ghost sm"><i class="ph ph-copy"></i> Копіювати</button></div></div>
+<div class="link-field" style="margin-top:12px"><input type="text" readonly value="https://autosync.example/r/golf-7k3x"><button type="button" class="btn-ghost sm"><i class="ph ph-copy"></i> Копіювати</button></div></div>
     <div class="ds-guide"><p><code>.radio-card</code> — вибір із двох-трьох варіантів великими картками (видимість історії для СТО). <code>.link-field</code> — поле для посилання лише для читання з кнопкою копіювання.</p>
 <p>СТО відкриває запит за посиланням без акаунта.</p></div>
   </div>
@@ -1414,7 +1537,7 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
   &lt;label class=&quot;radio-card&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ds-vis&quot; checked&gt;&lt;span&gt;&lt;i class=&quot;ph ph-notebook&quot;&gt;&lt;/i&gt; Усю історію&lt;/span&gt;&lt;/label&gt;
   &lt;label class=&quot;radio-card&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ds-vis&quot;&gt;&lt;span&gt;&lt;i class=&quot;ph ph-eye-slash&quot;&gt;&lt;/i&gt; Нічого&lt;/span&gt;&lt;/label&gt;
 &lt;/div&gt;
-&lt;div class=&quot;link-field&quot; style=&quot;margin-top:12px&quot;&gt;&lt;input type=&quot;text&quot; readonly value=&quot;https://autosync/golf-7k3x&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;btn-ghost sm&quot;&gt;&lt;i class=&quot;ph ph-copy&quot;&gt;&lt;/i&gt; Копіювати&lt;/button&gt;&lt;/div&gt;</code></pre></details>
+&lt;div class=&quot;link-field&quot; style=&quot;margin-top:12px&quot;&gt;&lt;input type=&quot;text&quot; readonly value=&quot;https://autosync.example/r/golf-7k3x&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;btn-ghost sm&quot;&gt;&lt;i class=&quot;ph ph-copy&quot;&gt;&lt;/i&gt; Копіювати&lt;/button&gt;&lt;/div&gt;</code></pre></details>
 </article><article class="ds-comp" id="c-mileage">
   <header class="ds-comp-head"><h3>MileageCard</h3><span class="ds-tag">Дані</span><span class="ds-tag mvp">MVP</span></header>
   <div class="ds-comp-grid">
@@ -1459,6 +1582,227 @@ p { color: var(--text-secondary); font-size: 0.85rem; }
     &lt;tr class=&quot;blocked&quot;&gt;&lt;td&gt;spam@example.com&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;status-badge danger&quot;&gt;Заблокований&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;&lt;/div&gt;</code></pre></details>
+</article>
+
+<div class="ds-sub" id="fe-components"><h3>Синхронізація з фронтендом (v2.1)</h3><p class=ds-lead-sm>Компоненти й правила, що з'явилися в React-застосунку (<code>autosync/frontend</code>) після прототипу v2.0. Позначені «React · v2.1». Крім них змінилися: <strong>Modal</strong> — на телефоні виїжджає знизу (sheet), від 768px — діалог по центру, варіант <code>wide</code> до 896px, підкладка <code>black/60</code> + blur 4px; <strong>Toast</strong> — фон popover, іконка стану, зникає за 3.5 с; <strong>Navigation</strong> — у шапці іконка «Мій гараж» перед профілем; <strong>Alert</strong> — додано варіант error і заголовок.</p></div>
+<article class="ds-comp" id="c-fx-button">
+  <header class="ds-comp-head"><h3>Button · варіанти</h3><span class="ds-tag">Дії</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-col">
+<div class="fx-row"><button class="fx-btn default">default</button><button class="fx-btn outline">outline</button><button class="fx-btn secondary">secondary</button><button class="fx-btn ghost">ghost</button></div>
+<div class="fx-row"><button class="fx-btn destructive">destructive</button><button class="fx-btn outline-destructive">outline-destructive</button><button class="fx-btn ai"><i class="ph ph-sparkle"></i> ai</button></div>
+<div class="fx-row"><button class="fx-btn default sm">sm · 36</button><button class="fx-btn default">default · 48</button><button class="fx-btn default lg">lg · 56</button><button class="fx-btn icon" aria-label="Налаштування"><i class="ph ph-gear"></i></button></div>
+</div></div>
+    <div class="ds-guide"><p>Повний набір варіантів кнопки у застосунку. <strong>default</strong> — головна дія (одна на екран); <strong>outline</strong> / <strong>secondary</strong> — другорядні; <strong>ghost</strong> — у тулбарах; <strong>destructive</strong> і <strong>outline-destructive</strong> — видалення й закриття; <strong>ai</strong> — майбутні функції з AI.</p>
+<p>Розміри: <code>sm</code> — піґулка 36px, <code>default</code> — 48px, <code>lg</code> — 56px, <code>icon</code> — коло 40px (<code>icon-sm</code> — 36px). Радіус 14px (піґулка — 999px), фокус — кільце 2px у <code>--ring</code>.</p><p class="fx-lab">Код: <code>components/ui/button.tsx</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-col&quot;&gt;
+&lt;div class=&quot;fx-row&quot;&gt;&lt;button class=&quot;fx-btn default&quot;&gt;default&lt;/button&gt;&lt;button class=&quot;fx-btn outline&quot;&gt;outline&lt;/button&gt;&lt;button class=&quot;fx-btn secondary&quot;&gt;secondary&lt;/button&gt;&lt;button class=&quot;fx-btn ghost&quot;&gt;ghost&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-row&quot;&gt;&lt;button class=&quot;fx-btn destructive&quot;&gt;destructive&lt;/button&gt;&lt;button class=&quot;fx-btn outline-destructive&quot;&gt;outline-destructive&lt;/button&gt;&lt;button class=&quot;fx-btn ai&quot;&gt;&lt;i class=&quot;ph ph-sparkle&quot;&gt;&lt;/i&gt; ai&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-row&quot;&gt;&lt;button class=&quot;fx-btn default sm&quot;&gt;sm · 36&lt;/button&gt;&lt;button class=&quot;fx-btn default&quot;&gt;default · 48&lt;/button&gt;&lt;button class=&quot;fx-btn default lg&quot;&gt;lg · 56&lt;/button&gt;&lt;button class=&quot;fx-btn icon&quot; aria-label=&quot;Налаштування&quot;&gt;&lt;i class=&quot;ph ph-gear&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-badge">
+  <header class="ds-comp-head"><h3>Badge · тони</h3><span class="ds-tag">Дані</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-row">
+<span class="fx-badge info">info</span><span class="fx-badge caution">caution</span><span class="fx-badge purple">purple</span><span class="fx-badge success">success</span><span class="fx-badge warning">warning</span><span class="fx-badge danger">danger</span><span class="fx-badge muted">muted</span>
+</div>
+<div class="fx-row" style="margin-top:14px"><span class="fx-badge success">Далеко</span><span class="fx-badge caution">У вікні ТО</span><span class="fx-badge danger">Прострочено</span></div></div>
+    <div class="ds-guide"><p>Сім тонів. Значення завжди у тексті, колір лише підсилює. Статуси плану ТО: <strong>success</strong> «Далеко», <strong>caution</strong> «У вікні ТО», <strong>danger</strong> «Прострочено».</p>
+<p><strong>Новий тон caution</strong> — жовтий <code>--caution</code> (#facc15): стан «скоро потрібна увага». Оранжевий <code>warning</code> лишається для попереджень та «Не відстежується». У світлій темі текст caution — темний (<code>--foreground</code>) на жовтій підкладці 40%, бо жовтий на світлому не читається.</p><p class="fx-lab">Код: <code>components/ui/badge.tsx, features/maintenance/levels.ts</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-row&quot;&gt;
+&lt;span class=&quot;fx-badge info&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;fx-badge caution&quot;&gt;caution&lt;/span&gt;&lt;span class=&quot;fx-badge purple&quot;&gt;purple&lt;/span&gt;&lt;span class=&quot;fx-badge success&quot;&gt;success&lt;/span&gt;&lt;span class=&quot;fx-badge warning&quot;&gt;warning&lt;/span&gt;&lt;span class=&quot;fx-badge danger&quot;&gt;danger&lt;/span&gt;&lt;span class=&quot;fx-badge muted&quot;&gt;muted&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class=&quot;fx-row&quot; style=&quot;margin-top:14px&quot;&gt;&lt;span class=&quot;fx-badge success&quot;&gt;Далеко&lt;/span&gt;&lt;span class=&quot;fx-badge caution&quot;&gt;У вікні ТО&lt;/span&gt;&lt;span class=&quot;fx-badge danger&quot;&gt;Прострочено&lt;/span&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-iconbox">
+  <header class="ds-comp-head"><h3>IconBox</h3><span class="ds-tag">Дані</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-row">
+<span class="fx-ibox red"><i class="ph ph-wrench"></i></span><span class="fx-ibox orange"><i class="ph ph-drop"></i></span><span class="fx-ibox yellow"><i class="ph ph-gauge"></i></span><span class="fx-ibox green"><i class="ph ph-battery-full"></i></span><span class="fx-ibox purple"><i class="ph ph-sparkle"></i></span><span class="fx-ibox blue"><i class="ph ph-gauge"></i></span>
+</div></div>
+    <div class="ds-guide"><p>Квадрат 44×44, радіус 12px, іконка 24px на тонованій підкладці 15–20%. Тон = стан рядка: red — прострочено, yellow — у вікні ТО, green — далеко, orange — увага, blue — нейтральна дія (пробіг), purple — AI/«скоро».</p>
+<p>Йому відповідають картки «Нагадування», «Поточний пробіг» і рядки плану.</p><p class="fx-lab">Код: <code>components/ui/icon-box.tsx</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-row&quot;&gt;
+&lt;span class=&quot;fx-ibox red&quot;&gt;&lt;i class=&quot;ph ph-wrench&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class=&quot;fx-ibox orange&quot;&gt;&lt;i class=&quot;ph ph-drop&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class=&quot;fx-ibox yellow&quot;&gt;&lt;i class=&quot;ph ph-gauge&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class=&quot;fx-ibox green&quot;&gt;&lt;i class=&quot;ph ph-battery-full&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class=&quot;fx-ibox purple&quot;&gt;&lt;i class=&quot;ph ph-sparkle&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class=&quot;fx-ibox blue&quot;&gt;&lt;i class=&quot;ph ph-gauge&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-carselector">
+  <header class="ds-comp-head"><h3>CarSelector + BrandLogo</h3><span class="ds-tag">Навігація</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-col" style="max-width:440px">
+<div class="fx-card interactive"><div class="fx-carsel"><span class="fx-logo">VW</span><div><h4>Volkswagen Golf VII</h4><p>2018 • Бензин • VIN WVWZZZ1KZAW000001</p></div><span class="fx-caret"><i class="ph ph-caret-down"></i></span></div></div>
+<div class="fx-panel">
+  <div class="fx-opt on"><span class="fx-logo active">VW</span><div style="flex:1"><b>Volkswagen Golf VII</b><small>2018 • Бензин • 145 200 км</small></div><i class="ph ph-check" style="color:var(--accent-primary)"></i></div>
+  <div class="fx-opt"><span class="fx-logo fallback"><i class="ph-fill ph-car"></i></span><div style="flex:1"><b>Škoda Octavia</b><small>2020 • Дизель • 88 000 км</small></div></div>
+  <div class="fx-opt add"><i class="ph ph-plus"></i> Додати авто</div>
+</div></div></div>
+    <div class="ds-guide"><p>Верх головної сторінки: активне авто (логотип, назва як <code>h1</code>, рік • пальне • VIN) і шеврон. Уся картка — ціль кліку, список відкривається під нею. Активне авто має галочку й <code>aria-current</code>, довгий список скролиться, в кінці — пунктирне «Додати авто».</p>
+<p>Це розкривна панель, а не ARIA-меню: Tab проходить по кнопках, Escape та клік поза нею закривають і повертають фокус на шеврон.</p>
+<p><strong>BrandLogo:</strong> логотип бренду на білій плитці (логотипи намальовані під світлий фон, тож читаються й у темній темі); без логотипа або при помилці завантаження — іконка авто на плитці стану (<code>fallback</code>), активна отримує акцентне кільце.</p><p class="fx-lab">Код: <code>features/cars/CarSelector.tsx, BrandLogo.tsx</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-col&quot; style=&quot;max-width:440px&quot;&gt;
+&lt;div class=&quot;fx-card interactive&quot;&gt;&lt;div class=&quot;fx-carsel&quot;&gt;&lt;span class=&quot;fx-logo&quot;&gt;VW&lt;/span&gt;&lt;div&gt;&lt;h4&gt;Volkswagen Golf VII&lt;/h4&gt;&lt;p&gt;2018 • Бензин • VIN WVWZZZ1KZAW000001&lt;/p&gt;&lt;/div&gt;&lt;span class=&quot;fx-caret&quot;&gt;&lt;i class=&quot;ph ph-caret-down&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-panel&quot;&gt;
+  &lt;div class=&quot;fx-opt on&quot;&gt;&lt;span class=&quot;fx-logo active&quot;&gt;VW&lt;/span&gt;&lt;div style=&quot;flex:1&quot;&gt;&lt;b&gt;Volkswagen Golf VII&lt;/b&gt;&lt;small&gt;2018 • Бензин • 145 200 км&lt;/small&gt;&lt;/div&gt;&lt;i class=&quot;ph ph-check&quot; style=&quot;color:var(--accent-primary)&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+  &lt;div class=&quot;fx-opt&quot;&gt;&lt;span class=&quot;fx-logo fallback&quot;&gt;&lt;i class=&quot;ph-fill ph-car&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;div style=&quot;flex:1&quot;&gt;&lt;b&gt;Škoda Octavia&lt;/b&gt;&lt;small&gt;2020 • Дизель • 88 000 км&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;fx-opt add&quot;&gt;&lt;i class=&quot;ph ph-plus&quot;&gt;&lt;/i&gt; Додати авто&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-rings">
+  <header class="ds-comp-head"><h3>HealthRing + MiniRing</h3><span class="ds-tag">Дані</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-rings">
+<span class="fx-ring"><svg viewBox="0 0 36 36" width="120" height="120" role="img" aria-label="Індекс: 85%"><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="2.5" class="tr"/><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="85, 100" class="good"/><text x="18" y="20.35" text-anchor="middle" font-size="8">85%</text></svg><span>good</span></span><span class="fx-ring"><svg viewBox="0 0 36 36" width="120" height="120" role="img" aria-label="Індекс: 62%"><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="2.5" class="tr"/><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="62, 100" class="caution"/><text x="18" y="20.35" text-anchor="middle" font-size="8">62%</text></svg><span>caution (жовтий)</span></span><span class="fx-ring"><svg viewBox="0 0 36 36" width="120" height="120" role="img" aria-label="Індекс: 25%"><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="2.5" class="tr"/><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="25, 100" class="danger"/><text x="18" y="20.35" text-anchor="middle" font-size="8">25%</text></svg><span>danger</span></span>
+</div>
+<div class="fx-rings" style="margin-top:20px"><span class="fx-ring"><svg viewBox="0 0 36 36" width="64" height="64" role="img" aria-label="Індекс: 90%"><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3" class="tr"/><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="90, 100" class="good"/><text x="18" y="20.6" text-anchor="middle" font-size="9">90%</text></svg><span>Двигун</span></span><span class="fx-ring"><svg viewBox="0 0 36 36" width="64" height="64" role="img" aria-label="Індекс: 55%"><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3" class="tr"/><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="55, 100" class="caution"/><text x="18" y="20.6" text-anchor="middle" font-size="9">55%</text></svg><span>Гальма</span></span><span class="fx-ring"><svg viewBox="0 0 36 36" width="64" height="64" role="img" aria-label="Індекс: 20%"><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3" class="tr"/><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="20, 100" class="danger"/><text x="18" y="20.6" text-anchor="middle" font-size="9">20%</text></svg><span>Шини</span></span></div></div>
+    <div class="ds-guide"><p>Кільце індексу стану (SVG 36×36, <code>pathLength</code> 100). HealthRing — 160px, 180px з 768px, 220px з 1440px; число шрифтом <strong>Outfit</strong>. MiniRing — менше кільце (товщина 3) з підписом знизу, для карток.</p>
+<p>Пороги: <strong>good</strong> — зелений, <strong>warning</strong> — тепер <strong>жовтий</strong> <code>--caution</code> (було помаранчевий), <strong>danger</strong> — червоний. Без даних — «—» і порожня дуга; для екранних читачів є <code>aria-label</code> із відсотком.</p><p class="fx-lab">Код: <code>features/cars/HealthRing.tsx, MiniRing.tsx, ringStyle.ts</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-rings&quot;&gt;
+&lt;span class=&quot;fx-ring&quot;&gt;&lt;svg viewBox=&quot;0 0 36 36&quot; width=&quot;120&quot; height=&quot;120&quot; role=&quot;img&quot; aria-label=&quot;Індекс: 85%&quot;&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;2.5&quot; class=&quot;tr&quot;/&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;2.5&quot; stroke-linecap=&quot;round&quot; stroke-dasharray=&quot;85, 100&quot; class=&quot;good&quot;/&gt;&lt;text x=&quot;18&quot; y=&quot;20.35&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;85%&lt;/text&gt;&lt;/svg&gt;&lt;span&gt;good&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;fx-ring&quot;&gt;&lt;svg viewBox=&quot;0 0 36 36&quot; width=&quot;120&quot; height=&quot;120&quot; role=&quot;img&quot; aria-label=&quot;Індекс: 62%&quot;&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;2.5&quot; class=&quot;tr&quot;/&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;2.5&quot; stroke-linecap=&quot;round&quot; stroke-dasharray=&quot;62, 100&quot; class=&quot;caution&quot;/&gt;&lt;text x=&quot;18&quot; y=&quot;20.35&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;62%&lt;/text&gt;&lt;/svg&gt;&lt;span&gt;caution (жовтий)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;fx-ring&quot;&gt;&lt;svg viewBox=&quot;0 0 36 36&quot; width=&quot;120&quot; height=&quot;120&quot; role=&quot;img&quot; aria-label=&quot;Індекс: 25%&quot;&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;2.5&quot; class=&quot;tr&quot;/&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;2.5&quot; stroke-linecap=&quot;round&quot; stroke-dasharray=&quot;25, 100&quot; class=&quot;danger&quot;/&gt;&lt;text x=&quot;18&quot; y=&quot;20.35&quot; text-anchor=&quot;middle&quot; font-size=&quot;8&quot;&gt;25%&lt;/text&gt;&lt;/svg&gt;&lt;span&gt;danger&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class=&quot;fx-rings&quot; style=&quot;margin-top:20px&quot;&gt;&lt;span class=&quot;fx-ring&quot;&gt;&lt;svg viewBox=&quot;0 0 36 36&quot; width=&quot;64&quot; height=&quot;64&quot; role=&quot;img&quot; aria-label=&quot;Індекс: 90%&quot;&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;3&quot; class=&quot;tr&quot;/&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-dasharray=&quot;90, 100&quot; class=&quot;good&quot;/&gt;&lt;text x=&quot;18&quot; y=&quot;20.6&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;90%&lt;/text&gt;&lt;/svg&gt;&lt;span&gt;Двигун&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;fx-ring&quot;&gt;&lt;svg viewBox=&quot;0 0 36 36&quot; width=&quot;64&quot; height=&quot;64&quot; role=&quot;img&quot; aria-label=&quot;Індекс: 55%&quot;&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;3&quot; class=&quot;tr&quot;/&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-dasharray=&quot;55, 100&quot; class=&quot;caution&quot;/&gt;&lt;text x=&quot;18&quot; y=&quot;20.6&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;55%&lt;/text&gt;&lt;/svg&gt;&lt;span&gt;Гальма&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;fx-ring&quot;&gt;&lt;svg viewBox=&quot;0 0 36 36&quot; width=&quot;64&quot; height=&quot;64&quot; role=&quot;img&quot; aria-label=&quot;Індекс: 20%&quot;&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;3&quot; class=&quot;tr&quot;/&gt;&lt;path d=&quot;M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831&quot; fill=&quot;none&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-dasharray=&quot;20, 100&quot; class=&quot;danger&quot;/&gt;&lt;text x=&quot;18&quot; y=&quot;20.6&quot; text-anchor=&quot;middle&quot; font-size=&quot;9&quot;&gt;20%&lt;/text&gt;&lt;/svg&gt;&lt;span&gt;Шини&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-checkbox">
+  <header class="ds-comp-head"><h3>Checkbox + FilePick + Select</h3><span class="ds-tag">Введення</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-col" style="max-width:420px">
+<div class="fx-row"><span class="fx-check on"></span><span>Виконано</span></div>
+<div class="fx-row"><span class="fx-check"></span><span>Не виконано</span></div>
+<div><div class="fx-lab" style="margin-bottom:6px">Фото одометра</div><div class="fx-pick"><i class="ph ph-paperclip"></i> Додати фото</div></div>
+<div><div class="fx-lab" style="margin-bottom:6px">Фото та файли</div><div class="fx-pick"><i class="ph ph-paperclip"></i> odometer.jpg, pads_old.jpg</div></div>
+<div><div class="fx-lab" style="margin-bottom:6px">Марка</div><div class="fx-field"><span style="flex:1">Volkswagen</span><i class="ph ph-caret-down"></i></div></div>
+</div></div>
+    <div class="ds-guide"><p><strong>Checkbox</strong> повторює Toggle (44×24, зелений у стані «увімкнено»), але має <code>role="checkbox"</code> і працює з клавіатури; стан «змішаний» (<code>aria-checked="mixed"</code>) — для «Виконано все».</p>
+<p><strong>FilePick</strong> — пунктирна кнопка з іконкою скріпки замість рамки <code>input[type=file]</code> (прихований). Показує імена вибраних файлів. У прототипі це макет: файли не завантажуються. <strong>Select</strong> — поле з власним шевроном (<code>appearance-none</code>), висота 48px, 16px текст, щоб iOS не зумив сторінку.</p><p class="fx-lab">Код: <code>components/ui/checkbox.tsx, file-pick.tsx, input.tsx</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-col&quot; style=&quot;max-width:420px&quot;&gt;
+&lt;div class=&quot;fx-row&quot;&gt;&lt;span class=&quot;fx-check on&quot;&gt;&lt;/span&gt;&lt;span&gt;Виконано&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-row&quot;&gt;&lt;span class=&quot;fx-check&quot;&gt;&lt;/span&gt;&lt;span&gt;Не виконано&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;&lt;div class=&quot;fx-lab&quot; style=&quot;margin-bottom:6px&quot;&gt;Фото одометра&lt;/div&gt;&lt;div class=&quot;fx-pick&quot;&gt;&lt;i class=&quot;ph ph-paperclip&quot;&gt;&lt;/i&gt; Додати фото&lt;/div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;div class=&quot;fx-lab&quot; style=&quot;margin-bottom:6px&quot;&gt;Фото та файли&lt;/div&gt;&lt;div class=&quot;fx-pick&quot;&gt;&lt;i class=&quot;ph ph-paperclip&quot;&gt;&lt;/i&gt; odometer.jpg, pads_old.jpg&lt;/div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;div class=&quot;fx-lab&quot; style=&quot;margin-bottom:6px&quot;&gt;Марка&lt;/div&gt;&lt;div class=&quot;fx-field&quot;&gt;&lt;span style=&quot;flex:1&quot;&gt;Volkswagen&lt;/span&gt;&lt;i class=&quot;ph ph-caret-down&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-picker">
+  <header class="ds-comp-head"><h3>PlanWorkPicker (Combobox)</h3><span class="ds-tag">Введення</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div style="max-width:420px">
+<div class="fx-lab" style="margin-bottom:6px">Категорія та робота</div>
+<div class="fx-field"><span style="flex:1">Обрати роботу</span><i class="ph ph-caret-up"></i></div>
+<div class="fx-menu">
+  <div class="sec">Відстежуються</div>
+  <div class="cat open"><span>Двигун і мастила</span><small>2 · ˄</small></div>
+  <div class="wk">Заміна оливи й фільтра</div><div class="wk">Заміна свічок запалювання</div>
+  <div class="cat"><span>Гальмівна система</span><small>1 · ˅</small></div>
+  <div class="sec">Інші роботи</div>
+  <div class="cat"><span>Підвіска</span><small>4 · ˅</small></div>
+</div></div></div>
+    <div class="ds-guide"><p>Одне поле замість двох списків: категорія → робота. Список показує категорії з кількістю робіт, що лишилися; якщо відомо, чи робота відстежується, розділяється на дві секції (спершу відстежувані). Категорія розгортається в роботи (по одній відкритій), рядки категорій темніші за роботи.</p>
+<p>Вибір роботи додає її одразу й закриває список; категорія лишається розгорнутою — зручно додати кілька робіт підряд. Порожня категорія зникає. Розкривна панель із кнопками (Escape / клік поза — закрити), а не ARIA listbox.</p>
+<p>Для пошуку за назвою авто є <strong>Combobox</strong> (<code>components/ui/combobox.tsx</code>): текст → підказки з API, Enter обирає лише актуальну підказку.</p><p class="fx-lab">Код: <code>features/requests/PlanWorkPicker.tsx, components/ui/combobox.tsx</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div style=&quot;max-width:420px&quot;&gt;
+&lt;div class=&quot;fx-lab&quot; style=&quot;margin-bottom:6px&quot;&gt;Категорія та робота&lt;/div&gt;
+&lt;div class=&quot;fx-field&quot;&gt;&lt;span style=&quot;flex:1&quot;&gt;Обрати роботу&lt;/span&gt;&lt;i class=&quot;ph ph-caret-up&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-menu&quot;&gt;
+  &lt;div class=&quot;sec&quot;&gt;Відстежуються&lt;/div&gt;
+  &lt;div class=&quot;cat open&quot;&gt;&lt;span&gt;Двигун і мастила&lt;/span&gt;&lt;small&gt;2 · ˄&lt;/small&gt;&lt;/div&gt;
+  &lt;div class=&quot;wk&quot;&gt;Заміна оливи й фільтра&lt;/div&gt;&lt;div class=&quot;wk&quot;&gt;Заміна свічок запалювання&lt;/div&gt;
+  &lt;div class=&quot;cat&quot;&gt;&lt;span&gt;Гальмівна система&lt;/span&gt;&lt;small&gt;1 · ˅&lt;/small&gt;&lt;/div&gt;
+  &lt;div class=&quot;sec&quot;&gt;Інші роботи&lt;/div&gt;
+  &lt;div class=&quot;cat&quot;&gt;&lt;span&gt;Підвіска&lt;/span&gt;&lt;small&gt;4 · ˅&lt;/small&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-worklist">
+  <header class="ds-comp-head"><h3>WorkList</h3><span class="ds-tag">Дані</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-wl">
+<div class="hd"><span class="fx-check on" style="transform:scale(.8)"></span><b>Виконано все</b><small>2 із 3</small><span class="x"></span></div>
+<div class="li"><span class="fx-check on" style="transform:scale(.8)"></span><span>Заміна передніх колодок</span><div class="amt">2 400</div><span class="x" aria-hidden="true"></span></div>
+<div class="li"><span class="fx-check on" style="transform:scale(.8)"></span><span>Заміна диска</span><div class="amt">1 200</div><span class="x"></span></div>
+<div class="li"><span class="fx-check" style="transform:scale(.8)"></span><span>Діагностика підвіски</span><div class="amt off">₴</div><span class="x"></span></div>
+<div class="li"><span style="flex:1;font-size:.875rem">Мийка двигуна <small class="fx-lab">(додатково)</small></span><div class="amt">300</div><span class="x"><i class="ph ph-x"></i></span></div>
+</div></div>
+    <div class="ds-guide"><p>Перелік робіт із сумами в пропозиції та звіті СТО (титул «Перелік робіт»). Рядок: назва + поле суми «₴» вирівняне вправо, праворуч — кнопка «×» для доданої роботи або порожній слот тієї ж ширини, щоб суми стояли в одну колонку.</p>
+<p>У звіті (<code>checkable</code>) кожен рядок має чекбокс; сума доступна лише для виконаної роботи. Липкий заголовок «Виконано все» + лічильник «N із M» (змішаний стан). Довгий список скролиться всередині (<code>max-height</code> 20rem, 26rem від <code>@3xl</code>), форма не росте.</p><p class="fx-lab">Код: <code>features/requests/WorkLines.tsx, useWorkLines.ts</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-wl&quot;&gt;
+&lt;div class=&quot;hd&quot;&gt;&lt;span class=&quot;fx-check on&quot; style=&quot;transform:scale(.8)&quot;&gt;&lt;/span&gt;&lt;b&gt;Виконано все&lt;/b&gt;&lt;small&gt;2 із 3&lt;/small&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;li&quot;&gt;&lt;span class=&quot;fx-check on&quot; style=&quot;transform:scale(.8)&quot;&gt;&lt;/span&gt;&lt;span&gt;Заміна передніх колодок&lt;/span&gt;&lt;div class=&quot;amt&quot;&gt;2 400&lt;/div&gt;&lt;span class=&quot;x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;li&quot;&gt;&lt;span class=&quot;fx-check on&quot; style=&quot;transform:scale(.8)&quot;&gt;&lt;/span&gt;&lt;span&gt;Заміна диска&lt;/span&gt;&lt;div class=&quot;amt&quot;&gt;1 200&lt;/div&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;li&quot;&gt;&lt;span class=&quot;fx-check&quot; style=&quot;transform:scale(.8)&quot;&gt;&lt;/span&gt;&lt;span&gt;Діагностика підвіски&lt;/span&gt;&lt;div class=&quot;amt off&quot;&gt;₴&lt;/div&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;li&quot;&gt;&lt;span style=&quot;flex:1;font-size:.875rem&quot;&gt;Мийка двигуна &lt;small class=&quot;fx-lab&quot;&gt;(додатково)&lt;/small&gt;&lt;/span&gt;&lt;div class=&quot;amt&quot;&gt;300&lt;/div&gt;&lt;span class=&quot;x&quot;&gt;&lt;i class=&quot;ph ph-x&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-tabs">
+  <header class="ds-comp-head"><h3>Tabs + StatusFilter</h3><span class="ds-tag">Навігація</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-col">
+<div class="fx-tabs" role="tablist" aria-label="Фільтр робіт"><button class="on" role="tab" aria-selected="true">Відстежуються <small>7</small></button><button role="tab" aria-selected="false">Не відстежуються <small>12</small></button></div>
+<div class="fx-row" aria-label="Фільтр за статусом">
+<button class="fx-fchip on"><span class="fx-badge danger">Прострочено <small>1</small></span></button>
+<button class="fx-fchip"><span class="fx-badge caution">У вікні ТО <small>2</small></span></button>
+<button class="fx-fchip"><span class="fx-badge success">Далеко <small>4</small></span></button>
+<button class="fx-btn outline sm"><i class="ph ph-checks"></i> Обрати всі <small style="opacity:.8">2</small></button>
+</div></div></div>
+    <div class="ds-guide"><p>Екран «План ТО». <strong>Tabs</strong> — група у вигляді піґулки: активна вкладка — акцентна заливка, поруч кількість. <strong>StatusFilter</strong> — бейджі статусу як перемикачі (можна обрати кілька); активний має межу акценту. Фільтр статусу є лише на вкладці «Відстежуються».</p>
+<p><strong>«Обрати всі»</strong> — чекбокс-кнопка, що кладе в кошик усі роботи під поточним фільтром і слідує за ним; ручний вибір картки вимикає режим. Вкладка і фільтр зберігаються для авто, коли користувач залишає сторінку.</p><p class="fx-lab">Код: <code>pages/Plan.tsx, features/maintenance/planViewSlice.ts</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-col&quot;&gt;
+&lt;div class=&quot;fx-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;Фільтр робіт&quot;&gt;&lt;button class=&quot;on&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;Відстежуються &lt;small&gt;7&lt;/small&gt;&lt;/button&gt;&lt;button role=&quot;tab&quot; aria-selected=&quot;false&quot;&gt;Не відстежуються &lt;small&gt;12&lt;/small&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-row&quot; aria-label=&quot;Фільтр за статусом&quot;&gt;
+&lt;button class=&quot;fx-fchip on&quot;&gt;&lt;span class=&quot;fx-badge danger&quot;&gt;Прострочено &lt;small&gt;1&lt;/small&gt;&lt;/span&gt;&lt;/button&gt;
+&lt;button class=&quot;fx-fchip&quot;&gt;&lt;span class=&quot;fx-badge caution&quot;&gt;У вікні ТО &lt;small&gt;2&lt;/small&gt;&lt;/span&gt;&lt;/button&gt;
+&lt;button class=&quot;fx-fchip&quot;&gt;&lt;span class=&quot;fx-badge success&quot;&gt;Далеко &lt;small&gt;4&lt;/small&gt;&lt;/span&gt;&lt;/button&gt;
+&lt;button class=&quot;fx-btn outline sm&quot;&gt;&lt;i class=&quot;ph ph-checks&quot;&gt;&lt;/i&gt; Обрати всі &lt;small style=&quot;opacity:.8&quot;&gt;2&lt;/small&gt;&lt;/button&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-plancard">
+  <header class="ds-comp-head"><h3>PlanCard · CategorySection</h3><span class="ds-tag">Дані</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-col" style="max-width:520px">
+<div class="fx-plan">
+  <div class="top"><span class="fx-ibox yellow"><i class="ph ph-drop"></i></span>
+    <div class="nm"><h4>Заміна оливи й фільтра</h4><p>Наступна через 800 км</p></div>
+    <span class="fx-badge caution">У вікні ТО</span><button class="fx-btn icon" style="width:36px;height:36px" aria-label="Змінити"><i class="ph ph-pencil-simple"></i></button><button class="fx-btn icon" style="width:36px;height:36px" aria-label="Додати в кошик"><i class="ph ph-shopping-cart"></i></button>
+  </div>
+  <dl class="fx-facts">
+    <div><i class="ph-bold ph-arrows-clockwise"></i><b>10 000 км · 12 міс.</b></div>
+    <div><i class="ph-bold ph-clock-counter-clockwise"></i><b>12.03.2026 · 134 400 км</b></div>
+    <div class="hi"><i class="ph-bold ph-list"></i><b>Високий</b></div>
+  </dl>
+  <div style="display:flex;gap:8px;align-items:center"><span class="fx-badge success"><i class="ph ph-check-circle"></i> У плані ТО</span><a class="fx-link">До плану</a></div>
+</div>
+<div class="fx-untracked"><div><b>Заміна свічок</b><p>Не відстежується</p></div><button class="fx-btn outline sm" style="border-color:var(--accent-primary);color:var(--accent-primary)"><i class="ph ph-plus"></i> Відстежувати</button></div>
+</div></div>
+    <div class="ds-guide"><p><strong>Картка роботи:</strong> IconBox (тон = статус), назва, текст статусу, Badge статусу, кнопки «Змінити» / «Додати в кошик» і рядок параметрів (<code>PlanFact</code>): інтервал, востаннє, пріоритет. Кожен параметр — іконка + коротке значення; назва й пояснення — у підказці при наведенні, для екранних читачів — прихований <code>dt</code>.</p>
+<p><strong>Пріоритет</strong> — кількість ліній: три (<code>list</code>, червоний) — високий, дві (<code>equals</code>, жовтий) — середній, одна (<code>minus</code>, акцент) — низький.</p>
+<p><strong>Робота без відстеження:</strong> пунктирна картка з кнопкою «Відстежувати». <strong>PlanStatus</strong> в історії: Badge success «У плані ТО» з посиланням або warning «Не відстежується» з кнопкою; для невпізнаних і власних робіт нічого не показується — хибний статус гірший за жодний.</p>
+<p><strong>Категорія</strong> (<code>CategorySection</code>): рамка <code>rounded-lg</code> на <code>secondary/60</code>, іконка категорії на 44px плитці, заголовок, лічильник Badge (danger, якщо є прострочені, інакше caution), складається.</p><p class="fx-lab">Код: <code>features/maintenance/CategorySection.tsx, PlanFact.tsx, PlanStatus.tsx</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-col&quot; style=&quot;max-width:520px&quot;&gt;
+&lt;div class=&quot;fx-plan&quot;&gt;
+  &lt;div class=&quot;top&quot;&gt;&lt;span class=&quot;fx-ibox yellow&quot;&gt;&lt;i class=&quot;ph ph-drop&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+    &lt;div class=&quot;nm&quot;&gt;&lt;h4&gt;Заміна оливи й фільтра&lt;/h4&gt;&lt;p&gt;Наступна через 800 км&lt;/p&gt;&lt;/div&gt;
+    &lt;span class=&quot;fx-badge caution&quot;&gt;У вікні ТО&lt;/span&gt;&lt;button class=&quot;fx-btn icon&quot; style=&quot;width:36px;height:36px&quot; aria-label=&quot;Змінити&quot;&gt;&lt;i class=&quot;ph ph-pencil-simple&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;button class=&quot;fx-btn icon&quot; style=&quot;width:36px;height:36px&quot; aria-label=&quot;Додати в кошик&quot;&gt;&lt;i class=&quot;ph ph-shopping-cart&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;dl class=&quot;fx-facts&quot;&gt;
+    &lt;div&gt;&lt;i class=&quot;ph-bold ph-arrows-clockwise&quot;&gt;&lt;/i&gt;&lt;b&gt;10 000 км · 12 міс.&lt;/b&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;i class=&quot;ph-bold ph-clock-counter-clockwise&quot;&gt;&lt;/i&gt;&lt;b&gt;12.03.2026 · 134 400 км&lt;/b&gt;&lt;/div&gt;
+    &lt;div class=&quot;hi&quot;&gt;&lt;i class=&quot;ph-bold ph-list&quot;&gt;&lt;/i&gt;&lt;b&gt;Високий&lt;/b&gt;&lt;/div&gt;
+  &lt;/dl&gt;
+  &lt;div style=&quot;display:flex;gap:8px;align-items:center&quot;&gt;&lt;span class=&quot;fx-badge success&quot;&gt;&lt;i class=&quot;ph ph-check-circle&quot;&gt;&lt;/i&gt; У плані ТО&lt;/span&gt;&lt;a class=&quot;fx-link&quot;&gt;До плану&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;fx-untracked&quot;&gt;&lt;div&gt;&lt;b&gt;Заміна свічок&lt;/b&gt;&lt;p&gt;Не відстежується&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;fx-btn outline sm&quot; style=&quot;border-color:var(--accent-primary);color:var(--accent-primary)&quot;&gt;&lt;i class=&quot;ph ph-plus&quot;&gt;&lt;/i&gt; Відстежувати&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</article><article class="ds-comp" id="c-fx-interactive">
+  <header class="ds-comp-head"><h3>InteractiveCard</h3><span class="ds-tag">Поверхні</span><span class="ds-tag fe">React · v2.1</span></header>
+  <div class="ds-comp-grid">
+    <div class="ds-stage"><div class="fx-col" style="max-width:360px">
+<div class="fx-card interactive"><div class="fx-row" style="justify-content:space-between"><b style="font-family:'Play',sans-serif">Гальмівні колодки</b><span class="fx-badge warning">Відповідь СТО</span></div><div class="fx-reqsteps" style="margin-top:12px"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+<div class="fx-lab">Наведіть курсор: межа теплішає, картка піднімається на 2px.</div></div></div>
+    <div class="ds-guide"><p>Утиліта <code>interactive-card</code> для картки, яку можна відкрити чи обрати: на hover та <code>focus-within</code> межа стає акцентною (50%), картка піднімається на 2px за 300ms із м'яким easing <code>cubic-bezier(0.22, 1, 0.36, 1)</code>. Підйом вимикається при <code>prefers-reduced-motion</code>.</p>
+<p>Приклад — <strong>ActiveRequestCard</strong> на головній: назва запиту, Badge стану, тонкі смужки <code>RequestSteps</code> (по одній на етап, пройдені — акцентні). Посилання-обгортка отримує фокус-кільце.</p><p class="fx-lab">Код: <code>index.css (@utility interactive-card), features/requests/ActiveRequestCard.tsx</code></p></div>
+  </div>
+  <details class="ds-code"><summary>HTML-розмітка</summary><button class="ds-copy" type="button">Копіювати</button><pre><code>&lt;div class=&quot;fx-col&quot; style=&quot;max-width:360px&quot;&gt;
+&lt;div class=&quot;fx-card interactive&quot;&gt;&lt;div class=&quot;fx-row&quot; style=&quot;justify-content:space-between&quot;&gt;&lt;b style=&quot;font-family:&#x27;Play&#x27;,sans-serif&quot;&gt;Гальмівні колодки&lt;/b&gt;&lt;span class=&quot;fx-badge warning&quot;&gt;Відповідь СТО&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;fx-reqsteps&quot; style=&quot;margin-top:12px&quot;&gt;&lt;i class=&quot;on&quot;&gt;&lt;/i&gt;&lt;i class=&quot;on&quot;&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;fx-lab&quot;&gt;Наведіть курсор: межа теплішає, картка піднімається на 2px.&lt;/div&gt;&lt;/div&gt;</code></pre></details>
 </article>
     </section>
 
